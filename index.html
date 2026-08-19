@@ -4,133 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WilsonHCG | Executive Search & Talent Intelligence Hub</title>
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Archivo Black for Wilson's heavy headers, Inter for readable body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <!-- PapaParse for Google Sheets Live CSV Sync -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <style>
         :root {
-            --brand-mint: #91EBC8;
-            --brand-mint-dark: #6BD0A8;
+            --brand-mint: #D3F3E4;
+            --brand-yellow: #FFFBDB;
             --brand-dark: #16170F;
-            --brand-dark-card: #22251A;
-            --brand-dark-border: #333728;
-            --bg-light: #F4F7F5;
-            --text-main: #16170F;
-            --text-muted: #666C5E;
+            --brand-teal: #00B386; /* Wilson Contact Button Accent */
             --white: #FFFFFF;
-            --font-heading: 'Montserrat', sans-serif;
+            --font-heading: 'Archivo Black', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font-body);
-            background-color: var(--bg-light);
-            color: var(--text-main);
+            background-color: var(--brand-mint);
+            color: var(--brand-dark);
             line-height: 1.5;
         }
 
         /* --- Header & Navigation --- */
         header {
-            background-color: var(--brand-dark);
-            color: var(--white);
-            padding: 1rem 2rem;
+            background-color: var(--white);
+            color: var(--brand-dark);
+            padding: 1.5rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .header-container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
         .brand-logo h1 {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
-            font-weight: 900;
+            font-size: 2.2rem;
             letter-spacing: -1px;
-            color: var(--brand-mint);
+            color: var(--brand-dark);
+            text-transform: lowercase;
+            margin-bottom: -5px;
         }
 
         .brand-logo span {
             font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #8A9082;
-            border-left: 1px solid #333728;
-            padding-left: 12px;
+            color: #666;
+            font-weight: 500;
         }
 
-        nav {
-            display: flex;
-            gap: 1rem;
-        }
+        nav { display: flex; gap: 1rem; }
 
         .nav-btn {
             background: transparent;
             border: none;
-            color: #A0A698;
-            font-family: var(--font-heading);
+            color: #666;
+            font-family: var(--font-body);
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             padding: 0.6rem 1.2rem;
-            border-radius: 6px;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .nav-btn:hover {
-            color: var(--brand-mint);
-            background: var(--brand-dark-card);
-        }
+        .nav-btn:hover { color: var(--brand-teal); }
 
         .nav-btn.active {
-            color: var(--brand-dark);
-            background: var(--brand-mint);
+            color: var(--white);
+            background: var(--brand-teal);
         }
 
         /* --- Main Layout --- */
         .container {
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 2rem auto;
             padding: 0 1.5rem;
         }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
         /* --- Collapsible Search Mandate --- */
         .mandate-card {
-            background: var(--brand-dark);
-            color: var(--white);
-            border-radius: 12px;
+            background: var(--brand-yellow);
+            border-radius: 8px;
             margin-bottom: 2rem;
             overflow: hidden;
-            border: 1px solid var(--brand-dark-border);
+            border: 2px solid var(--brand-dark);
+            box-shadow: 4px 4px 0px rgba(22,23,15,0.1);
         }
 
         .mandate-header {
@@ -139,37 +111,28 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            background: var(--brand-dark-card);
+            background: var(--brand-dark);
+            color: var(--brand-yellow);
             user-select: none;
         }
 
         .mandate-header h2 {
             font-family: var(--font-heading);
-            font-size: 1.1rem;
-            color: var(--brand-mint);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
         }
 
         .mandate-toggle {
             font-size: 0.85rem;
-            background: rgba(145, 235, 200, 0.15);
-            color: var(--brand-mint);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .mandate-body {
             padding: 1.75rem;
             display: none;
-            border-top: 1px solid var(--brand-dark-border);
         }
-
-        .mandate-body.open {
-            display: block;
-        }
+        .mandate-body.open { display: block; }
 
         .mandate-grid {
             display: grid;
@@ -178,343 +141,185 @@
             margin-top: 1rem;
         }
 
-        .mandate-section {
-            background: rgba(255, 255, 255, 0.03);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border-left: 3px solid var(--brand-mint);
-        }
-
         .mandate-section h3 {
             font-family: var(--font-heading);
-            font-size: 0.95rem;
-            color: var(--brand-mint);
+            font-size: 1.1rem;
             margin-bottom: 0.6rem;
+            text-transform: uppercase;
         }
 
         .mandate-section ul {
             list-style: none;
-            font-size: 0.88rem;
-            color: #C0C6B8;
-        }
-
-        .mandate-section li {
-            margin-bottom: 0.4rem;
-            position: relative;
-            padding-left: 14px;
-        }
-
-        .mandate-section li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--brand-mint);
-        }
-
-        /* --- Toolbar & Filters --- */
-        .controls-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            background: var(--white);
-            padding: 1rem 1.25rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .search-box {
-            flex: 1;
-            min-width: 280px;
-        }
-
-        .search-box input {
-            width: 100%;
-            padding: 0.7rem 1rem;
-            border: 1px solid #E0E4DD;
-            border-radius: 6px;
-            font-family: var(--font-body);
             font-size: 0.9rem;
-            outline: none;
         }
+        .mandate-section li { margin-bottom: 0.5rem; padding-left: 14px; position: relative; }
+        .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.7rem; top: 4px; }
 
-        .search-box input:focus {
-            border-color: var(--brand-mint-dark);
-            box-shadow: 0 0 0 3px rgba(145, 235, 200, 0.3);
-        }
-
-        .filter-group {
+        /* --- Kanban Board --- */
+        .kanban-board {
             display: flex;
-            gap: 0.75rem;
-        }
-
-        .filter-select {
-            padding: 0.7rem 1rem;
-            border: 1px solid #E0E4DD;
-            border-radius: 6px;
-            font-family: var(--font-body);
-            font-size: 0.88rem;
-            background: var(--white);
-            outline: none;
-            cursor: pointer;
-        }
-
-        /* --- Candidate Grid --- */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 2rem;
+            align-items: flex-start;
+        }
+
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.5);
+            min-width: 320px;
+            width: 320px;
+            border-radius: 8px;
+            padding: 1rem;
+            border: 2px solid rgba(22,23,15,0.1);
+        }
+
+        .kanban-header {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--brand-dark);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .kanban-count {
+            background: var(--brand-dark);
+            color: var(--brand-yellow);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-family: var(--font-body);
+            font-weight: 700;
         }
 
         .candidate-card {
             background: var(--white);
-            border-radius: 10px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            border: 1px solid #E6EAE3;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border-radius: 6px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 2px solid var(--brand-dark);
+            box-shadow: 3px 3px 0px rgba(22,23,15,0.1);
+            transition: transform 0.1s ease;
         }
 
         .candidate-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            border-color: var(--brand-mint-dark);
-        }
-
-        .card-header {
-            margin-bottom: 1rem;
+            transform: translateY(-2px);
         }
 
         .candidate-name {
             font-family: var(--font-heading);
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--brand-dark);
+            font-size: 1.15rem;
             margin-bottom: 0.25rem;
+            text-transform: uppercase;
         }
 
         .candidate-meta {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: #555;
+            font-weight: 600;
             margin-bottom: 0.75rem;
         }
 
         .badge {
             display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            padding: 4px 8px;
+            background: var(--brand-yellow);
+            border: 1px solid var(--brand-dark);
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-bottom: 0.75rem;
         }
 
-        .badge-latam { background: #E3F2FD; color: #0D47A1; }
-        .badge-us { background: #F3E5F5; color: #4A148C; }
-        .badge-hybrid { background: #E8F5E9; color: #1B5E20; }
-
         .card-preview {
-            font-size: 0.88rem;
-            color: #44483E;
-            margin-bottom: 1.25rem;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .card-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: auto;
-        }
+        .card-actions { display: flex; gap: 0.5rem; }
 
-        .btn-view {
+        .btn-action {
             flex: 1;
-            background: var(--brand-dark);
-            color: var(--brand-mint);
-            border: none;
-            padding: 0.65rem;
-            border-radius: 6px;
+            padding: 0.6rem;
+            border: 2px solid var(--brand-dark);
+            background: transparent;
+            font-family: var(--font-body);
             font-weight: 700;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             cursor: pointer;
-            transition: background 0.2s ease;
-        }
-
-        .btn-view:hover {
-            background: var(--brand-dark-card);
-        }
-
-        .btn-linkedin {
-            background: #0A66C2;
-            color: var(--white);
+            border-radius: 4px;
+            text-align: center;
             text-decoration: none;
-            padding: 0.65rem 0.85rem;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.82rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            color: var(--brand-dark);
+            text-transform: uppercase;
         }
+
+        .btn-view { background: var(--brand-yellow); }
+        .btn-view:hover { background: #F0E8B8; }
+        
+        .btn-linkedin { background: var(--brand-teal); color: var(--white); border-color: var(--brand-teal); }
+        .btn-linkedin:hover { background: #009973; }
 
         /* --- Modal Window --- */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(22, 23, 15, 0.75);
-            backdrop-filter: blur(4px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(22, 23, 15, 0.8);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
             padding: 1.5rem;
         }
-
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-card {
-            background: var(--white);
-            border-radius: 12px;
-            max-width: 700px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-            position: relative;
+            background: var(--brand-yellow);
+            border: 3px solid var(--brand-dark);
+            border-radius: 8px;
+            max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto;
+            padding: 2rem; position: relative;
+            box-shadow: 8px 8px 0px rgba(0,0,0,0.2);
         }
 
         .modal-close {
-            position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: var(--bg-light);
-            border: none;
-            font-size: 1.25rem;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 1rem; right: 1rem;
+            background: var(--brand-dark); color: var(--white);
+            border: none; width: 30px; height: 30px; border-radius: 50%;
+            font-weight: bold; cursor: pointer;
         }
 
-        .modal-section {
-            margin-top: 1.25rem;
-            padding-top: 1rem;
-            border-top: 1px solid #E6EAE3;
-        }
+        .modal-section { margin-top: 1.5rem; padding-top: 1rem; border-top: 2px solid rgba(22,23,15,0.1); }
+        .modal-section h4 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 0.5rem; font-size: 1rem; }
+        .modal-section p { font-size: 0.95rem; }
 
-        .modal-section h4 {
-            font-family: var(--font-heading);
-            font-size: 0.88rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
-
-        .modal-section p {
-            font-size: 0.95rem;
-            color: var(--brand-dark);
-        }
-
-        /* --- Competitor Tab Layout --- */
-        .intel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .intel-card {
+        /* --- Full Intelligence Report UI --- */
+        .intel-content {
             background: var(--white);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border: 1px solid #E6EAE3;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-
-        .intel-card h3 {
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
-            color: var(--brand-dark);
-            margin-bottom: 0.75rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--brand-mint);
-        }
-
-        .battle-card {
-            background: var(--brand-dark);
-            color: var(--white);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .battle-card h4 {
-            font-family: var(--font-heading);
-            color: var(--brand-mint);
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .talk-track {
-            background: rgba(145, 235, 200, 0.08);
-            border-left: 3px solid var(--brand-mint);
-            padding: 0.85rem;
-            margin-top: 0.75rem;
-            font-size: 0.88rem;
-            font-style: italic;
-            color: #DDE2D7;
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--white);
+            padding: 2rem;
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            margin-top: 1rem;
+            border: 2px solid var(--brand-dark);
+            margin-bottom: 2rem;
         }
 
-        .data-table th {
-            background: var(--brand-dark);
-            color: var(--brand-mint);
-            font-family: var(--font-heading);
-            font-size: 0.85rem;
-            text-align: left;
-            padding: 0.85rem 1rem;
+        .intel-content h2 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 1.5rem; text-transform: uppercase; border-bottom: 4px solid var(--brand-mint); display: inline-block; padding-bottom: 5px; }
+        .intel-content h3 { font-family: var(--font-heading); font-size: 1.3rem; margin: 2rem 0 1rem 0; color: var(--brand-teal); text-transform: uppercase; }
+        
+        .data-table {
+            width: 100%; border-collapse: collapse; margin-bottom: 1.5rem;
+            border: 2px solid var(--brand-dark);
         }
+        .data-table th { background: var(--brand-dark); color: var(--white); font-family: var(--font-heading); padding: 1rem; text-align: left; }
+        .data-table td { padding: 1rem; border-bottom: 1px solid #ddd; font-size: 0.95rem; background: var(--white); }
+        .data-table tr:nth-child(even) td { background: var(--brand-mint); }
 
-        .data-table td {
-            padding: 0.85rem 1rem;
-            border-bottom: 1px solid #E6EAE3;
-            font-size: 0.88rem;
-        }
+        .battle-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .battle-card { background: var(--brand-yellow); border: 2px solid var(--brand-dark); padding: 1.5rem; border-radius: 8px; }
+        .battle-card h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .battle-card .talk-track { background: var(--white); border-left: 4px solid var(--brand-teal); padding: 1rem; margin-top: 1rem; font-style: italic; font-weight: 500; }
 
-        /* --- Loading State --- */
-        #loading-state {
-            text-align: center;
-            padding: 3rem;
-            font-family: var(--font-heading);
-            color: var(--text-muted);
-        }
     </style>
 </head>
 <body>
@@ -523,250 +328,154 @@
     <header>
         <div class="header-container">
             <div class="brand-logo">
-                <h1>wilsonHCG</h1>
-                <span>Executive Talent Platform</span>
+                <h1>wilson</h1>
+                <span>A fresh take on talent.</span>
             </div>
             <nav>
                 <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">VP Delivery Pipeline</button>
-                <button class="nav-btn" onclick="switchTab('intel-tab', this)">Competitor Intelligence</button>
+                <button class="nav-btn" onclick="switchTab('intel-tab', this)">Market Intelligence</button>
             </nav>
         </div>
     </header>
 
     <div class="container">
-
-        <!-- TAB 1: VP DELIVERY PIPELINE -->
+        <!-- TAB 1: PIPELINE & KANBAN -->
         <div id="pipeline-tab" class="tab-content active">
-
-            <!-- Collapsible Search Mandate -->
+            
             <div class="mandate-card">
                 <div class="mandate-header" onclick="toggleMandate()">
                     <h2>Search Mandate Summary (VP Delivery - Americas)</h2>
-                    <span class="mandate-toggle" id="mandate-toggle-text">Expand Overview</span>
+                    <span class="mandate-toggle" id="mandate-toggle-text">Expand Overview ▼</span>
                 </div>
                 <div class="mandate-body" id="mandate-body">
-                    <p style="color: #C0C6B8; font-size: 0.92rem; margin-bottom: 1rem;">
-                        <strong>Mandate Goal:</strong> Architect, scale, and lead WilsonHCG’s nearshore and offshore delivery infrastructure across the Americas, balancing enterprise client delivery with high-efficiency nearshore shared services.
+                    <p style="font-weight: 500; margin-bottom: 1rem;">
+                        <strong>Primary Mandate:</strong> Architect, scale, and lead WilsonHCG’s nearshore and offshore delivery infrastructure across the Americas. The role bridges enterprise client delivery, nearshore shared services scale, and tech-enabled sourcing integration.
                     </p>
                     <div class="mandate-grid">
                         <div class="mandate-section">
-                            <h3>Core Deliverables</h3>
+                            <h3>Core Priorities</h3>
                             <ul>
                                 <li>Scale nearshore shared services (Mexico, Argentina).</li>
                                 <li>Stabilize mid-market & "tail business" accounts.</li>
-                                <li>Pave way for AI/Sourcing technology integration.</li>
+                                <li>Modernize delivery workflows and AI sourcing models.</li>
                             </ul>
                         </div>
                         <div class="mandate-section">
                             <h3>Target Archetypes</h3>
                             <ul>
-                                <li><strong>LATAM Commercial Leaders:</strong> $110k–$120k USD.</li>
-                                <li><strong>US Tech/Implementation Architects:</strong> ~$200k USD.</li>
-                                <li><strong>Strategic TA Pivots:</strong> Client advisory focus.</li>
+                                <li><strong>LATAM Commercial Leaders:</strong> $110k–$120k USD Base.</li>
+                                <li><strong>US Tech / Implementation:</strong> ~$200k USD.</li>
+                                <li><strong>Strategic TA Pivots:</strong> Fresh perspectives on tech.</li>
                             </ul>
                         </div>
                         <div class="mandate-section">
-                            <h3>Cultural & Vertical Filters</h3>
+                            <h3>Cultural Filters</h3>
                             <ul>
-                                <li><strong>Target Verticals:</strong> Engineering, Life Sciences/Pharma, Skilled Mfg.</li>
-                                <li><strong>"Anti-Randstad":</strong> Agile, builder-minded, matrix-fluent operators.</li>
+                                <li><strong>"Anti-Randstad":</strong> Agile, builder-minded, non-corporate.</li>
+                                <li><strong>Target Verticals:</strong> Engineering, Pharma, Skilled Mfg.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Controls Panel -->
-            <div class="controls-panel">
-                <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Search candidate, company, location, or notes..." oninput="filterCandidates()">
-                </div>
-                <div class="filter-group">
-                    <select id="profile-filter" class="filter-select" onchange="filterCandidates()">
-                        <option value="ALL">All Background Profiles</option>
-                        <option value="LATAM">Verified LATAM / Hybrids</option>
-                        <option value="US">US Transformation</option>
-                    </select>
-                </div>
+            <div id="loading-state" style="font-family: var(--font-heading); padding: 2rem; text-align: center;">Loading live pipeline...</div>
+
+            <!-- Kanban Board -->
+            <div class="kanban-board" id="kanban-board">
+                <!-- Columns injected via JS -->
             </div>
-
-            <!-- Loading Indicator -->
-            <div id="loading-state">Loading live pipeline data from Google Sheets...</div>
-
-            <!-- Candidate Cards Grid -->
-            <div class="cards-grid" id="cards-container"></div>
         </div>
 
-        <!-- TAB 2: COMPETITOR INTELLIGENCE -->
+        <!-- TAB 2: INTELLIGENCE REPORT -->
         <div id="intel-tab" class="tab-content">
-            <h2 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">RPO Competitor Intelligence Report</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
-                Strategic analysis based on live career portal postings across Cielo, Hudson, Pontoon, Sevenstep, and PeopleScout.
-            </p>
+            <div class="intel-content">
+                <h2>IntelMate Market Report</h2>
+                <p><strong>Target Company:</strong> Wilson HCG <br><strong>Competitors Analyzed:</strong> Cielo, Hudson, Pontoon, Sevenstep, PeopleScout</p>
 
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Company</th>
-                        <th>Strategic Focus</th>
-                        <th>Primary Footprint</th>
-                        <th>Core Vulnerability</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Cielo</strong></td>
-                        <td>Specialized R&D / Pharma Recruiting</td>
-                        <td>Global, US, UK</td>
-                        <td>Burnout from massive enterprise tech integrations</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Hudson</strong></td>
-                        <td>Advisory-Led Business Partnering</td>
-                        <td>APAC, UK</td>
-                        <td>Project-based RPO churn and client instability</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Pontoon</strong></td>
-                        <td>Internal HR Tech Product Management</td>
-                        <td>UK, Poland, India, US</td>
-                        <td>Red tape of massive Adecco conglomerate</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Sevenstep</strong></td>
-                        <td>Volume Sourcing Incubation</td>
-                        <td>US (East Coast), Global</td>
-                        <td>Glass ceiling for senior full-cycle talent</td>
-                    </tr>
-                    <tr>
-                        <td><strong>PeopleScout</strong></td>
-                        <td>High-Volume / Mass Hiring Execution</td>
-                        <td>US, UK, Global</td>
-                        <td>Rigid dependency on internal Affinix tech stack</td>
-                    </tr>
-                </tbody>
-            </table>
+                <h3>1) Full Role Inventory</h3>
+                <table class="data-table">
+                    <tr><th>Company</th><th>Top Verified Functions (Live ATS)</th></tr>
+                    <tr><td>Cielo</td><td>Facilities, Sr. Recruiter (Pharma R&D), Recruiter</td></tr>
+                    <tr><td>Hudson</td><td>Recruitment Business Partner, Sr. Recruiter, Talent Sourcer</td></tr>
+                    <tr><td>Pontoon</td><td>Recruitment Coordinator, Program Consultant, Product Manager</td></tr>
+                    <tr><td>Sevenstep</td><td>Talent Acquisition Partner, Recruitment Coordinator, Sourcing</td></tr>
+                    <tr><td>PeopleScout</td><td>High-Volume Recruiter, Program Specialist, TA Specialist</td></tr>
+                </table>
 
-            <h3 style="font-family: var(--font-heading); margin: 2rem 0 1rem 0;">Poaching Battle Cards</h3>
-            
-            <div class="intel-grid">
-                <div class="battle-card">
-                    <h4>Cielo Battle Card</h4>
-                    <p><strong>Target Pool:</strong> Client Services & Implementation specialists.</p>
-                    <div class="talk-track">
-                        "If you want to focus purely on strategic talent acquisition without software integration headaches, WilsonHCG offers a purer RPO environment."
+                <h3>2) Compensation Benchmarking</h3>
+                <table class="data-table">
+                    <tr><th>Company</th><th>Transparency & Verified Ranges</th></tr>
+                    <tr><td>Cielo</td><td>Partial. Sr. Recruiter (Pharma R&D): $62,308 – $89,079</td></tr>
+                    <tr><td>Hudson</td><td>Not Disclosed</td></tr>
+                    <tr><td>Pontoon</td><td>Variable (Bonuses, Commission, OTE)</td></tr>
+                    <tr><td>Sevenstep</td><td>Not Disclosed (Competitive compensation + health, 529 plans)</td></tr>
+                    <tr><td>PeopleScout</td><td>Not Disclosed (Emphasis on benefits/remote flexibility)</td></tr>
+                </table>
+
+                <h3>3) Strategic Signals & Vulnerabilities</h3>
+                <p><strong>Cielo:</strong> Targeted approach with specialized roles. Vulnerability: Burnout from massive enterprise rollouts.<br>
+                <strong>Hudson:</strong> Focus on "Business Partners" / advisory models. Vulnerability: Instability of Project RPO models.<br>
+                <strong>Pontoon:</strong> Building internal HR tech products. Vulnerability: Heavy Adecco bureaucracy.<br>
+                <strong>Sevenstep & PeopleScout:</strong> Doubling down on high-volume execution. Vulnerability: Alienating seasoned recruiters who want strategic consulting.</p>
+
+                <h3>4) Poaching Battle Cards</h3>
+                <div class="battle-cards-grid">
+                    <div class="battle-card">
+                        <h4>Cielo</h4>
+                        <p><strong>Target Pool:</strong> Client Services & Implementation specialists.</p>
+                        <div class="talk-track">"If you want to focus purely on strategic talent acquisition without the software integration headaches, Wilson HCG offers a purer RPO environment."</div>
                     </div>
-                </div>
-
-                <div class="battle-card">
-                    <h4>Hudson Battle Card</h4>
-                    <p><strong>Target Pool:</strong> Recruiters stuck in short-term 'Recruiter on Demand' loops.</p>
-                    <div class="talk-track">
-                        "At WilsonHCG, we build long-term, embedded relationships with enterprise clients rather than bouncing you between client projects."
+                    <div class="battle-card">
+                        <h4>Hudson</h4>
+                        <p><strong>Target Pool:</strong> Recruiters stuck in high-churn 'On Demand' models.</p>
+                        <div class="talk-track">"Project RPO means bouncing between clients. At Wilson HCG, we build long-term, embedded relationships."</div>
                     </div>
-                </div>
-
-                <div class="battle-card">
-                    <h4>Pontoon Battle Card</h4>
-                    <p><strong>Target Pool:</strong> Program Managers frustrated by corporate bureaucracy.</p>
-                    <div class="talk-track">
-                        "WilsonHCG delivers global reach combined with the agility and responsiveness of a dedicated talent solutions firm."
-                    </div>
-                </div>
-
-                <div class="battle-card">
-                    <h4>Sevenstep Battle Card</h4>
-                    <p><strong>Target Pool:</strong> Senior sourcers ready for full-lifecycle client leadership.</p>
-                    <div class="talk-track">
-                        "If you are ready to graduate from pure volume sourcing into full strategic account management, WilsonHCG is the logical next step."
+                    <div class="battle-card">
+                        <h4>Sevenstep</h4>
+                        <p><strong>Target Pool:</strong> Senior sourcers hitting a career ceiling.</p>
+                        <div class="talk-track">"Sevenstep is great to learn the basics, but if you're ready to graduate to full strategic advisory, Wilson HCG is the next step."</div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- Modal Popup for Granular Candidate Details -->
+    <!-- Modal Popup -->
     <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
         <div class="modal-card">
-            <button class="modal-close" onclick="closeModalDirect()">✕</button>
+            <button class="modal-close" onclick="closeModalDirect()">X</button>
             <span class="badge" id="modal-badge">Profile</span>
-            <h2 class="candidate-name" id="modal-name">Candidate Name</h2>
+            <h2 class="candidate-name" id="modal-name">Name</h2>
             <div class="candidate-meta" id="modal-meta">Title • Company • Location</div>
 
             <div class="modal-section">
-                <h4>The Good (Mandate Alignment)</h4>
+                <h4>The Good (Initial JD Alignment)</h4>
                 <p id="modal-good">-</p>
             </div>
-
             <div class="modal-section">
                 <h4>Trade-Offs & Potential Risks</h4>
                 <p id="modal-tradeoff">-</p>
             </div>
-
-            <div class="modal-section" style="background: rgba(145, 235, 200, 0.1); padding: 1rem; border-radius: 8px; border-top: none; margin-top: 1rem;">
-                <h4 style="color: #0F5238;">Vetting Focus & Next Steps</h4>
-                <p id="modal-vetting" style="color: #16170F; font-weight: 500;">-</p>
-            </div>
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
     <script>
         // --- GOOGLE SHEETS LIVE CSV URL ---
-        // Replace this URL with your published Google Sheet CSV link when ready:
         const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7SGehun-xXnLILN48Yhxsh9Oar9jrpiZDyBuwCpmepsYIKE_kZOB3MPdbrohvfCjMYXbZpUZg0qJu/pub?gid=974184280&single=true&output=csv'; 
 
-        // Fallback / Initial Data Array
-        let candidateData = [
-            {
-                Candidate: "Adela Quezada",
-                BackgroundProfile: "Verified LATAM / US Hybrids",
-                CurrentCompany: "Randstad",
-                Location: "US",
-                TheGood: "Built Randstad Mexico’s RPO/MSP from scratch. Now US-based. Deep AI/Tech fluency.",
-                TheTradeOff: "Currently Director level.",
-                LinkedIn: "https://linkedin.com"
-            },
-            {
-                Candidate: "Lourdes Borja",
-                BackgroundProfile: "LATAM",
-                CurrentCompany: "Cielo",
-                Location: "Mexico",
-                TheGood: "10-year tenure at Cielo running LATAM delivery; on-the-ground in Mexico City; direct history managing US-facing nearshore delivery centers.",
-                TheTradeOff: "Currently holds Regional Director title at Cielo.",
-                LinkedIn: "https://linkedin.com"
-            },
-            {
-                Candidate: "Valeria Stupenengo",
-                BackgroundProfile: "LATAM",
-                CurrentCompany: "Pierpoint International",
-                Location: "Argentina",
-                TheGood: "Built and scaled Cielo's main nearshore delivery hub (BA CoE) from scratch; managed 16 enterprise RPO accounts across 14 LATAM countries.",
-                TheTradeOff: "Based in Argentina.",
-                LinkedIn: "https://linkedin.com"
-            },
-            {
-                Candidate: "Marco Abraham Garza Valle",
-                BackgroundProfile: "LATAM",
-                CurrentCompany: "Korn Ferry",
-                Location: "Mexico",
-                TheGood: "Operational scale in Mexico/Central America (100+ FTEs, 26 accounts, 8,000 hires/yr); deep Korn Ferry RPO pedigree.",
-                TheTradeOff: "Recently shifted into exec search practice.",
-                LinkedIn: "https://linkedin.com"
-            },
-            {
-                Candidate: "Stephen Frank",
-                BackgroundProfile: "Verified LATAM / US Hybrids",
-                CurrentCompany: "Manpower",
-                Location: "US",
-                TheGood: "26 years of pure RPO scaling; leads 800+ team members across the Americas; built dedicated LATAM Center of Recruitment Excellence.",
-                TheTradeOff: "Deeply entrenched in Manpower.",
-                LinkedIn: "https://linkedin.com"
-            }
+        // Kanban Pipeline Stages
+        const stages = [
+            "Mapped (Pre-Outreach)",
+            "Outreach Active",
+            "Screening (Rob)",
+            "Charles Review",
+            "Keep Warm / Bench",
+            "Passed"
         ];
 
-        // --- Fetch Live Data on Load ---
+        let candidateData = [];
+
         window.addEventListener('DOMContentLoaded', () => {
             if (GOOGLE_SHEET_CSV_URL.startsWith('http') || GOOGLE_SHEET_CSV_URL.endsWith('.csv')) {
                 Papa.parse(GOOGLE_SHEET_CSV_URL, {
@@ -775,86 +484,62 @@
                     skipEmptyLines: true,
                     complete: function(results) {
                         if(results.data && results.data.length > 0) {
-                            // Normalize keys
                             candidateData = results.data.map(row => ({
                                 Candidate: row['Candidate'] || row['Candidate Name'] || '',
-                                BackgroundProfile: row['Background Profile'] || row['Background'] || '',
+                                BackgroundProfile: row['Background Profile'] || row['Background'] || 'Unspecified',
                                 CurrentCompany: row['Current Company'] || '',
                                 Location: row['Location'] || '',
-                                TheGood: row['The Good (JD Alignment)'] || row['The Good'] || '',
-                                TheTradeOff: row['The Trade-Off'] || '',
-                                LinkedIn: row['LinkedIn'] || 'https://linkedin.com'
+                                TheGood: row['The Good (Initial JD Alignment)'] || row['The Good'] || 'No notes provided.',
+                                TheTradeOff: row['The Trade-Off'] || 'None noted.',
+                                Status: row['Status'] || 'Mapped (Pre-Outreach)',
+                                LinkedIn: row['LinkedIn URL'] || row['LinkedIn'] || '#'
                             }));
                         }
-                        renderCards(candidateData);
-                        document.getElementById('loading-state').style.display = 'none';
-                    },
-                    error: function() {
-                        renderCards(candidateData); // Fallback to local
+                        renderKanban();
                         document.getElementById('loading-state').style.display = 'none';
                     }
                 });
-            } else {
-                renderCards(candidateData);
-                document.getElementById('loading-state').style.display = 'none';
             }
         });
 
-        // --- Render Cards ---
-        function renderCards(data) {
-            const container = document.getElementById('cards-container');
-            container.innerHTML = '';
+        function renderKanban() {
+            const board = document.getElementById('kanban-board');
+            board.innerHTML = '';
 
-            data.forEach((item, index) => {
-                if (!item.Candidate) return;
+            stages.forEach(stage => {
+                const col = document.createElement('div');
+                col.className = 'kanban-column';
+                
+                const matches = candidateData.filter(c => c.Status.trim() === stage && c.Candidate !== "");
+                
+                let cardsHtml = '';
+                matches.forEach((item, index) => {
+                    // Find actual index in main array for modal clicking
+                    const realIndex = candidateData.indexOf(item);
+                    cardsHtml += `
+                        <div class="candidate-card">
+                            <span class="badge">${item.BackgroundProfile}</span>
+                            <div class="candidate-name">${item.Candidate}</div>
+                            <div class="candidate-meta">${item.CurrentCompany} • ${item.Location}</div>
+                            <div class="card-preview">${item.TheGood}</div>
+                            <div class="card-actions">
+                                <button class="btn-action btn-view" onclick="openModal(${realIndex})">Notes</button>
+                                <a href="${item.LinkedIn}" target="_blank" class="btn-action btn-linkedin">LinkedIn</a>
+                            </div>
+                        </div>
+                    `;
+                });
 
-                let badgeClass = 'badge-latam';
-                if (item.BackgroundProfile.includes('US')) badgeClass = 'badge-us';
-
-                const card = document.createElement('div');
-                card.className = 'candidate-card';
-                card.innerHTML = `
-                    <div>
-                        <span class="badge ${badgeClass}">${item.BackgroundProfile || 'Executive'}</span>
-                        <div class="candidate-name">${item.Candidate}</div>
-                        <div class="candidate-meta">${item.CurrentCompany} • ${item.Location}</div>
-                        <div class="card-preview">${item.TheGood}</div>
+                col.innerHTML = `
+                    <div class="kanban-header">
+                        ${stage} <span class="kanban-count">${matches.length}</span>
                     </div>
-                    <div class="card-actions">
-                        <button class="btn-view" onclick="openModal(${index})">View Details</button>
-                        <a href="${item.LinkedIn}" target="_blank" class="btn-linkedin">LinkedIn ↗</a>
-                    </div>
+                    ${cardsHtml}
                 `;
-                container.appendChild(card);
+                board.appendChild(col);
             });
         }
 
-        // --- Filter Function ---
-        function filterCandidates() {
-            const search = document.getElementById('search-input').value.toLowerCase();
-            const filter = document.getElementById('profile-filter').value;
-
-            const filtered = candidateData.filter(item => {
-                const matchesSearch = (
-                    (item.Candidate && item.Candidate.toLowerCase().includes(search)) ||
-                    (item.CurrentCompany && item.CurrentCompany.toLowerCase().includes(search)) ||
-                    (item.Location && item.Location.toLowerCase().includes(search)) ||
-                    (item.TheGood && item.TheGood.toLowerCase().includes(search))
-                );
-
-                const matchesFilter = (
-                    filter === 'ALL' || 
-                    (filter === 'LATAM' && item.BackgroundProfile.includes('LATAM')) ||
-                    (filter === 'US' && item.BackgroundProfile.includes('US'))
-                );
-
-                return matchesSearch && matchesFilter;
-            });
-
-            renderCards(filtered);
-        }
-
-        // --- Navigation ---
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
@@ -866,17 +551,16 @@
             const body = document.getElementById('mandate-body');
             const toggleText = document.getElementById('mandate-toggle-text');
             body.classList.toggle('open');
-            toggleText.innerText = body.classList.contains('open') ? 'Collapse Overview' : 'Expand Overview';
+            toggleText.innerText = body.classList.contains('open') ? 'Collapse Overview ▲' : 'Expand Overview ▼';
         }
 
-        // --- Modal Logic ---
         function openModal(index) {
             const item = candidateData[index];
             document.getElementById('modal-name').innerText = item.Candidate;
             document.getElementById('modal-meta').innerText = `${item.CurrentCompany} • ${item.Location}`;
-            document.getElementById('modal-good').innerText = item.TheGood || 'N/A';
-            document.getElementById('modal-tradeoff').innerText = item.TheTradeOff || 'None noted.';
-            document.getElementById('modal-vetting').innerText = `Screen for commercial P&L size and direct US client alignment.`;
+            document.getElementById('modal-badge').innerText = item.BackgroundProfile;
+            document.getElementById('modal-good').innerText = item.TheGood;
+            document.getElementById('modal-tradeoff').innerText = item.TheTradeOff;
             document.getElementById('modal-overlay').classList.add('active');
         }
 

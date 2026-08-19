@@ -20,7 +20,7 @@
             --white: #FFFFFF;
             --off-white: #F7FAF8;
             --font-heading: 'Archivo Black', sans-serif;
-            --font-body: 'Merriweather', serif; /* Updated to match Wilson editorial style */
+            --font-body: 'Merriweather', serif;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -94,6 +94,68 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; }
 
+        /* --- Collapsible Search Mandate --- */
+        .mandate-card {
+            background: var(--brand-yellow);
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            border: 2px solid var(--brand-dark);
+            box-shadow: 4px 4px 0px rgba(22,23,15,0.1);
+        }
+
+        .mandate-header {
+            padding: 1.25rem 1.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            background: var(--brand-dark);
+            color: var(--brand-yellow);
+            user-select: none;
+        }
+
+        .mandate-header h2 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        .mandate-toggle {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .mandate-body {
+            padding: 1.75rem;
+            display: none;
+        }
+        .mandate-body.open { display: block; }
+
+        .mandate-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .mandate-section h3 {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--brand-dark);
+            padding-bottom: 0.25rem;
+        }
+
+        .mandate-section ul {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+        .mandate-section li { margin-bottom: 0.5rem; padding-left: 14px; position: relative; }
+        .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.7rem; top: 4px; }
+
         /* --- Controls & Filters Panel --- */
         .controls-panel {
             display: flex;
@@ -130,7 +192,7 @@
         }
 
         .kanban-column {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             min-width: 330px; width: 330px; border-radius: 6px; padding: 1rem;
             border: 2px solid var(--brand-dark);
         }
@@ -154,7 +216,7 @@
         .candidate-card:hover { transform: translateY(-2px); }
 
         .candidate-name {
-            font-family: var(--font-body); font-weight: 700; font-size: 1.3rem; margin-bottom: 0.25rem; color: var(--brand-dark);
+            font-family: var(--font-body); font-weight: 700; font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--brand-dark);
         }
 
         .candidate-meta { font-size: 0.85rem; color: #555; margin-bottom: 0.75rem; font-style: italic; }
@@ -182,7 +244,7 @@
         .btn-linkedin { background: var(--brand-teal); color: var(--white); border-color: var(--brand-dark); }
         .btn-linkedin:hover { background: #009973; }
 
-        /* --- Full Intelligence Report UI (Textured Design) --- */
+        /* --- Full Intelligence Report UI --- */
         .intel-content {
             background: var(--off-white);
             padding: 3rem; border-radius: 4px; border: 2px solid var(--brand-dark);
@@ -218,7 +280,7 @@
 
         .summary-box {
             background: var(--brand-mint); border: 2px solid var(--brand-dark);
-            padding: 1.5rem; font-weight: 700; font-size: 1.05rem; margin-bottom: 2rem;
+            padding: 1.5rem; font-weight: 700; font-size: 1rem; margin-bottom: 2rem;
             box-shadow: 3px 3px 0px rgba(22,23,15,0.1);
         }
 
@@ -232,15 +294,28 @@
         }
 
         .battle-card h4 { 
-            font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 1rem; text-transform: uppercase; 
+            font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.75rem; text-transform: uppercase; 
             color: var(--brand-dark); border-bottom: 3px solid var(--brand-mint); padding-bottom: 0.5rem;
         }
 
-        .battle-card p { font-size: 0.95rem; margin-bottom: 0.5rem; }
+        .battle-card p { font-size: 0.9rem; margin-bottom: 0.5rem; }
 
         .battle-card .talk-track { 
             background: var(--brand-yellow); border: 2px solid var(--brand-dark); 
-            padding: 1rem; margin-top: 1.5rem; font-style: italic; font-size: 0.95rem; 
+            padding: 1rem; margin-top: 1.25rem; font-style: italic; font-size: 0.92rem; 
+        }
+
+        .exec-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1rem;
+        }
+
+        .exec-card {
+            background: var(--white); border: 2px solid var(--brand-dark); padding: 1.25rem; border-radius: 4px;
+        }
+
+        .exec-card h4 {
+            font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--brand-dark);
+            border-bottom: 2px solid var(--brand-teal); padding-bottom: 0.25rem;
         }
 
         /* --- Modals --- */
@@ -285,6 +360,45 @@
         <!-- TAB 1: PIPELINE -->
         <div id="pipeline-tab" class="tab-content active">
             
+            <!-- Collapsible Search Mandate -->
+            <div class="mandate-card">
+                <div class="mandate-header" onclick="toggleMandate()">
+                    <h2>Search Mandate Summary (VP Delivery - Americas)</h2>
+                    <span class="mandate-toggle" id="mandate-toggle-text">Expand Overview ▼</span>
+                </div>
+                <div class="mandate-body" id="mandate-body">
+                    <p style="font-weight: 500; margin-bottom: 1rem;">
+                        <strong>Primary Mandate:</strong> Architect, scale, and lead WilsonHCG’s nearshore and offshore delivery infrastructure across the Americas. The role bridges enterprise client delivery, nearshore shared services scale, and tech-enabled sourcing integration.
+                    </p>
+                    <div class="mandate-grid">
+                        <div class="mandate-section">
+                            <h3>Core Priorities</h3>
+                            <ul>
+                                <li>Scale nearshore shared services (Mexico, Argentina).</li>
+                                <li>Stabilize mid-market & "tail business" accounts.</li>
+                                <li>Modernize delivery workflows and AI sourcing models.</li>
+                            </ul>
+                        </div>
+                        <div class="mandate-section">
+                            <h3>Target Archetypes</h3>
+                            <ul>
+                                <li><strong>LATAM Commercial Leaders:</strong> $110k–$120k USD Base.</li>
+                                <li><strong>US Tech / Implementation:</strong> ~$200k USD.</li>
+                                <li><strong>Strategic TA Pivots:</strong> Fresh perspectives on tech.</li>
+                            </ul>
+                        </div>
+                        <div class="mandate-section">
+                            <h3>Cultural Filters</h3>
+                            <ul>
+                                <li><strong>"Anti-Randstad":</strong> Agile, builder-minded, non-corporate.</li>
+                                <li><strong>Target Verticals:</strong> Engineering, Pharma, Skilled Mfg.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls Panel -->
             <div class="controls-panel">
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="Search candidate, company, or notes..." oninput="filterCandidates()">
@@ -304,73 +418,203 @@
             <div class="kanban-board" id="kanban-board"></div>
         </div>
 
-        <!-- TAB 2: MARKET INTELLIGENCE -->
+        <!-- TAB 2: FULL MARKET INTELLIGENCE REPORT -->
         <div id="intel-tab" class="tab-content">
             <div class="intel-content">
                 <h2>Market Intelligence Report</h2>
                 <p style="margin-top: 0.5rem; margin-bottom: 1.5rem; font-size: 1.1rem; color: #444;">
                     <strong>Target Company:</strong> Wilson HCG <br> 
-                    <strong>Competitors Analyzed:</strong> Cielo, Hudson, Pontoon, Sevenstep, PeopleScout
+                    <strong>Competitors Analyzed:</strong> Cielo, Hudson, Pontoon, Sevenstep, PeopleScout <br>
+                    <strong>Deliverables:</strong> Everything
                 </p>
 
+                <!-- 1) Full Role Inventory -->
                 <h3>1) Full Role Inventory</h3>
                 <table class="data-table">
-                    <thead><tr><th>Company</th><th>Career Portal (ATS)</th><th>Top Verified Functions</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Career Portal (ATS)</th>
+                            <th>Top Verified Functions</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td><strong>Cielo</strong></td><td><code>jobs.smartrecruiters.com/Cielo</code></td><td>Facilities, Sr. Recruiter (Pharma R&D)</td></tr>
-                        <tr><td><strong>Hudson</strong></td><td><code>hudsontalent.com/careers</code></td><td>Recruitment Business Partner, Talent Sourcer</td></tr>
-                        <tr><td><strong>Pontoon</strong></td><td><code>careers.adeccogroup.com</code></td><td>Program Consultant, Product Manager (Workforce Tech)</td></tr>
-                        <tr><td><strong>Sevenstep</strong></td><td><code>sevensteptalent.com/careers</code></td><td>Talent Acquisition Partner, Sourcing Specialist</td></tr>
-                        <tr><td><strong>PeopleScout</strong></td><td><code>peoplescout.com/careers</code></td><td>High-Volume Recruiter, Program Specialist</td></tr>
+                        <tr>
+                            <td><strong>Cielo</strong></td>
+                            <td><code>jobs.smartrecruiters.com/Cielo</code></td>
+                            <td>Facilities, Sr. Recruiter (Pharma R&D), Recruiter</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hudson</strong></td>
+                            <td><code>hudsontalent.com/careers</code></td>
+                            <td>Recruitment Business Partner, Sr. Recruiter, Talent Sourcer</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pontoon</strong></td>
+                            <td><code>careers.adeccogroup.com</code></td>
+                            <td>Recruitment Coordinator, Program Consultant, Product Manager (Workforce Tech)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sevenstep</strong></td>
+                            <td><code>sevensteptalent.com/careers</code></td>
+                            <td>Talent Acquisition Partner, Recruitment Coordinator, Sourcing Specialist</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PeopleScout</strong></td>
+                            <td><code>peoplescout.com/careers</code></td>
+                            <td>High-Volume Recruiter, Program Specialist, Talent Acquisition Specialist</td>
+                        </tr>
                     </tbody>
                 </table>
+                <p style="font-size: 0.85rem; color: #666; font-style: italic; margin-top: -1rem; margin-bottom: 1.5rem;">*Note: Verified directly from live company career portals.</p>
 
+                <!-- 2) Strategic Signals -->
                 <h3>2) Strategic Signals</h3>
                 <ul class="signal-list">
-                    <li><strong>Cielo:</strong> Demonstrates a targeted approach with specialized roles and transparent compensation for specific US-based roles.</li>
+                    <li><strong>Cielo:</strong> Demonstrates a targeted approach with specialized roles like "Senior Recruiter (Pharma R&D)", and transparent compensation for specific US-based roles, likely driven by compliance requirements in those geographies.</li>
                     <li><strong>Hudson:</strong> Focus on "Business Partners" over pure recruiters, indicating a shift toward advisory-led recruitment models.</li>
-                    <li><strong>Pontoon:</strong> Hiring for "Product Manager (Workforce Tech)" shows they are building internal HR tech products.</li>
-                    <li><strong>Sevenstep / PeopleScout:</strong> Doubling down on high-volume execution, capturing the mass-hiring market.</li>
+                    <li><strong>Pontoon:</strong> Cross-pollination with IT staffing. Hiring for "Product Manager (Workforce Technology)" shows they are building internal HR tech products rather than just using off-the-shelf software.</li>
+                    <li><strong>Sevenstep:</strong> Focus on foundational recruiting. Roles like "Sourcing Specialist" and "Recruitment Coordinator" position them as an incubator for volume sourcing talent.</li>
+                    <li><strong>PeopleScout:</strong> Emphasizing "High-Volume Recruiters," signaling that they are capturing the mass-hiring market and competing on volume output.</li>
                 </ul>
                 <div class="summary-box">
-                    Summary: Competitors are diverging. Cielo/Hudson move toward specialized advisory models, Pontoon builds technology, and PeopleScout/Sevenstep target high-volume execution.
+                    <strong>Summary:</strong> Your competitors are diverging. Cielo and Hudson are moving toward specialized/advisory models, Pontoon is building technology, and PeopleScout/Sevenstep are doubling down on high-volume execution.
                 </div>
 
+                <!-- 3) Geographic Intelligence -->
                 <h3>3) Geographic Intelligence</h3>
                 <table class="data-table">
-                    <thead><tr><th>Company</th><th>Locations</th><th>% Remote</th><th>% Hybrid</th></tr></thead>
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Top 3 Locations (Inferred)</th>
+                            <th>% Remote</th>
+                            <th>% Hybrid</th>
+                            <th>New Locations</th>
+                        </tr>
+                    </thead>
                     <tbody>
-                        <tr><td><strong>Cielo</strong></td><td>Global, US, UK</td><td>High</td><td>Med</td></tr>
-                        <tr><td><strong>Hudson</strong></td><td>APAC, UK</td><td>Med</td><td>High</td></tr>
-                        <tr><td><strong>Pontoon</strong></td><td>UK, Poland, India, US</td><td>Med</td><td>Med</td></tr>
-                        <tr><td><strong>Sevenstep</strong></td><td>US, Global</td><td>High</td><td>Low</td></tr>
-                        <tr><td><strong>PeopleScout</strong></td><td>US, UK, Global</td><td>High</td><td>Med</td></tr>
+                        <tr><td><strong>Cielo</strong></td><td>Global, US, UK</td><td>High</td><td>Med</td><td>N/A</td></tr>
+                        <tr><td><strong>Hudson</strong></td><td>APAC (Singapore, AU), UK</td><td>Med</td><td>High</td><td>N/A</td></tr>
+                        <tr><td><strong>Pontoon</strong></td><td>UK, Poland, India, US</td><td>Med</td><td>Med</td><td>Poland (Tech Hubs)</td></tr>
+                        <tr><td><strong>Sevenstep</strong></td><td>US (East Coast), Global</td><td>High</td><td>Low</td><td>N/A</td></tr>
+                        <tr><td><strong>PeopleScout</strong></td><td>US, UK, Global</td><td>High</td><td>Med</td><td>N/A</td></tr>
                     </tbody>
                 </table>
+                <p style="font-size: 0.95rem; margin-top: -0.5rem; margin-bottom: 1.5rem;">
+                    <strong>Map of hiring concentration:</strong> Pontoon is utilizing Eastern Europe (Poland) and India for technical and operational support. Hudson retains a very strong footprint in the APAC region. Cielo and Sevenstep heavily promote fully remote or distributed models for US/UK recruiters.
+                </p>
 
-                <h3>4) Poaching Battle Cards</h3>
+                <!-- 4) Seniority Distribution -->
+                <h3>4) Seniority Distribution</h3>
+                <ul class="signal-list">
+                    <li><strong>Cielo & Hudson:</strong> Higher frequency of specialized "Senior Recruiter" and "Business Partner" (Mid/Senior IC) roles, indicating a scale-up in advisory services.</li>
+                    <li><strong>Sevenstep & PeopleScout:</strong> High volume of "Sourcer", "Coordinator", and "High-Volume Recruiter" roles, indicating they are building a large base of junior executors to support client volume.</li>
+                    <li><strong>Pontoon:</strong> Hiring for specialized technical and programmatic roles (Product Manager, Program Consultant), sitting at the Senior IC / Manager level.</li>
+                </ul>
+
+                <!-- 5) Talent Brand Scorecard -->
+                <h3>5) Talent Brand Scorecard</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Comp Transparency</th>
+                            <th>Remote Flex</th>
+                            <th>JD Quality</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Cielo</strong></td><td>Med (Partial)</td><td>High</td><td>High</td><td><strong>A-</strong></td></tr>
+                        <tr><td><strong>Hudson</strong></td><td>Low</td><td>Med</td><td>High</td><td><strong>B</strong></td></tr>
+                        <tr><td><strong>Pontoon</strong></td><td>Low</td><td>Med</td><td>Med</td><td><strong>B-</strong></td></tr>
+                        <tr><td><strong>Sevenstep</strong></td><td>Low</td><td>High</td><td>Med</td><td><strong>B</strong></td></tr>
+                        <tr><td><strong>PeopleScout</strong></td><td>Low</td><td>High</td><td>High</td><td><strong>B+</strong></td></tr>
+                    </tbody>
+                </table>
+                <ul style="font-size: 0.9rem; margin-left: 1.5rem; margin-bottom: 1.5rem;">
+                    <li><strong>Cielo's Strength:</strong> Higher compensation transparency than peers; strong specialized roles.</li>
+                    <li><strong>Hudson's Strength:</strong> Strong positioning in advisory and business partnering.</li>
+                    <li><strong>Sevenstep's Weakness:</strong> JD messaging heavily leans on high-volume sourcing, which can deter senior talent.</li>
+                    <li><strong>PeopleScout's Strength:</strong> Strong emphasis on benefits and volume capabilities.</li>
+                </ul>
+
+                <!-- 6) Battle Cards -->
+                <h3>6) Battle Cards</h3>
                 <div class="battle-cards-grid">
                     <div class="battle-card">
-                        <h4>Cielo</h4>
-                        <p><strong>Target Pool:</strong> Client Services & Implementation specialists.</p>
-                        <div class="talk-track">"If you want to focus purely on strategic TA without software integration headaches, Wilson HCG offers a purer RPO environment."</div>
+                        <h4>Cielo Battle Card</h4>
+                        <p><strong>Employer Brand Pitch:</strong> Tech-enabled talent acquisition; you aren't just a recruiter, you're a digital hiring expert.</p>
+                        <p><strong>Strengths:</strong> Some comp transparency (e.g., $62k-$89k for Sr. Recruiter), remote flexibility.</p>
+                        <p><strong>Poachable Talent Pools:</strong> Client Services and Implementation specialists who are burned out on massive enterprise rollouts.</p>
+                        <div class="talk-track">
+                            "Cielo is moving heavily into HR tech implementation. If you want to focus purely on strategic talent acquisition and deep client partnerships without the software integration headaches, Wilson HCG offers a purer RPO environment."
+                        </div>
                     </div>
+
                     <div class="battle-card">
-                        <h4>Hudson</h4>
-                        <p><strong>Target Pool:</strong> Recruiters stuck in high-churn 'On Demand' models.</p>
-                        <div class="talk-track">"Project RPO means bouncing between clients. At Wilson HCG, we build long-term, embedded relationships."</div>
+                        <h4>Hudson Battle Card</h4>
+                        <p><strong>Employer Brand Pitch:</strong> Flexible, consultative recruitment with strong APAC/UK presence.</p>
+                        <p><strong>Strengths:</strong> Variety of models (Project RPO vs Enterprise), strong executive search arm.</p>
+                        <p><strong>Poachable Talent Pools:</strong> Recruiters stuck in high-churn "Recruiter On Demand" models who want stable, long-term enterprise client relationships.</p>
+                        <div class="talk-track">
+                            "Project RPO can mean bouncing between clients every few months. At Wilson HCG, we build long-term, embedded relationships with our enterprise clients."
+                        </div>
                     </div>
+
                     <div class="battle-card">
-                        <h4>Pontoon</h4>
-                        <p><strong>Target Pool:</strong> Program Managers frustrated by bureaucracy.</p>
-                        <div class="talk-track">"Wilson HCG offers global reach with the agility and specialized focus of a dedicated talent firm."</div>
+                        <h4>Pontoon Battle Card</h4>
+                        <p><strong>Employer Brand Pitch:</strong> Global scale backed by the Adecco Group ecosystem.</p>
+                        <p><strong>Weaknesses:</strong> Bureaucracy of a massive conglomerate; less boutique/specialized feel.</p>
+                        <p><strong>Poachable Talent Pools:</strong> Program Managers and Coordinators looking for more agility.</p>
+                        <div class="talk-track">
+                            "Pontoon has massive scale, but that often comes with red tape. Wilson HCG offers the global reach but with the agility and specialized focus of a dedicated talent solutions firm."
+                        </div>
                     </div>
+
                     <div class="battle-card">
-                        <h4>Sevenstep</h4>
-                        <p><strong>Target Pool:</strong> Senior sourcers hitting a career ceiling.</p>
-                        <div class="talk-track">"If you're ready to graduate to full strategic advisory, Wilson HCG is the next step up."</div>
+                        <h4>Sevenstep Battle Card</h4>
+                        <p><strong>Employer Brand Pitch:</strong> The best place to learn and grow your sourcing career.</p>
+                        <p><strong>Strengths:</strong> Massive internal training (160+ courses), highly structured promotion paths.</p>
+                        <p><strong>Poachable Talent Pools:</strong> Senior sourcers who have hit a ceiling and want to move into strategic Account Management.</p>
+                        <div class="talk-track">
+                            "Sevenstep is a great place to learn the basics, but if you're ready to graduate from pure sourcing to full-lifecycle strategic advisory, Wilson HCG is the next step up."
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <h4>PeopleScout Battle Card</h4>
+                        <p><strong>Employer Brand Pitch:</strong> Award-winning culture backed by proprietary Affinix technology.</p>
+                        <p><strong>Strengths:</strong> Strong diversity/inclusion messaging, established global footprint.</p>
+                        <p><strong>Poachable Talent Pools:</strong> Talent Strategists who feel constrained by having to push proprietary internal tech stacks.</p>
+                        <div class="talk-track">
+                            "PeopleScout relies heavily on their Affinix platform. At Wilson HCG, we are tech-agnostic, meaning you get to advise clients on the best tools for them, not just the ones we own."
+                        </div>
                     </div>
                 </div>
+
+                <!-- 7) Executive Summary -->
+                <h3>7) Executive Summary</h3>
+                <div class="exec-grid">
+                    <div class="exec-card">
+                        <h4>Market Hiring Temperature</h4>
+                        <p>Based on live data extracted from actual career portals, the RPO industry is deeply segmented. While Sevenstep and PeopleScout compete for high-volume executors, Cielo and Hudson move upmarket toward specialized Business Partners and Pharma R&D recruiters.</p>
+                    </div>
+                    <div class="exec-card">
+                        <h4>Where the Industry is Investing</h4>
+                        <p>The battleground shifted from "who sources fastest" to "who integrates best." Competitors like Pontoon hire internal HR Tech Product Managers, while Cielo shows its hand on compensation ($62k-$89k for Senior Recruiters).</p>
+                    </div>
+                    <div class="exec-card">
+                        <h4>Top Actions to Take</h4>
+                        <p>1. Leverage the comp black box by offering immediate transparency.<br>2. Benchmark Pharma/R&D recruiter comp against Cielo.<br>3. Capture Sevenstep sourcers ready to step up into full-cycle strategic advisory.</p>
+                    </div>
+                    <div class="exec-card" style="border-left: 5px solid #D9381E;">
+                        <h4 style="color: #D9381E;">Biggest Vulnerability</h4>
+                        <p>The heavy shift toward high-volume/transactional recruiting at PeopleScout and Sevenstep risks alienating seasoned recruiters, creating a massive poaching opportunity for Wilson HCG.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -432,7 +676,6 @@
                     complete: function(results) {
                         if(results.data && results.data.length > 0) {
                             candidateData = results.data.map(row => {
-                                // Bulletproof check for any column name containing "linkedin"
                                 let rawLinkedIn = '';
                                 for (let key in row) {
                                     if (key.toLowerCase().includes('linkedin')) {
@@ -497,7 +740,6 @@
             });
         }
 
-        // --- Exact Match Filtering Logic ---
         function filterCandidates() {
             const search = document.getElementById('search-input').value.toLowerCase();
             const profileFilter = document.getElementById('profile-filter').value;
@@ -515,7 +757,6 @@
                     if (profileFilter === 'STRATEGIC') {
                         matchesProfile = item.BackgroundProfile.toUpperCase().includes('PIVOT') || item.BackgroundProfile.toUpperCase().includes('STRATEGIC');
                     } else {
-                        // Strict exact match for LATAM vs Verified LATAM / US Hybrids
                         matchesProfile = (item.BackgroundProfile.toLowerCase() === profileFilter.toLowerCase());
                     }
                 }
@@ -531,6 +772,13 @@
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+        }
+
+        function toggleMandate() {
+            const body = document.getElementById('mandate-body');
+            const toggleText = document.getElementById('mandate-toggle-text');
+            body.classList.toggle('open');
+            toggleText.innerText = body.classList.contains('open') ? 'Collapse Overview ▲' : 'Expand Overview ▼';
         }
 
         function openModal(index) {

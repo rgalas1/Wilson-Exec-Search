@@ -614,6 +614,22 @@
 
         let candidateData = [];
 
+        // --- NEW BULLETPROOF STATUS NORMALIZER ---
+        // This stops Google Sheets drag-and-drop errors (like "Mapped 1", "Mapped 2") from breaking the board
+        function normalizeStatus(rawStatus) {
+            if (!rawStatus) return stages[0];
+            let lower = String(rawStatus).toLowerCase();
+            
+            if (lower.includes('outreach')) return stages[1];
+            if (lower.includes('screen') || lower.includes('rob')) return stages[2];
+            if (lower.includes('charles') || lower.includes('review')) return stages[3];
+            if (lower.includes('warm') || lower.includes('bench')) return stages[4];
+            if (lower.includes('pass')) return stages[5];
+            
+            // Default to Mapped if it says 'mapped' or is an accidental string (like "Mapped (Pre-Outreach) 1")
+            return stages[0]; 
+        }
+
         function forceOpenLink(url) {
             if (url && url !== '#') {
                 window.open(url, '_blank');
@@ -652,7 +668,7 @@
                                     Location: row['Location'] || '',
                                     TheGood: row['The Good (Initial JD Alignment)'] || row['The Good'] || 'No notes provided.',
                                     TheTradeOff: row['The Trade-Off'] || 'None noted.',
-                                    Status: row['Status'] || 'Mapped (Pre-Outreach)',
+                                    Status: normalizeStatus(row['Status']), // FIXED: Bulletproof status routing
                                     LinkedIn: formatUrl(rawLinkedIn)
                                 };
                             });
@@ -672,7 +688,7 @@
                 const col = document.createElement('div');
                 col.className = 'kanban-column';
                 
-                const matches = dataToRender.filter(c => (c.Status || '').trim() === stage && c.Candidate !== "");
+                const matches = dataToRender.filter(c => c.Status === stage && c.Candidate !== "");
                 
                 let cardsHtml = '';
                 matches.forEach((item) => {

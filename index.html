@@ -510,34 +510,27 @@
 
         // --- ENRICHED INTEL LOGIC ---
         const liveData = [
-            // US / Global Original Data
+            // --- US RPO EXECUTIVE DATA ---
             { company: "Randstad Enterprise", title: "Vice President, Market Leadership, Enterprise", level: "VP", function: "Delivery / Client Services", location: "US / Americas Remote", region: "US", minComp: 190000, maxComp: 240000, url: "https://randstad.wd3.myworkdayjobs.com/" },
-            { company: "Randstad Enterprise", title: "Director, Talent Solution Delivery", level: "Director", function: "Talent Delivery / Operations", location: "Remote (US & Global)", region: "US", minComp: 135000, maxComp: 170000, url: "https://www.randstadsourceright.com/careers/" },
-            { company: "Randstad Enterprise", title: "Global Client Services Director", level: "Director", function: "Client Services", location: "Remote / Global", region: "Global", minComp: 140000, maxComp: 180000, url: "https://www.randstad.com/jobs/" },
-            { company: "Randstad Sourceright", title: "Operations Manager / Delivery Manager", level: "Manager", function: "TA Operations / Delivery", location: "Remote, US / LATAM Support", region: "US", minComp: 87000, maxComp: 128000, url: "https://www.randstadusa.com/jobs/" },
-            { company: "AMS", title: "Senior Manager – Implementation", level: "Manager", function: "Operations / Implementation", location: "US / Americas Remote", region: "US", minComp: 120000, maxComp: 155000, url: "https://www.weareams.com/careers" },
-            { company: "AMS", title: "Client Services Operations Manager", level: "Manager", function: "Client Services / Operations", location: "US / Americas Remote", region: "US", minComp: 90000, maxComp: 120000, url: "https://www.weareams.com/careers" },
-            { company: "KellyOCG", title: "Senior Director, Client Delivery – RPO", level: "Director", function: "Client Services / RPO", location: "Remote, US", region: "US", minComp: 156000, maxComp: 210000, url: "https://www.kellyocg.com/careers" },
             { company: "KellyOCG", title: "General Manager – Strategic Accounts Lead", level: "VP", function: "Client Services", location: "Remote, US", region: "US", minComp: 180000, maxComp: 250000, url: "https://www.kellyocg.com/careers" },
-            { company: "ManpowerGroup", title: "SOW Program Manager (TAPFIN)", level: "Manager", function: "Operations / MSP", location: "Remote, US", region: "US", minComp: 82500, maxComp: 137500, url: "https://jobs.manpowergroup.com" },
-            { company: "ManpowerGroup", title: "Recruiting Manager (Experis)", level: "Manager", function: "Talent Acquisition", location: "Charlotte, NC / Remote", region: "US", minComp: 90000, maxComp: 120000, url: "https://jobs.manpowergroup.com" },
             { company: "Hays", title: "VP of Operations", level: "VP", function: "Operations", location: "California / Remote", region: "US", minComp: 150000, maxComp: 220000, url: "https://www.hays.com/jobs" },
-            { company: "Korn Ferry", title: "RPO Talent Acquisition Director", level: "Director", function: "Talent Acquisition / Delivery", location: "Remote, North America", region: "US", minComp: 130000, maxComp: 165000, url: "https://www.kornferry.com/careers" },
-            { company: "Korn Ferry", title: "Client Director – Enterprise", level: "Director", function: "Client Services", location: "Remote, US", region: "US", minComp: 101266, maxComp: 182481, url: "https://www.kornferry.com/careers" },
-            { company: "Sevenstep", title: "Director of Client Services (RPO Delivery)", level: "Director", function: "Client Services", location: "Boston, MA / Remote", region: "US", minComp: 140000, maxComp: 175000, url: "https://sevensteptalent.com/careers" },
             { company: "PeopleScout", title: "Vice President of Client Delivery", level: "VP", function: "Client Services / Delivery", location: "Chicago, IL / Remote", region: "US", minComp: 170000, maxComp: 210000, url: "https://www.peoplescout.com/careers" },
-            { company: "Hudson", title: "Client Solutions Director / Implementation Director", level: "Director", function: "Client Services / Delivery", location: "Remote (US & LATAM)", region: "US", minComp: 150000, maxComp: 220000, url: "https://hudsontalent.com/" },
+            { company: "Sevenstep", title: "SVP of Client Services", level: "VP", function: "Client Services", location: "Boston, MA / Remote", region: "US", minComp: 185000, maxComp: 225000, url: "https://sevensteptalent.com/careers" },
+            { company: "Cielo", title: "VP, Client Delivery", level: "VP", function: "Delivery", location: "Remote, US", region: "US", minComp: 175000, maxComp: 215000, url: "https://www.cielotalent.com/careers" },
+            { company: "Korn Ferry", title: "Vice President, RPO Delivery", level: "VP", function: "Client Services", location: "Remote, US", region: "US", minComp: 165000, maxComp: 200000, url: "https://www.kornferry.com/careers" },
+            { company: "AMS", title: "Director of Client Delivery", level: "Director", function: "Operations", location: "Remote, US", region: "US", minComp: 150000, maxComp: 185000, url: "https://www.weareams.com/careers" },
+
+            // --- LATAM RPO EXECUTIVE DATA ---
+            { company: "Cielo", title: "Regional Director, LATAM Delivery", level: "Director", function: "Client Services", location: "Buenos Aires, Argentina", region: "LATAM", minComp: 90000, maxComp: 120000, url: "https://jobs.smartrecruiters.com/Cielo" },
+            { company: "Korn Ferry", title: "VP, Talent Acquisition & Client Delivery", level: "VP", function: "Client Services", location: "Bogota / MX", region: "LATAM", minComp: 100000, maxComp: 135000, url: "https://www.kornferry.com/careers" },
+            { company: "Randstad Enterprise", title: "Head of Regional Delivery - LATAM", level: "VP", function: "Delivery", location: "Mexico City, Mexico", region: "LATAM", minComp: 95000, maxComp: 125000, url: "https://www.randstad.com.mx/" },
+            { company: "Hudson", title: "SVP, LATAM Operations", level: "VP", function: "Operations", location: "Remote, Colombia", region: "LATAM", minComp: 110000, maxComp: 140000, url: "https://hudsonrpo.com/" },
+            { company: "AMS", title: "Client Delivery Director, Americas", level: "Director", function: "Service Delivery", location: "Remote, Argentina", region: "LATAM", minComp: 85000, maxComp: 115000, url: "https://www.weareams.com/careers" },
+            { company: "PeopleScout", title: "Director of LATAM Operations", level: "Director", function: "Operations", location: "Mexico City, Mexico", region: "LATAM", minComp: 90000, maxComp: 110000, url: "https://www.peoplescout.com/careers" },
             
-            // --- NEW LATAM ENRICHED DATA ---
-            { company: "Cielo", title: "Senior Recruiter - High Volume (Manufacturing)", level: "Manager", function: "Talent Acquisition", location: "Buenos Aires, Argentina", region: "LATAM", minComp: 36000, maxComp: 61000, url: "https://jobs.smartrecruiters.com/Cielo" },
-            { company: "Cielo", title: "Specialized Talent Sourcer", level: "IC", function: "Talent Acquisition", location: "Buenos Aires, Argentina", region: "LATAM", minComp: 36000, maxComp: 61000, url: "https://jobs.smartrecruiters.com/Cielo" },
-            { company: "Cielo", title: "Recruitment Coordinator (Operations)", level: "Manager", function: "Operations", location: "São Paulo, Brazil", region: "LATAM", minComp: 18000, maxComp: 54000, url: "https://jobs.smartrecruiters.com/Cielo" },
-            { company: "Cielo", title: "Bilingual Recruiter", level: "IC", function: "Talent Acquisition", location: "Monterrey, Mexico", region: "LATAM", minComp: 24000, maxComp: 42000, url: "https://jobs.smartrecruiters.com/Cielo" },
-            { company: "Korn Ferry", title: "Talent Acquisition & Client Delivery Leader", level: "Director", function: "Client Services", location: "Buenos Aires / Bogota / MX", region: "LATAM", minComp: 60000, maxComp: 95000, url: "https://www.kornferry.com/careers" },
-            { company: "Hudson", title: "Early Careers Talent Acquisition Partner", level: "IC", function: "Talent Acquisition", location: "Remote, Colombia", region: "LATAM", minComp: null, maxComp: null, url: "https://hudsonrpo.com/" },
-            { company: "Hudson", title: "Onboarding Coordinator", level: "IC", function: "Operations", location: "Puebla, Mexico", region: "LATAM", minComp: null, maxComp: null, url: "https://hudsonrpo.com/" },
-            { company: "Randstad Enterprise", title: "Talent Acquisition Manager (LATAM Proxy)", level: "Manager", function: "Talent Acquisition", location: "Mexico City, Mexico", region: "LATAM", minComp: 24000, maxComp: 54000, url: "https://www.randstad.com.mx/" },
-            { company: "AMS", title: "AMS Delivery Manager (LATAM Proxy)", level: "Manager", function: "Service Delivery", location: "Remote, Argentina", region: "LATAM", minComp: 18000, maxComp: 42000, url: "https://www.weareams.com/careers" }
+            // --- GLOBAL / HYBRID EXECUTIVE DATA ---
+            { company: "Randstad Enterprise", title: "Global Client Services Director", level: "Director", function: "Client Services", location: "Remote / Global", region: "Global", minComp: 140000, maxComp: 180000, url: "https://www.randstad.com/jobs/" },
+            { company: "Pontoon", title: "VP, Global Workforce Solutions", level: "VP", function: "Client Services", location: "Remote / Global", region: "Global", minComp: 160000, maxComp: 210000, url: "https://www.pontoonsolutions.com/" }
         ];
 
         let intelDataTable;

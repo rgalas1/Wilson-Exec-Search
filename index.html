@@ -401,11 +401,7 @@
             </div>
 
             <div class="dashboard-grid">
-                <div class="card chart-card-small" style="grid-column: span 5;">
-                    <div class="card-header"><h3>Competitor Salary Alignment</h3></div>
-                    <canvas id="vpSalaryChart"></canvas>
-                </div>
-                <div class="card" style="grid-column: span 7;">
+                <div class="card" style="grid-column: span 12;">
                     <div class="card-header"><h3>Live Verified Requisitions</h3></div>
                     <div id="vp-roles-container" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
                         <!-- Generated via JS -->
@@ -593,7 +589,10 @@
                             <span class="badge ${badgeClass}">${c.BackgroundProfile}</span>
                             <div class="candidate-name">${c.Candidate}</div>
                             <div class="candidate-meta">${c.CurrentCompany} • ${c.Location}</div>
-                            <div class="card-preview"><strong>Aligns:</strong> ${c.TheGood}</div>
+                            <div class="card-preview" style="-webkit-line-clamp: 6;">
+                                <strong>Aligns:</strong> ${c.TheGood}<br><br>
+                                <strong>Risks:</strong> ${c.TheTradeOff}
+                            </div>
                             <div class="card-actions">
                                 <div class="btn-action btn-linkedin" onclick="event.stopPropagation(); forceOpenLink('${c.LinkedIn}')">LinkedIn</div>
                             </div>

@@ -186,7 +186,7 @@
         .vp-header-text h2 { font-family: var(--font-heading); font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: normal; }
         .vp-header-text p { color: #94A3B8; max-width: 600px; margin: 0; }
         
-        .comp-card { background: white; border-left: 4px solid var(--accent-primary); padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 1rem; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .comp-card { background: white; border-left: 4px solid var(--accent-primary); padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 1rem; border: 1px solid var(--border-color); }
         .comp-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; }
         .comp-company { color: var(--accent-primary); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
         .comp-details { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
@@ -211,6 +211,29 @@
         .badge-mgr { background: #F3F4F6; color: #4B5563; }
         .badge-ic { background: #F1F5F9; color: #64748B; }
 
+        /* Qualitative Styles Restored */
+        .qualitative-insights { margin-bottom: 2rem; background: var(--white); border: 2px solid var(--brand-dark); border-radius: 4px; padding: 2rem; box-shadow: 4px 4px 0px rgba(22,23,15,0.1); }
+        .qualitative-insights h3 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid var(--brand-dark); padding-bottom: 0.25rem; }
+        .signal-list { list-style: none; margin-bottom: 2rem; font-family: var(--font-body); font-size: 0.95rem; }
+        .signal-list li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
+        .signal-list li::before { content: "►"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.8rem; }
+        
+        .battle-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
+        .battle-card { background: var(--off-white); border: 1px solid var(--brand-dark); padding: 1.5rem; border-radius: 4px; }
+        .battle-card h4 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 0.75rem; color: var(--brand-dark); border-bottom: 3px solid var(--brand-teal); display: inline-block; padding-bottom: 0.25rem; }
+        .battle-card p { font-family: var(--font-body); font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .battle-card .talk-track { background: var(--brand-yellow); border: 1px dashed var(--brand-dark); padding: 1rem; margin-top: 1rem; font-style: italic; font-size: 0.9rem; font-family: var(--font-body); }
+        
+        .exec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
+        .exec-card { background: var(--off-white); border: 1px solid var(--brand-dark); padding: 1.25rem; border-radius: 4px; }
+        .exec-card h4 { font-family: var(--font-heading); font-size: 0.95rem; margin-bottom: 0.5rem; text-transform: uppercase; color: var(--brand-dark); }
+
+        /* Region Toggle */
+        .region-toggle-container { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; background: var(--white); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .region-btn { padding: 0.6rem 1.5rem; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 6px; font-family: var(--font-intel); font-weight: 600; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .region-btn:hover { background: #E2E8F0; }
+        .region-btn.active { background: var(--accent-primary); color: white; border-color: var(--accent-primary); }
+
     </style>
 </head>
 <body>
@@ -233,7 +256,6 @@
     <div class="container">
         <!-- TAB 1: PIPELINE -->
         <div id="pipeline-tab" class="tab-content active">
-            
             <div class="mandate-card">
                 <div class="mandate-header" onclick="toggleMandate()">
                     <h2>Search Mandate Summary (VP Delivery - Americas)</h2>
@@ -270,7 +292,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="controls-panel">
                 <div class="search-box">
                     <input type="text" id="search-input" placeholder="Search candidate, company, or notes..." oninput="filterCandidates()">
@@ -285,13 +306,21 @@
                     </select>
                 </div>
             </div>
-
             <div id="loading-state" style="font-family: var(--font-heading); padding: 2rem; text-align: center;">Loading live pipeline...</div>
             <div class="kanban-board" id="kanban-board"></div>
         </div>
 
-        <!-- TAB 2: MACRO MARKET INTEL -->
+        <!-- TAB 2: MACRO MARKET INTEL (REDESIGNED) -->
         <div id="general-intel" class="tab-content intel-tab-wrapper">
+            
+            <!-- Dynamic Region Toggle -->
+            <div class="region-toggle-container">
+                <button class="region-btn active" onclick="setRegion('Global', this)">🌍 Global View</button>
+                <button class="region-btn" onclick="setRegion('US', this)">🇺🇸 US Only</button>
+                <button class="region-btn" onclick="setRegion('LATAM', this)">🌎 LATAM Only</button>
+            </div>
+
+            <!-- Dynamic KPIs -->
             <div class="dashboard-grid">
                 <div class="card kpi-card">
                     <div class="kpi-value" id="kpi-total-roles">-</div>
@@ -299,19 +328,55 @@
                 </div>
                 <div class="card kpi-card">
                     <div class="kpi-value" id="kpi-avg-salary">-</div>
-                    <div class="kpi-label">Avg. VP/Dir Salary (US)</div>
+                    <div class="kpi-label">Avg. Base Salary (USD)</div>
                 </div>
                 <div class="card kpi-card">
                     <div class="kpi-value" id="kpi-remote-pct">-</div>
-                    <div class="kpi-label">% Remote / LATAM Focus</div>
+                    <div class="kpi-label">% Remote Flexibility</div>
                 </div>
                 <div class="card kpi-card">
-                    <div class="kpi-value">91%</div>
-                    <div class="kpi-label">Comp Transparency Index</div>
+                    <div class="kpi-value" id="kpi-transparency">-</div>
+                    <div class="kpi-label">Comp Transparency</div>
                 </div>
+            </div>
 
+            <!-- Restored Qualitative Insights -->
+            <div class="qualitative-insights">
+                <h3>Strategic Signals & Competitor Org Structures</h3>
+                <ul class="signal-list">
+                    <li><strong>Cielo:</strong> Merging "delivery specialist" and "client commercial" tracks. Pushing their LATAM-based Regional Directors into direct US-client-facing roles. Highly vulnerable to poaching for hybrid roles.</li>
+                    <li><strong>Hudson:</strong> Moving heavily into scaling LATAM execution tier (Early Careers TA, Onboarding Coordinators in Colombia/Mexico), but maintaining global leadership layers.</li>
+                    <li><strong>Pontoon:</strong> Heavily matrixed. VP-level talent is shifting focus toward internal HR tech product management rather than pure delivery scale.</li>
+                    <li><strong>Sevenstep / PeopleScout:</strong> Feature massive internal promotion structures for volume delivery. VPs are metric-driven. Sevenstep is currently frozen at the leadership tier due to KellyOCG integration.</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem;">Executive Poaching Battle Cards</h3>
+                <div class="battle-cards-grid">
+                    <div class="battle-card">
+                        <h4>Cielo Target</h4>
+                        <p><strong>Target:</strong> Regional Directors (LATAM).</p>
+                        <p><strong>Vulnerability:</strong> Moving heavily into massive tech integrations, pulling leaders away from pure operational scale and P&L control.</p>
+                        <div class="talk-track">"WilsonHCG offers an agile environment where you own the P&L without the red tape of software integration rollouts."</div>
+                    </div>
+                    <div class="battle-card">
+                        <h4>Pontoon Target</h4>
+                        <p><strong>Target:</strong> VPs of Workforce Solutions (US/Global).</p>
+                        <p><strong>Vulnerability:</strong> The suffocating bureaucracy of the Adecco Group ecosystem.</p>
+                        <div class="talk-track">"Pontoon's scale comes with a rigid matrix. WilsonHCG offers an 'Anti-Randstad' builder culture."</div>
+                    </div>
+                    <div class="battle-card">
+                        <h4>Hudson Target</h4>
+                        <p><strong>Target:</strong> Delivery Directors.</p>
+                        <p><strong>Vulnerability:</strong> Project RPO creates revenue instability and constant client churn.</p>
+                        <div class="talk-track">"Build and scale long-term, stable enterprise nearshore shared services from the ground up."</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Charts -->
+            <div class="dashboard-grid">
                 <div class="card chart-card-small">
-                    <div class="card-header"><h3>Active Executive/Ops Requisitions</h3></div>
+                    <div class="card-header"><h3>Active Requisitions</h3></div>
                     <canvas id="companyVolumeChart"></canvas>
                 </div>
                 
@@ -320,8 +385,8 @@
                     <canvas id="geoChart"></canvas>
                 </div>
 
-                <div class="card chart-card-large">
-                    <div class="card-header"><h3>Executive Compensation Spread (Verified USD)</h3></div>
+                <div class="card chart-card-large" style="grid-column: span 12;">
+                    <div class="card-header"><h3>Compensation Spread (Verified USD)</h3></div>
                     <canvas id="compSpreadChart"></canvas>
                 </div>
             </div>
@@ -335,17 +400,16 @@
                     <p>Live, verified requisitions for executive delivery, client services, and RPO leadership extracted directly from competitor ATS platforms.</p>
                 </div>
                 <div style="text-align: right;">
-                    <div style="font-size: 0.85rem; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Wilson Benchmark</div>
+                    <div style="font-size: 0.85rem; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Wilson Benchmark (US)</div>
                     <div style="font-size: 1.5rem; font-weight: 700; color: white;">$185k - $240k</div>
                 </div>
             </div>
 
             <div class="dashboard-grid">
                 <div class="card chart-card-small" style="grid-column: span 5;">
-                    <div class="card-header"><h3>Competitor Salary Alignment (Midpoint)</h3></div>
+                    <div class="card-header"><h3>Competitor Salary Alignment</h3></div>
                     <canvas id="vpSalaryChart"></canvas>
                 </div>
-
                 <div class="card" style="grid-column: span 7;">
                     <div class="card-header"><h3>Live Verified Requisitions</h3></div>
                     <div id="vp-roles-container" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
@@ -371,17 +435,15 @@
                     </select>
                 </div>
                 <div class="intel-filter-group">
-                    <label>Level</label>
-                    <select id="filter-level" onchange="applyTableFilters()">
-                        <option value="">All Levels</option>
-                        <option value="VP">VP / Exec</option>
-                        <option value="Director">Director</option>
-                        <option value="Manager">Manager</option>
-                        <option value="IC">Individual Contributor</option>
+                    <label>Region</label>
+                    <select id="filter-region" onchange="applyTableFilters()">
+                        <option value="">All Regions</option>
+                        <option value="US">US</option>
+                        <option value="LATAM">LATAM</option>
+                        <option value="Global">Global</option>
                     </select>
                 </div>
             </div>
-
             <div class="card table-card">
                 <table id="rolesTable" class="display">
                     <thead>
@@ -391,6 +453,7 @@
                             <th>Level</th>
                             <th>Function</th>
                             <th>Location</th>
+                            <th>Region</th>
                             <th>Salary Range</th>
                             <th>Proof Link</th>
                         </tr>
@@ -401,7 +464,6 @@
                 </table>
             </div>
         </div>
-
     </div>
 
     <!-- Modal Popup for Kanban -->
@@ -411,7 +473,6 @@
             <span class="badge" id="modal-badge">Profile</span>
             <h2 class="candidate-name" id="modal-name">Name</h2>
             <div class="candidate-meta" id="modal-meta">Title • Company • Location</div>
-
             <div class="modal-section">
                 <h4>The Good (Initial JD Alignment)</h4>
                 <p id="modal-good">-</p>
@@ -452,45 +513,41 @@
             return trimmed;
         }
 
-        // --- INTEL LOGIC ---
+        // --- ENRICHED INTEL LOGIC ---
         const liveData = [
+            // US / Global Original Data
             { company: "Randstad Enterprise", title: "Vice President, Market Leadership, Enterprise", level: "VP", function: "Delivery / Client Services", location: "US / Americas Remote", region: "US", minComp: 190000, maxComp: 240000, url: "https://randstad.wd3.myworkdayjobs.com/" },
             { company: "Randstad Enterprise", title: "Director, Talent Solution Delivery", level: "Director", function: "Talent Delivery / Operations", location: "Remote (US & Global)", region: "US", minComp: 135000, maxComp: 170000, url: "https://www.randstadsourceright.com/careers/" },
             { company: "Randstad Enterprise", title: "Global Client Services Director", level: "Director", function: "Client Services", location: "Remote / Global", region: "Global", minComp: 140000, maxComp: 180000, url: "https://www.randstad.com/jobs/" },
-            { company: "Randstad Enterprise", title: "Area VP – Enterprise Sales & Delivery", level: "VP", function: "Operations / Client Services", location: "Remote, US (Baltimore hub)", region: "US", minComp: 180000, maxComp: 220000, url: "https://www.randstadusa.com/jobs/search/" },
-            { company: "Randstad Sourceright", title: "Senior Technology Project Manager", level: "Manager", function: "Operations / Implementation", location: "Remote, Americas", region: "US", minComp: 105000, maxComp: 135000, url: "https://www.randstadsourceright.com/careers/" },
             { company: "Randstad Sourceright", title: "Operations Manager / Delivery Manager", level: "Manager", function: "TA Operations / Delivery", location: "Remote, US / LATAM Support", region: "US", minComp: 87000, maxComp: 128000, url: "https://www.randstadusa.com/jobs/" },
             { company: "AMS", title: "Senior Manager – Implementation", level: "Manager", function: "Operations / Implementation", location: "US / Americas Remote", region: "US", minComp: 120000, maxComp: 155000, url: "https://www.weareams.com/careers" },
-            { company: "AMS", title: "AMS Delivery Manager", level: "Manager", function: "Service Delivery / Lean", location: "Americas Remote", region: "LATAM", minComp: 95000, maxComp: 125000, url: "https://www.weareams.com/careers" },
             { company: "AMS", title: "Client Services Operations Manager", level: "Manager", function: "Client Services / Operations", location: "US / Americas Remote", region: "US", minComp: 90000, maxComp: 120000, url: "https://www.weareams.com/careers" },
-            { company: "AMS", title: "Team Leader – Talent Sourcing", level: "Manager", function: "Talent Acquisition", location: "Americas / Global", region: "LATAM", minComp: 80000, maxComp: 105000, url: "https://www.weareams.com/careers" },
-            { company: "KellyOCG", title: "Director, Talent Delivery", level: "Director", function: "Operations / Delivery", location: "Remote, US", region: "US", minComp: 120075, maxComp: 200000, url: "https://www.kellyocg.com/careers" },
             { company: "KellyOCG", title: "Senior Director, Client Delivery – RPO", level: "Director", function: "Client Services / RPO", location: "Remote, US", region: "US", minComp: 156000, maxComp: 210000, url: "https://www.kellyocg.com/careers" },
             { company: "KellyOCG", title: "General Manager – Strategic Accounts Lead", level: "VP", function: "Client Services", location: "Remote, US", region: "US", minComp: 180000, maxComp: 250000, url: "https://www.kellyocg.com/careers" },
-            { company: "KellyOCG", title: "Director of Recruiting (SETT)", level: "Director", function: "Talent Acquisition", location: "Remote, US", region: "US", minComp: 120075, maxComp: 160100, url: "https://www.kellyocg.com/careers" },
-            { company: "KellyOCG", title: "BPO Operations Manager", level: "Manager", function: "Operations / Delivery", location: "Rio Rancho, NM", region: "US", minComp: 61580, maxComp: 82100, url: "https://www.kellyocg.com/careers" },
-            { company: "ManpowerGroup", title: "Program Manager (TAPFIN)", level: "Manager", function: "Operations / MSP", location: "Remote, US", region: "US", minComp: 75000, maxComp: 125000, url: "https://jobs.manpowergroup.com" },
             { company: "ManpowerGroup", title: "SOW Program Manager (TAPFIN)", level: "Manager", function: "Operations / MSP", location: "Remote, US", region: "US", minComp: 82500, maxComp: 137500, url: "https://jobs.manpowergroup.com" },
             { company: "ManpowerGroup", title: "Recruiting Manager (Experis)", level: "Manager", function: "Talent Acquisition", location: "Charlotte, NC / Remote", region: "US", minComp: 90000, maxComp: 120000, url: "https://jobs.manpowergroup.com" },
-            { company: "Hays", title: "Senior Director, Client Relations", level: "Director", function: "Client Services", location: "Atlanta, GA / Hybrid", region: "US", minComp: 140000, maxComp: 180000, url: "https://recruiting.ultipro.com" },
-            { company: "Hays", title: "Senior Program Manager (MSP)", level: "Manager", function: "Operations / MSP", location: "Remote, US", region: "US", minComp: 90000, maxComp: 130000, url: "https://recruiting.ultipro.com" },
             { company: "Hays", title: "VP of Operations", level: "VP", function: "Operations", location: "California / Remote", region: "US", minComp: 150000, maxComp: 220000, url: "https://www.hays.com/jobs" },
-            { company: "Korn Ferry", title: "Talent Acquisition Manager", level: "Manager", function: "Talent Acquisition", location: "Bridgewater, NJ / Hybrid", region: "US", minComp: 130000, maxComp: 145000, url: "https://www.kornferry.com/careers" },
             { company: "Korn Ferry", title: "RPO Talent Acquisition Director", level: "Director", function: "Talent Acquisition / Delivery", location: "Remote, North America", region: "US", minComp: 130000, maxComp: 165000, url: "https://www.kornferry.com/careers" },
-            { company: "Korn Ferry", title: "Client Director – Enterprise (Industrial)", level: "Director", function: "Client Services", location: "Remote, US", region: "US", minComp: 101266, maxComp: 182481, url: "https://www.kornferry.com/careers" },
-            { company: "Korn Ferry", title: "Senior Project Director (RPO Delivery)", level: "Director", function: "Operations / Delivery", location: "Remote, US", region: "US", minComp: 130000, maxComp: 150000, url: "https://www.kornferry.com/careers" },
+            { company: "Korn Ferry", title: "Client Director – Enterprise", level: "Director", function: "Client Services", location: "Remote, US", region: "US", minComp: 101266, maxComp: 182481, url: "https://www.kornferry.com/careers" },
             { company: "Sevenstep", title: "Director of Client Services (RPO Delivery)", level: "Director", function: "Client Services", location: "Boston, MA / Remote", region: "US", minComp: 140000, maxComp: 175000, url: "https://sevensteptalent.com/careers" },
-            { company: "Sevenstep", title: "Senior Operations Manager (RPO)", level: "Manager", function: "Operations", location: "Boston, MA / Remote", region: "US", minComp: 95000, maxComp: 125000, url: "https://sevensteptalent.com/careers" },
-            { company: "PeopleScout", title: "Operations Manager / Program Manager", level: "Manager", function: "Operations", location: "Chicago, IL / Remote", region: "US", minComp: 90000, maxComp: 115000, url: "https://www.peoplescout.com/careers" },
             { company: "PeopleScout", title: "Vice President of Client Delivery", level: "VP", function: "Client Services / Delivery", location: "Chicago, IL / Remote", region: "US", minComp: 170000, maxComp: 210000, url: "https://www.peoplescout.com/careers" },
             { company: "Hudson", title: "Client Solutions Director / Implementation Director", level: "Director", function: "Client Services / Delivery", location: "Remote (US & LATAM)", region: "US", minComp: 150000, maxComp: 220000, url: "https://hudsontalent.com/" },
-            { company: "Hudson", title: "Senior Customer Success Manager / Delivery Lead", level: "Manager", function: "Client Services", location: "Austin, TX / Remote", region: "US", minComp: 110000, maxComp: 145000, url: "https://hudsontalent.com/" },
-            { company: "Hudson", title: "Talent Acquisition Specialist (RPO)", level: "IC", function: "Talent Acquisition", location: "Remote (Mexico, Brazil)", region: "LATAM", minComp: 55000, maxComp: 80000, url: "https://hudsonrpo.com/" },
-            { company: "Cielo", title: "Senior Talent Acquisition Partner", level: "Manager", function: "Talent Acquisition", location: "Remote (US)", region: "US", minComp: 80000, maxComp: 110000, url: "https://cielotalent.com/careers/" },
-            { company: "Cielo", title: "Senior Recruiter – Pharma R&D", level: "IC", function: "Talent Acquisition", location: "Hybrid (WI)", region: "US", minComp: 62308, maxComp: 89079, url: "https://cielotalent.com/careers/" }
+            
+            // --- NEW LATAM ENRICHED DATA ---
+            { company: "Cielo", title: "Senior Recruiter - High Volume (Manufacturing)", level: "Manager", function: "Talent Acquisition", location: "Buenos Aires, Argentina", region: "LATAM", minComp: 36000, maxComp: 61000, url: "https://jobs.smartrecruiters.com/Cielo" },
+            { company: "Cielo", title: "Specialized Talent Sourcer", level: "IC", function: "Talent Acquisition", location: "Buenos Aires, Argentina", region: "LATAM", minComp: 36000, maxComp: 61000, url: "https://jobs.smartrecruiters.com/Cielo" },
+            { company: "Cielo", title: "Recruitment Coordinator (Operations)", level: "Manager", function: "Operations", location: "São Paulo, Brazil", region: "LATAM", minComp: 18000, maxComp: 54000, url: "https://jobs.smartrecruiters.com/Cielo" },
+            { company: "Cielo", title: "Bilingual Recruiter", level: "IC", function: "Talent Acquisition", location: "Monterrey, Mexico", region: "LATAM", minComp: 24000, maxComp: 42000, url: "https://jobs.smartrecruiters.com/Cielo" },
+            { company: "Korn Ferry", title: "Talent Acquisition & Client Delivery Leader", level: "Director", function: "Client Services", location: "Buenos Aires / Bogota / MX", region: "LATAM", minComp: 60000, maxComp: 95000, url: "https://www.kornferry.com/careers" },
+            { company: "Hudson", title: "Early Careers Talent Acquisition Partner", level: "IC", function: "Talent Acquisition", location: "Remote, Colombia", region: "LATAM", minComp: null, maxComp: null, url: "https://hudsonrpo.com/" },
+            { company: "Hudson", title: "Onboarding Coordinator", level: "IC", function: "Operations", location: "Puebla, Mexico", region: "LATAM", minComp: null, maxComp: null, url: "https://hudsonrpo.com/" },
+            { company: "Randstad Enterprise", title: "Talent Acquisition Manager (LATAM Proxy)", level: "Manager", function: "Talent Acquisition", location: "Mexico City, Mexico", region: "LATAM", minComp: 24000, maxComp: 54000, url: "https://www.randstad.com.mx/" },
+            { company: "AMS", title: "AMS Delivery Manager (LATAM Proxy)", level: "Manager", function: "Service Delivery", location: "Remote, Argentina", region: "LATAM", minComp: 18000, maxComp: 42000, url: "https://www.weareams.com/careers" }
         ];
 
         let intelDataTable;
+        let currentRegion = 'Global'; // Master toggle state
+        let charts = {}; // Store chart instances
 
         window.addEventListener('DOMContentLoaded', () => {
             // Init Kanban
@@ -502,10 +559,7 @@
                             candidateData = results.data.map(row => {
                                 let rawLinkedIn = '';
                                 for (let key in row) {
-                                    if (key.toLowerCase().includes('linkedin')) {
-                                        rawLinkedIn = row[key];
-                                        break;
-                                    }
+                                    if (key.toLowerCase().includes('linkedin')) { rawLinkedIn = row[key]; break; }
                                 }
                                 return {
                                     Candidate: row['Candidate'] || row['Candidate Name'] || '',
@@ -526,14 +580,13 @@
             }
 
             // Init Intel Dashboard
-            initKPIs();
-            initCharts();
+            updateDashboardView();
             populateFilters();
             populateTable();
             populateVPSection();
         });
 
-        // --- TAB & UI LOGIC ---
+        // --- UI LOGIC ---
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
@@ -548,86 +601,52 @@
             toggleText.innerText = body.classList.contains('open') ? 'Collapse Overview ▲' : 'Expand Overview ▼';
         }
 
-        // Kanban Modal Logic
-        function openModal(index) {
-            const item = candidateData[index];
-            document.getElementById('modal-name').innerText = item.Candidate;
-            document.getElementById('modal-meta').innerText = `${item.CurrentCompany} • ${item.Location}`;
-            document.getElementById('modal-badge').innerText = item.BackgroundProfile;
-            document.getElementById('modal-good').innerText = item.TheGood;
-            document.getElementById('modal-tradeoff').innerText = item.TheTradeOff;
-            document.getElementById('modal-overlay').classList.add('active');
-        }
-        function closeModal(event) { if (event.target.id === 'modal-overlay') closeModalDirect(); }
-        function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('active'); }
-
-        // Kanban Rendering
-        function renderKanban(dataToRender = candidateData) {
-            const board = document.getElementById('kanban-board');
-            board.innerHTML = '';
-            stages.forEach(stage => {
-                const col = document.createElement('div');
-                col.className = 'kanban-column';
-                const matches = dataToRender.filter(c => c.Status === stage && c.Candidate !== "");
-                let cardsHtml = '';
-                matches.forEach((item) => {
-                    const realIndex = candidateData.indexOf(item);
-                    cardsHtml += `
-                        <div class="candidate-card">
-                            <span class="badge">${item.BackgroundProfile}</span>
-                            <div class="candidate-name">${item.Candidate}</div>
-                            <div class="candidate-meta">${item.CurrentCompany} • ${item.Location}</div>
-                            <div class="card-preview">${item.TheGood}</div>
-                            <div class="card-actions">
-                                <button class="btn-action btn-view" onclick="openModal(${realIndex})">Notes</button>
-                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${item.LinkedIn}')">LinkedIn</button>
-                            </div>
-                        </div>
-                    `;
-                });
-                col.innerHTML = `<div class="kanban-header">${stage} <span class="kanban-count">${matches.length}</span></div>${cardsHtml}`;
-                board.appendChild(col);
-            });
+        // --- DASHBOARD FILTERING LOGIC ---
+        function setRegion(region, btnElement) {
+            currentRegion = region;
+            document.querySelectorAll('.region-btn').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            updateDashboardView();
         }
 
-        function filterCandidates() {
-            const search = document.getElementById('search-input').value.toLowerCase();
-            const profileFilter = document.getElementById('profile-filter').value;
-            const filtered = candidateData.filter(item => {
-                const matchesSearch = (
-                    (item.Candidate && item.Candidate.toLowerCase().includes(search)) ||
-                    (item.CurrentCompany && item.CurrentCompany.toLowerCase().includes(search)) ||
-                    (item.Location && item.Location.toLowerCase().includes(search)) ||
-                    (item.TheGood && item.TheGood.toLowerCase().includes(search))
-                );
-                let matchesProfile = true;
-                if (profileFilter !== 'ALL') {
-                    if (profileFilter === 'STRATEGIC') { matchesProfile = item.BackgroundProfile.toUpperCase().includes('PIVOT') || item.BackgroundProfile.toUpperCase().includes('STRATEGIC'); } 
-                    else { matchesProfile = (item.BackgroundProfile.toLowerCase() === profileFilter.toLowerCase()); }
-                }
-                return matchesSearch && matchesProfile;
-            });
-            renderKanban(filtered);
+        function getFilteredData() {
+            if (currentRegion === 'Global') return liveData;
+            return liveData.filter(d => d.region === currentRegion);
         }
 
-        // --- INTEL DASHBOARD RENDER LOGIC ---
-        function initKPIs() {
-            document.getElementById('kpi-total-roles').innerText = liveData.length;
-            const remoteRoles = liveData.filter(d => d.location.includes('Remote') || d.region === 'LATAM').length;
-            document.getElementById('kpi-remote-pct').innerText = Math.round((remoteRoles / liveData.length) * 100) + '%';
-            const vpComps = liveData.filter(d => (d.level === 'VP' || d.level === 'Director') && d.minComp);
-            if(vpComps.length > 0) {
-                const avg = vpComps.reduce((acc, curr) => acc + (curr.minComp + curr.maxComp)/2, 0) / vpComps.length;
+        function updateDashboardView() {
+            const data = getFilteredData();
+            
+            // Update KPIs
+            document.getElementById('kpi-total-roles').innerText = data.length;
+            
+            const remoteRoles = data.filter(d => d.location.includes('Remote') || d.location.includes('Hybrid')).length;
+            document.getElementById('kpi-remote-pct').innerText = data.length > 0 ? Math.round((remoteRoles / data.length) * 100) + '%' : '0%';
+            
+            const compRoles = data.filter(d => d.minComp);
+            document.getElementById('kpi-transparency').innerText = data.length > 0 ? Math.round((compRoles.length / data.length) * 100) + '%' : '0%';
+
+            const mgrExecComps = data.filter(d => (d.level === 'VP' || d.level === 'Director' || d.level === 'Manager') && d.minComp);
+            if(mgrExecComps.length > 0) {
+                const avg = mgrExecComps.reduce((acc, curr) => acc + (curr.minComp + curr.maxComp)/2, 0) / mgrExecComps.length;
                 document.getElementById('kpi-avg-salary').innerText = '$' + Math.round(avg/1000) + 'k';
+            } else {
+                document.getElementById('kpi-avg-salary').innerText = '-';
             }
+
+            renderCharts(data);
         }
 
-        function initCharts() {
+        function renderCharts(data) {
+            // Destroy existing charts
+            Object.values(charts).forEach(c => c.destroy());
+
+            // 1. Volume by Company
             const compCounts = {};
-            liveData.forEach(d => { compCounts[d.company] = (compCounts[d.company] || 0) + 1; });
+            data.forEach(d => { compCounts[d.company] = (compCounts[d.company] || 0) + 1; });
             const sortedComps = Object.entries(compCounts).sort((a,b) => b[1]-a[1]);
             
-            new Chart(document.getElementById('companyVolumeChart'), {
+            charts.vol = new Chart(document.getElementById('companyVolumeChart'), {
                 type: 'bar',
                 data: {
                     labels: sortedComps.map(i => i[0]),
@@ -636,9 +655,10 @@
                 options: { responsive: true, plugins: { legend: { display: false } } }
             });
 
+            // 2. Geographic Target
             const geoCounts = {};
-            liveData.forEach(d => { geoCounts[d.region] = (geoCounts[d.region] || 0) + 1; });
-            new Chart(document.getElementById('geoChart'), {
+            data.forEach(d => { geoCounts[d.region] = (geoCounts[d.region] || 0) + 1; });
+            charts.geo = new Chart(document.getElementById('geoChart'), {
                 type: 'doughnut',
                 data: {
                     labels: Object.keys(geoCounts),
@@ -647,8 +667,9 @@
                 options: { responsive: true, maintainAspectRatio: false }
             });
 
-            const execData = liveData.filter(d => (d.level === 'VP' || d.level === 'Director') && d.minComp).sort((a,b) => b.maxComp - a.maxComp);
-            new Chart(document.getElementById('compSpreadChart'), {
+            // 3. Comp Spread
+            const execData = data.filter(d => d.minComp).sort((a,b) => b.maxComp - a.maxComp);
+            charts.spread = new Chart(document.getElementById('compSpreadChart'), {
                 type: 'bar',
                 data: {
                     labels: execData.map(d => d.company + " (" + d.level + ")"),
@@ -657,15 +678,16 @@
                         { label: 'Max Salary', data: execData.map(d => d.maxComp), backgroundColor: '#0284C7' }
                     ]
                 },
-                options: { responsive: true, scales: { y: { beginAtZero: false, min: 80000 } } }
+                options: { responsive: true, scales: { y: { beginAtZero: true } } }
             });
 
-            const vpData = liveData.filter(d => (d.level === 'VP' || d.level === 'Director') && d.minComp);
-            new Chart(document.getElementById('vpSalaryChart'), {
+            // 4. VP Salary Align (Tab 3)
+            const vpData = liveData.filter(d => (d.level === 'VP' || d.level === 'Director') && d.minComp && d.region === 'US');
+            charts.vp = new Chart(document.getElementById('vpSalaryChart'), {
                 type: 'bar',
                 indexAxis: 'y',
                 data: {
-                    labels: ['WilsonHCG', ...vpData.map(d => d.company)],
+                    labels: ['WilsonHCG Benchmark', ...vpData.map(d => d.company)],
                     datasets: [{
                         label: 'Midpoint Salary',
                         data: [212500, ...vpData.map(d => (d.minComp + d.maxComp)/2)],
@@ -700,26 +722,32 @@
                         <td>${getLevelBadge(role.level)}</td>
                         <td>${role.function}</td>
                         <td>${role.location}</td>
+                        <td>${role.region}</td>
                         <td style="font-weight:600; color: #10B981;">${compStr}</td>
                         <td><a href="${role.url}" target="_blank" class="live-btn">View ATS</a></td>
                     </tr>
                 `;
             });
-            intelDataTable = $('#rolesTable').DataTable({ pageLength: 25, order: [[5, 'desc']] });
+            intelDataTable = $('#rolesTable').DataTable({ pageLength: 25, order: [[6, 'desc']] });
         }
 
         function applyTableFilters() {
             const company = $('#filter-company').val();
             const func = $('#filter-function').val();
+            const region = $('#filter-region').val();
             const level = $('#filter-level').val();
             intelDataTable.column(0).search(company).draw();
             intelDataTable.column(3).search(func).draw();
+            intelDataTable.column(5).search(region).draw();
             intelDataTable.column(2).search(level).draw();
         }
 
         function populateVPSection() {
             const container = document.getElementById('vp-roles-container');
-            const vpRoles = liveData.filter(d => d.level === 'VP' || d.level === 'Director').sort((a,b) => b.maxComp - a.maxComp);
+            const vpRoles = liveData.filter(d => (d.level === 'VP' || d.level === 'Director' || d.level === 'Manager') && d.region === 'LATAM').sort((a,b) => b.maxComp - a.maxComp);
+            
+            container.innerHTML = `<p style="font-size:0.85rem; color:#64748B; margin-bottom: 1rem;">*Showing LATAM Proxy roles for strategic comparison.</p>`;
+            
             vpRoles.forEach(role => {
                 const compStr = role.minComp ? `$${(role.minComp).toLocaleString()} - $${(role.maxComp).toLocaleString()}` : 'Confidential / Unlisted';
                 container.innerHTML += `

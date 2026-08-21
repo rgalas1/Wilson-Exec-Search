@@ -582,6 +582,69 @@
         });
 
         // --- UI LOGIC ---
+        function renderKanban(dataToRender = candidateData) {
+            const board = document.getElementById('kanban-board');
+            board.innerHTML = '';
+            stages.forEach(stage => {
+                const stageCards = dataToRender.filter(c => c.Status === stage);
+                let colHTML = `
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            ${stage} <span class="kanban-count">${stageCards.length}</span>
+                        </div>
+                `;
+                stageCards.forEach((c, idx) => {
+                    const badgeClass = c.BackgroundProfile.includes('LATAM') ? 'badge-vp' : 'badge-mgr';
+                    colHTML += `
+                        <div class="candidate-card" onclick="openModal(${candidateData.indexOf(c)})">
+                            <span class="badge ${badgeClass}">${c.BackgroundProfile}</span>
+                            <div class="candidate-name">${c.Candidate}</div>
+                            <div class="candidate-meta">${c.CurrentCompany} • ${c.Location}</div>
+                            <div class="card-preview"><strong>Aligns:</strong> ${c.TheGood}</div>
+                            <div class="card-actions">
+                                <div class="btn-action btn-linkedin" onclick="event.stopPropagation(); forceOpenLink('${c.LinkedIn}')">LinkedIn</div>
+                            </div>
+                        </div>
+                    `;
+                });
+                colHTML += `</div>`;
+                board.innerHTML += colHTML;
+            });
+        }
+
+        function openModal(index) {
+            const c = candidateData[index];
+            document.getElementById('modal-name').innerText = c.Candidate;
+            document.getElementById('modal-badge').innerText = c.BackgroundProfile;
+            document.getElementById('modal-badge').className = 'badge ' + (c.BackgroundProfile.includes('LATAM') ? 'badge-vp' : 'badge-mgr');
+            document.getElementById('modal-meta').innerText = `${c.CurrentCompany} • ${c.Location}`;
+            document.getElementById('modal-good').innerText = c.TheGood;
+            document.getElementById('modal-tradeoff').innerText = c.TheTradeOff;
+            document.getElementById('modal-overlay').classList.add('active');
+        }
+        function closeModal(e) { if(e.target.id === 'modal-overlay') { document.getElementById('modal-overlay').classList.remove('active'); } }
+        function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('active'); }
+
+        function filterCandidates() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const profileFilter = document.getElementById('profile-filter').value;
+            const filtered = candidateData.filter(item => {
+                const matchesSearch = (
+                    item.Candidate.toLowerCase().includes(query) ||
+                    item.CurrentCompany.toLowerCase().includes(query) ||
+                    item.TheGood.toLowerCase().includes(query) ||
+                    item.Location.toLowerCase().includes(query)
+                );
+                let matchesProfile = true;
+                if (profileFilter !== 'ALL') {
+                    if (profileFilter === 'STRATEGIC') { matchesProfile = item.BackgroundProfile.toUpperCase().includes('PIVOT') || item.BackgroundProfile.toUpperCase().includes('STRATEGIC'); } 
+                    else { matchesProfile = (item.BackgroundProfile.toLowerCase() === profileFilter.toLowerCase()); }
+                }
+                return matchesSearch && matchesProfile;
+            });
+            renderKanban(filtered);
+        }
+
         function switchTab(tabId, btn) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));

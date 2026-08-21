@@ -375,14 +375,9 @@
 
             <!-- Dynamic Charts -->
             <div class="dashboard-grid">
-                <div class="card chart-card-small">
+                <div class="card chart-card-large" style="grid-column: span 12;">
                     <div class="card-header"><h3>Active Requisitions</h3></div>
                     <canvas id="companyVolumeChart"></canvas>
-                </div>
-                
-                <div class="card chart-card-large">
-                    <div class="card-header"><h3>Geographic Targeting</h3></div>
-                    <canvas id="geoChart"></canvas>
                 </div>
 
                 <div class="card chart-card-large" style="grid-column: span 12;">
@@ -653,18 +648,6 @@
                     datasets: [{ label: 'Active Reqs', data: sortedComps.map(i => i[1]), backgroundColor: '#0284C7', borderRadius: 4 }]
                 },
                 options: { responsive: true, plugins: { legend: { display: false } } }
-            });
-
-            // 2. Geographic Target
-            const geoCounts = {};
-            data.forEach(d => { geoCounts[d.region] = (geoCounts[d.region] || 0) + 1; });
-            charts.geo = new Chart(document.getElementById('geoChart'), {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(geoCounts),
-                    datasets: [{ data: Object.values(geoCounts), backgroundColor: ['#0F172A', '#38BDF8', '#10B981', '#F59E0B'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
             });
 
             // 3. Comp Spread

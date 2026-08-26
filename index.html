@@ -250,6 +250,7 @@
             </div>
             <nav>
                 <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">VP Delivery Pipeline</button>
+                <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">Stack Ranking</button>
                 <button class="nav-btn" onclick="switchTab('general-intel', this)">Macro Market Intel</button>
                 <button class="nav-btn" onclick="switchTab('vp-intel', this)">VP Delivery Focus</button>
                 <button class="nav-btn" onclick="switchTab('raw-data', this)">Live Database</button>
@@ -312,6 +313,11 @@
             </div>
             <div id="loading-state" style="font-family: var(--font-heading); padding: 2rem; text-align: center;">Loading live pipeline...</div>
             <div class="kanban-board" id="kanban-board"></div>
+        </div>
+
+        <!-- TAB 1.5: STACK RANK -->
+        <div id="stack-rank-tab" class="tab-content">
+            <div class="kanban-board" id="stack-rank-board"></div>
         </div>
 
         <!-- TAB 2: MACRO MARKET INTEL (REDESIGNED) -->
@@ -557,11 +563,17 @@
                                     TheGood: row['The Good (Initial JD Alignment)'] || row['The Good'] || 'No notes provided.',
                                     TheTradeOff: row['The Trade-Off'] || 'None noted.',
                                     Status: normalizeStatus(row['Status']),
-                                    LinkedIn: formatUrl(rawLinkedIn)
+                                    LinkedIn: formatUrl(rawLinkedIn),
+                                    StackRankBucket: row['Stank Rank Bucket'] || row['Stack Rank Bucket'] || '',
+                                    CalibratedScore: row['Calibrated Score'] || '',
+                                    Salary: row['Salary'] || '',
+                                    SpecificLocation: row['Specific Location'] || '',
+                                    ExecSummary: row['Exec summary'] || row['Exec Summary'] || ''
                                 };
                             });
                         }
                         renderKanban();
+                        renderStackRank();
                         document.getElementById('loading-state').style.display = 'none';
                     }
                 });
@@ -597,6 +609,59 @@
                             <div class="card-actions">
                                 <button class="btn-action btn-view" onclick="openModal(${candidateData.indexOf(c)})">Notes</button>
                                 <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')">LinkedIn</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                colHTML += `</div>`;
+                board.innerHTML += colHTML;
+            });
+        }
+
+        function renderStackRank() {
+            const board = document.getElementById('stack-rank-board');
+            if (!board) return;
+            board.innerHTML = '';
+            const stackBuckets = ["Bucket 1: US VP", "Bucket 2: LATAM Director", "Bucket 3: Strategic Pivot"];
+            
+            let rankedData = candidateData.filter(c => c.StackRankBucket && c.StackRankBucket.trim() !== '');
+            
+            stackBuckets.forEach(bucket => {
+                let bucketPrefix = bucket.split(':')[0];
+                let bucketCards = rankedData.filter(c => c.StackRankBucket.includes(bucketPrefix));
+                bucketCards.sort((a, b) => parseFloat(b.CalibratedScore) - parseFloat(a.CalibratedScore));
+                
+                let colHTML = `
+                    <div class="kanban-column">
+                        <div class="kanban-header">
+                            ${bucket} <span class="kanban-count">${bucketCards.length}</span>
+                        </div>
+                `;
+                bucketCards.forEach((c) => {
+                    let summaryHTML = c.ExecSummary;
+                    // Auto-bold Strengths, Trade-offs, Cultural Fit
+                    if(summaryHTML) {
+                        summaryHTML = summaryHTML.replace(/\*\*Strengths:\*\*/g, '<strong>Strengths:</strong>');
+                        summaryHTML = summaryHTML.replace(/\*\*Trade-offs:\*\*/g, '<strong>Trade-offs:</strong>');
+                        summaryHTML = summaryHTML.replace(/\*\*Cultural Fit:\*\*/g, '<strong>Cultural Fit:</strong>');
+                        summaryHTML = summaryHTML.replace(/⚠️ \*ROI WARNING:/g, '⚠️ <strong>ROI WARNING:</strong>');
+                        summaryHTML = summaryHTML.replace(/\*ROI WARNING:/g, '⚠️ <strong>ROI WARNING:</strong>');
+                    }
+
+                    colHTML += `
+                        <div class="candidate-card" style="padding-bottom:1rem; cursor:default;">
+                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                                <div class="candidate-name" style="margin:0; font-size:1.15rem; line-height:1.2;">${c.Candidate}</div>
+                                <span class="badge badge-vp" style="margin:0; padding:6px 10px; font-size:0.9rem; font-weight:bold;">${c.CalibratedScore}</span>
+                            </div>
+                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem;"><strong>${c.CurrentCompany}</strong></div>
+                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">📍 ${c.SpecificLocation || c.Location}</div>
+                            <div class="candidate-meta" style="margin-bottom:12px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">💰 ${c.Salary}</div>
+                            <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #eee; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
+                                ${summaryHTML}
+                            </div>
+                            <div class="card-actions" style="margin-top:15px;">
+                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')" style="width:100%; padding:0.5rem; justify-content:center;">LinkedIn Profile</button>
                             </div>
                         </div>
                     `;

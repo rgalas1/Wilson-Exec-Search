@@ -238,6 +238,12 @@
         .region-btn:hover { background: #E2E8F0; }
         .region-btn.active { background: var(--brand-teal); color: white; border-color: var(--brand-teal); }
 
+        /* Screening Summaries Styles */
+        .screening-column { min-width: 450px !important; max-width: 450px !important; }
+        .screening-card { background-color: var(--brand-yellow) !important; border: 1px solid #E6D089 !important; padding: 1.5rem !important; }
+        .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
+        .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
+        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 2px; }
     </style>
 </head>
 <body>
@@ -250,7 +256,7 @@
             </div>
             <nav>
                 <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">VP Delivery Pipeline</button>
-                <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">Stack Ranking</button>
+                <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">Screening Summaries</button>
                 <button class="nav-btn" onclick="switchTab('general-intel', this)">Macro Market Intel</button>
                 <button class="nav-btn" onclick="switchTab('vp-intel', this)">VP Delivery Focus</button>
                 <button class="nav-btn" onclick="switchTab('raw-data', this)">Live Database</button>
@@ -632,36 +638,49 @@
                 bucketCards.sort((a, b) => parseFloat(b.CalibratedScore) - parseFloat(a.CalibratedScore));
                 
                 let colHTML = `
-                    <div class="kanban-column">
+                    <div class="kanban-column screening-column">
                         <div class="kanban-header">
                             ${bucket} <span class="kanban-count">${bucketCards.length}</span>
                         </div>
                 `;
                 bucketCards.forEach((c) => {
-                    let summaryHTML = c.ExecSummary;
-                    // Auto-bold Strengths, Trade-offs, Cultural Fit
-                    if(summaryHTML) {
-                        summaryHTML = summaryHTML.replace(/\*\*Strengths:\*\*/g, '<strong>Strengths:</strong>');
-                        summaryHTML = summaryHTML.replace(/\*\*Trade-offs:\*\*/g, '<strong>Trade-offs:</strong>');
-                        summaryHTML = summaryHTML.replace(/\*\*Cultural Fit:\*\*/g, '<strong>Cultural Fit:</strong>');
-                        summaryHTML = summaryHTML.replace(/⚠️ \*ROI WARNING:/g, '⚠️ <strong>ROI WARNING:</strong>');
-                        summaryHTML = summaryHTML.replace(/\*ROI WARNING:/g, '⚠️ <strong>ROI WARNING:</strong>');
+                    let summaryHTML = c.ExecSummary || "";
+                    let salaryDisplay = (c.Salary || "").replace(/\$/g, '&#36;');
+                    summaryHTML = summaryHTML.replace(/\$/g, '&#36;'); // Prevent KaTeX issues
+                    
+                    let roiText = "";
+                    let roiMatch = summaryHTML.match(/(⚠️?\s*\*?ROI WARNING:[^\.]*\.)\s*/i);
+                    if (roiMatch) {
+                        roiText = roiMatch[1].replace(/\*?\*?ROI WARNING:\*?\*?/i, 'ROI WARNING:');
+                        summaryHTML = summaryHTML.replace(roiMatch[0], "");
+                    }
+
+                    // Format Subheads
+                    summaryHTML = summaryHTML.replace(/\*?\*?Strengths:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Strengths</span><br>');
+                    summaryHTML = summaryHTML.replace(/\*?\*?Trade-offs:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-offs</span><br>');
+                    summaryHTML = summaryHTML.replace(/\*?\*?Cultural Fit:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Cultural Fit</span><br>');
+                    
+                    // Wrap the first overview part
+                    summaryHTML = '<div class="summary-section">' + summaryHTML + '</div>';
+
+                    // Add ROI warning at the end
+                    if (roiText) {
+                        summaryHTML += `<div class="roi-warning">⚠️ <strong>${roiText.replace('⚠️', '').trim()}</strong></div>`;
                     }
 
                     colHTML += `
-                        <div class="candidate-card" style="padding-bottom:1rem; cursor:default;">
+                        <div class="candidate-card screening-card" style="padding-bottom:1rem; cursor:default;">
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
                                 <div class="candidate-name" style="margin:0; font-size:1.15rem; line-height:1.2;">${c.Candidate}</div>
-                                <span class="badge badge-vp" style="margin:0; padding:6px 10px; font-size:0.9rem; font-weight:bold;">${c.CalibratedScore}</span>
                             </div>
                             <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem;"><strong>${c.CurrentCompany}</strong></div>
                             <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">📍 ${c.SpecificLocation || c.Location}</div>
-                            <div class="candidate-meta" style="margin-bottom:12px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">💰 ${c.Salary}</div>
-                            <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #eee; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
+                            <div class="candidate-meta" style="margin-bottom:12px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">💰 ${salaryDisplay}</div>
+                            <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #c9b165; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
                                 ${summaryHTML}
                             </div>
                             <div class="card-actions" style="margin-top:15px;">
-                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')" style="width:100%; padding:0.5rem; justify-content:center;">LinkedIn Profile</button>
+                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')" style="width:100%; padding:0.5rem; justify-content:center; border: 1px solid var(--brand-teal); background-color: white; color: var(--brand-teal);">LinkedIn Profile</button>
                             </div>
                         </div>
                     `;

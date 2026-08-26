@@ -655,10 +655,10 @@
                         summaryHTML = summaryHTML.replace(roiMatch[0], "");
                     }
 
-                    // Format Subheads
-                    summaryHTML = summaryHTML.replace(/\*?\*?Strengths:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Strengths</span><br>');
-                    summaryHTML = summaryHTML.replace(/\*?\*?Trade-offs:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-offs</span><br>');
-                    summaryHTML = summaryHTML.replace(/\*?\*?Cultural Fit:\*?\*?/gi, '</div><div class="summary-section"><span class="summary-subhead">Cultural Fit</span><br>');
+                    // Format Subheads (Bulletproof against copy-paste artifacts)
+                    summaryHTML = summaryHTML.replace(/Strengths:/gi, '</div><div class="summary-section"><span class="summary-subhead">Strengths</span><br>');
+                    summaryHTML = summaryHTML.replace(/Trade-offs:/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-offs</span><br>');
+                    summaryHTML = summaryHTML.replace(/Cultural Fit:/gi, '</div><div class="summary-section"><span class="summary-subhead">Cultural Fit</span><br>');
                     
                     // Wrap the first overview part
                     summaryHTML = '<div class="summary-section">' + summaryHTML + '</div>';

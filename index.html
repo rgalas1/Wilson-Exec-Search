@@ -239,8 +239,8 @@
         .region-btn.active { background: var(--brand-teal); color: white; border-color: var(--brand-teal); }
 
         /* Screening Summaries Styles */
-        .screening-column { min-width: 450px !important; max-width: 450px !important; }
-        .screening-card { background-color: var(--brand-yellow) !important; border: 1px solid #E6D089 !important; padding: 1.5rem !important; }
+        .screening-column { min-width: 380px !important; max-width: 380px !important; }
+        .screening-card { background-color: var(--off-white) !important; border: 3px solid var(--brand-yellow) !important; padding: 1.5rem !important; }
         .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
         .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
         .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 2px; }
@@ -645,8 +645,8 @@
                 `;
                 bucketCards.forEach((c) => {
                     let summaryHTML = c.ExecSummary || "";
-                    let salaryDisplay = (c.Salary || "").replace(/\$/g, '&#36;');
-                    summaryHTML = summaryHTML.replace(/\$/g, '&#36;'); // Prevent KaTeX issues
+                    let salaryDisplay = (c.Salary || "").replace(/\$/g, '');
+                    summaryHTML = summaryHTML.replace(/\$/g, 'USD '); // Prevent KaTeX issues
                     
                     let roiText = "";
                     let roiMatch = summaryHTML.match(/(⚠️?\s*\*?ROI WARNING:[^\.]*\.)\s*/i);

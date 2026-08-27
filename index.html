@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WilsonHCG | Executive Search & Talent Intelligence Hub</title>
+    <title>Wilson | Executive Search & Talent Intelligence Hub</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -17,249 +17,1144 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
     <style>
-
         :root {
-            --brand-mint: #94E3C9;
-            --brand-yellow: #FEF4D5;
-            --brand-dark: #1A1A1A;
-            --brand-teal: #00BA88;
-            --white: #FFFFFF;
-            --off-white: #F9FAFB;
-            --font-heading: 'Archivo Black', 'Inter', sans-serif;
-            --font-body: 'Merriweather', serif;
+            /* Wilson Official Brand System */
+            --wilson-black: #16170F;
+            --wilson-slate: #1F2421;
+            --wilson-mint: #94E3C9;
+            --wilson-teal: #00BA88;
+            --wilson-teal-dark: #008761;
+            --wilson-teal-light: #E6F8F3;
+            --wilson-yellow: #FEF4D5;
+            --wilson-yellow-border: #E8DEB5;
+            --wilson-bg: #F8FAF9;
+            --wilson-surface: #FFFFFF;
+            --wilson-surface-subtle: #F3F5F4;
+            --wilson-surface-card: #FFFFFF;
+            --wilson-border: #E5E9EB;
+            --wilson-border-subtle: #EDF2F4;
+            --wilson-text-main: #16170F;
+            --wilson-text-muted: #64748B;
+            --wilson-text-light: #94A3B8;
             
-            /* Intel Dashboard Colors */
-            --bg-color: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text-main: #1A1A1A;
-            --text-muted: #64748B;
-            --accent-primary: #00BA88; /* Teal */
-            --accent-secondary: #94E3C9; /* Mint */
-            --border-color: #E5E7EB;
-            --success: #10B981;
-            --font-intel: 'Inter', sans-serif;
+            /* Typography */
+            --font-heading: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-intel: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            
+            /* Radius & Shadows */
+            --radius-xs: 4px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 999px;
+            --shadow-sm: 0 2px 6px rgba(22, 23, 15, 0.03);
+            --shadow-card: 0 4px 16px rgba(22, 23, 15, 0.05);
+            --shadow-hover: 0 10px 28px rgba(22, 23, 15, 0.08);
+            --shadow-modal: 0 25px 60px rgba(22, 23, 15, 0.18);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font-body);
-            background-color: var(--brand-mint);
-            color: var(--brand-dark);
-            line-height: 1.6;
+            background-color: var(--wilson-bg);
+            color: var(--wilson-text-main);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         /* --- Header & Navigation --- */
         header {
-            background-color: var(--white);
-            color: var(--brand-dark);
-            padding: 1.25rem 2rem;
+            background-color: var(--wilson-surface);
+            color: var(--wilson-text-main);
+            padding: 0.9rem 2rem;
             position: sticky;
             top: 0;
             z-index: 1000;
-            border-bottom: 1px solid #E5E7EB;
+            border-bottom: 1px solid var(--wilson-border);
+            box-shadow: var(--shadow-sm);
         }
 
         .header-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .brand-logo-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-sm);
+            object-fit: contain;
+            background: var(--wilson-black);
+            padding: 4px;
         }
 
         .brand-logo {
             display: flex;
             flex-direction: column;
-            line-height: 1;
+            line-height: 1.05;
         }
 
         .brand-logo h1 {
             font-family: var(--font-heading);
-            font-size: 2.5rem;
-            letter-spacing: -2px;
-            color: var(--brand-dark);
+            font-size: 1.85rem;
+            font-weight: 800;
+            letter-spacing: -1.2px;
+            color: var(--wilson-black);
             text-transform: lowercase;
-            margin-bottom: 2px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .brand-logo h1 .brand-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--wilson-teal);
+            display: inline-block;
         }
 
         .brand-logo span {
-            font-family: var(--font-intel);
-            font-size: 0.8rem;
-            color: #666;
-            font-weight: 400;
-            text-transform: none;
+            font-family: var(--font-body);
+            font-size: 0.75rem;
+            color: var(--wilson-text-muted);
+            font-weight: 500;
+            letter-spacing: 0.2px;
         }
 
-        nav { display: flex; gap: 1rem; }
+        nav { 
+            display: flex; 
+            gap: 0.4rem; 
+            background: var(--wilson-surface-subtle);
+            padding: 4px;
+            border-radius: var(--radius-pill);
+            border: 1px solid var(--wilson-border);
+        }
 
         .nav-btn {
             background: transparent;
             border: none;
-            color: var(--brand-dark);
-            font-family: var(--font-intel);
-            font-weight: 500;
-            font-size: 0.95rem;
-            padding: 0.6rem 1.2rem;
+            color: var(--wilson-text-muted);
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 0.5rem 1.1rem;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
-            text-transform: none;
+            border-radius: var(--radius-pill);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
         }
         
-        .nav-btn.active {
-            font-weight: 700;
-        }
-        
-        .nav-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--brand-teal);
+        .nav-btn:hover { 
+            color: var(--wilson-black); 
+            background: rgba(0, 0, 0, 0.04);
         }
 
-        .nav-btn:hover { color: var(--brand-teal); }
+        .nav-btn.active {
+            background: var(--wilson-black);
+            color: #FFFFFF;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-btn.active .nav-indicator {
+            background: var(--wilson-mint);
+        }
+
+        .nav-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: transparent;
+            display: inline-block;
+        }
 
         /* --- Main Layout --- */
-        .container { max-width: 1400px; margin: 2rem auto; padding: 0 1.5rem; }
+        .container { 
+            max-width: 1440px; 
+            margin: 1.75rem auto; 
+            padding: 0 1.5rem; 
+        }
+
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.3s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .tab-content.active { display: block; animation: fadeIn 0.25s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- PIPELINE KANBAN STYLES --- */
-        .mandate-card { background: var(--brand-yellow); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .mandate-header { padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--brand-dark); color: var(--white); user-select: none; }
-        .mandate-header h2 { font-family: var(--font-heading); font-size: 1.1rem; text-transform: uppercase; }
-        .mandate-toggle { font-family: var(--font-intel); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
-        .mandate-body { padding: 1.75rem; display: none; }
+        /* --- PIPELINE & MANDATE CARD --- */
+        .mandate-card { 
+            background: var(--wilson-surface); 
+            border-radius: var(--radius-md); 
+            margin-bottom: 1.5rem; 
+            overflow: hidden; 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-card); 
+        }
+
+        .mandate-header { 
+            padding: 1.1rem 1.75rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            cursor: pointer; 
+            background: var(--wilson-black); 
+            color: #FFFFFF; 
+            user-select: none; 
+            transition: background 0.2s;
+        }
+
+        .mandate-header:hover {
+            background: var(--wilson-slate);
+        }
+
+        .mandate-header-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .mandate-pill {
+            background: rgba(148, 227, 201, 0.2);
+            color: var(--wilson-mint);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            letter-spacing: 0.5px;
+        }
+
+        .mandate-header h2 { 
+            font-family: var(--font-heading); 
+            font-size: 1.05rem; 
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        .mandate-toggle { 
+            font-family: var(--font-body); 
+            font-weight: 600; 
+            font-size: 0.8rem; 
+            color: var(--wilson-mint);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mandate-body { 
+            padding: 1.75rem; 
+            display: none; 
+            background: #FFFFFF;
+            border-top: 1px solid var(--wilson-border);
+        }
+
         .mandate-body.open { display: block; }
-        .mandate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .mandate-section h3 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 0.6rem; text-transform: uppercase; border-bottom: 2px solid var(--brand-dark); padding-bottom: 0.25rem; }
-        .mandate-section ul { list-style: none; font-size: 0.95rem; font-family: var(--font-intel); }
-        .mandate-section li { margin-bottom: 0.5rem; padding-left: 14px; position: relative; }
-        .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.7rem; top: 4px; }
         
-        .controls-panel { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--white); padding: 1rem 1.25rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .search-box { flex: 1; min-width: 280px; }
-        .search-box input { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-intel); font-size: 0.9rem; outline: none; background: var(--off-white); }
+        .mandate-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
+            margin-top: 1.25rem; 
+        }
+
+        .mandate-section {
+            background: var(--wilson-surface-subtle);
+            padding: 1.25rem;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--wilson-border);
+        }
+
+        .mandate-section h3 { 
+            font-family: var(--font-heading); 
+            font-size: 0.9rem; 
+            font-weight: 700;
+            margin-bottom: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+            color: var(--wilson-black);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .mandate-section ul { 
+            list-style: none; 
+            font-size: 0.88rem; 
+            color: #334155;
+        }
+
+        .mandate-section li { 
+            margin-bottom: 0.45rem; 
+            padding-left: 16px; 
+            position: relative; 
+            line-height: 1.4;
+        }
+
+        .mandate-section li::before { 
+            content: ""; 
+            position: absolute; 
+            left: 0; 
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--wilson-teal); 
+            top: 7px; 
+        }
+        
+        /* --- CONTROLS PANEL --- */
+        .controls-panel { 
+            display: flex; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 1.5rem; 
+            background: var(--wilson-surface); 
+            padding: 0.85rem 1.25rem; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-sm); 
+        }
+
+        .search-box { 
+            flex: 1; 
+            min-width: 280px; 
+            position: relative;
+        }
+
+        .search-box input { 
+            width: 100%; 
+            padding: 0.65rem 1rem 0.65rem 2.4rem; 
+            border: 1px solid var(--wilson-border); 
+            border-radius: var(--radius-pill); 
+            font-family: var(--font-body); 
+            font-size: 0.88rem; 
+            outline: none; 
+            background: var(--wilson-surface-subtle); 
+            transition: all 0.2s;
+        }
+
+        .search-box input:focus {
+            background: #FFFFFF;
+            border-color: var(--wilson-teal);
+            box-shadow: 0 0 0 3px rgba(0, 186, 136, 0.12);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.9rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--wilson-text-muted);
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
         .filter-group { display: flex; gap: 0.75rem; }
-        .filter-select { padding: 0.7rem 1rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-intel); font-weight: 600; font-size: 0.85rem; background: var(--off-white); outline: none; cursor: pointer; }
 
-        .kanban-board { display: flex; gap: 1.5rem; overflow-x: auto; padding-bottom: 2rem; align-items: flex-start; }
-        .kanban-column { background: rgba(255, 255, 255, 0.5); min-width: 330px; width: 330px; border-radius: 4px; padding: 1rem; border: none; }
-        .kanban-header { font-family: var(--font-heading); font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--brand-dark); display: flex; justify-content: space-between; align-items: center; }
-        .kanban-count { background: var(--brand-dark); color: var(--white); padding: 2px 10px; border-radius: 20px; font-size: 0.85rem; font-family: var(--font-intel); font-weight: bold; }
+        .filter-select { 
+            padding: 0.65rem 1.2rem; 
+            border: 1px solid var(--wilson-border); 
+            border-radius: var(--radius-pill); 
+            font-family: var(--font-body); 
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            background: var(--wilson-surface-subtle); 
+            color: var(--wilson-text-main);
+            outline: none; 
+            cursor: pointer; 
+            transition: all 0.2s;
+        }
+
+        .filter-select:focus {
+            border-color: var(--wilson-teal);
+            background: #FFFFFF;
+        }
+
+        /* --- KANBAN BOARD --- */
+        .kanban-board { 
+            display: flex; 
+            gap: 1.25rem; 
+            overflow-x: auto; 
+            padding-bottom: 2rem; 
+            align-items: flex-start; 
+        }
+
+        .kanban-column { 
+            background: #F1F4F6; 
+            min-width: 320px; 
+            width: 320px; 
+            border-radius: var(--radius-md); 
+            padding: 1rem; 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-sm);
+        }
+
+        .kanban-header { 
+            font-family: var(--font-heading); 
+            font-size: 0.9rem; 
+            font-weight: 700;
+            text-transform: uppercase; 
+            letter-spacing: 0.4px;
+            margin-bottom: 0.9rem; 
+            padding-bottom: 0.6rem; 
+            border-bottom: 2px solid #E2E8F0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            color: var(--wilson-black);
+        }
+
+        .kanban-count { 
+            background: var(--wilson-black); 
+            color: #FFFFFF; 
+            padding: 2px 8px; 
+            border-radius: var(--radius-pill); 
+            font-size: 0.75rem; 
+            font-family: var(--font-body); 
+            font-weight: 700; 
+        }
         
-        .candidate-card { background: var(--white); border-radius: 4px; padding: 1.25rem; margin-bottom: 1rem; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .candidate-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        .candidate-name { font-family: var(--font-heading); text-transform: uppercase; font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--brand-dark); }
-        .candidate-meta { font-size: 0.85rem; color: #666; margin-bottom: 0.75rem; font-family: var(--font-intel); }
-        .badge { display: inline-block; padding: 4px 8px; background: var(--brand-yellow); border: none; font-family: var(--font-intel); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; border-radius: 2px; }
-        .card-preview { font-size: 0.95rem; margin-bottom: 1.25rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #333; }
-        .card-actions { display: flex; gap: 0.75rem; }
-        .btn-action { flex: 1; padding: 0.7rem; border: none; font-family: var(--font-heading); font-size: 0.75rem; cursor: pointer; border-radius: 2px; text-align: center; text-decoration: none; text-transform: uppercase; transition: background 0.2s; }
-        .btn-view { background: var(--brand-dark); color: var(--white); }
-        .btn-view:hover { background: #333; }
-        .btn-linkedin { background: var(--brand-teal); color: var(--white); }
-        .btn-linkedin:hover { background: #009970; }
+        .candidate-card { 
+            background: var(--wilson-surface); 
+            border-radius: var(--radius-sm); 
+            padding: 1.15rem; 
+            margin-bottom: 0.85rem; 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-sm); 
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s; 
+        }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 1.5rem; }
-        .modal-overlay.active { display: flex; animation: fadeIn 0.2s ease; }
-        .modal-card { background: var(--white); border: none; max-width: 650px; width: 100%; max-height: 90vh; overflow-y: auto; padding: 2.5rem; position: relative; border-radius: 4px; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-        .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--brand-dark); color: var(--white); border: none; width: 40px; height: 40px; border-radius: 50%; font-family: var(--font-heading); font-size: 1rem; cursor: pointer; transition: background 0.2s; }
-        .modal-close:hover { background: #333; }
-        .modal-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color); }
-        .modal-section h4 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 0.75rem; font-size: 0.95rem; }
+        .candidate-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-hover); 
+            border-color: #CBD5E1;
+        }
+
+        .candidate-name { 
+            font-family: var(--font-heading); 
+            font-weight: 700;
+            font-size: 1.05rem; 
+            margin-bottom: 0.2rem; 
+            color: var(--wilson-black); 
+            letter-spacing: -0.2px;
+        }
+
+        .candidate-meta { 
+            font-size: 0.82rem; 
+            color: var(--wilson-text-muted); 
+            margin-bottom: 0.65rem; 
+            font-family: var(--font-body); 
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-wrap: wrap;
+        }
+
+        .badge { 
+            display: inline-block; 
+            padding: 3px 8px; 
+            background: var(--wilson-yellow); 
+            border: 1px solid var(--wilson-yellow-border);
+            color: #78350F;
+            font-family: var(--font-body); 
+            font-size: 0.68rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.4px;
+            margin-bottom: 0.65rem; 
+            border-radius: var(--radius-pill); 
+        }
+
+        .badge-vp { 
+            background: #EFF6FF; 
+            color: #1E40AF; 
+            border-color: #BFDBFE; 
+        }
+
+        .badge-dir { 
+            background: #F0FDF4; 
+            color: #166534; 
+            border-color: #BBF7D0; 
+        }
+
+        .badge-mgr { 
+            background: #F8FAFC; 
+            color: #475569; 
+            border-color: #E2E8F0; 
+        }
+
+        .card-preview { 
+            font-size: 0.85rem; 
+            line-height: 1.45;
+            margin-bottom: 1rem; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            color: #475569; 
+        }
+
+        .card-actions { display: flex; gap: 0.5rem; }
+
+        .btn-action { 
+            flex: 1; 
+            padding: 0.55rem; 
+            border: none; 
+            font-family: var(--font-body); 
+            font-weight: 600;
+            font-size: 0.75rem; 
+            cursor: pointer; 
+            border-radius: var(--radius-pill); 
+            text-align: center; 
+            text-decoration: none; 
+            text-transform: none; 
+            transition: all 0.2s; 
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .btn-view { 
+            background: var(--wilson-black); 
+            color: #FFFFFF; 
+        }
+
+        .btn-view:hover { 
+            background: var(--wilson-slate); 
+        }
+
+        .btn-linkedin { 
+            background: var(--wilson-teal-light); 
+            color: var(--wilson-teal-dark); 
+            border: 1px solid rgba(0, 186, 136, 0.3);
+        }
+
+        .btn-linkedin:hover { 
+            background: var(--wilson-teal); 
+            color: #FFFFFF; 
+        }
+
+        /* --- SCREENING SUMMARIES TAB --- */
+        .screening-column { 
+            min-width: 390px !important; 
+            max-width: 390px !important; 
+        }
+
+        .screening-card { 
+            background-color: var(--wilson-surface) !important; 
+            border: 1px solid var(--wilson-border) !important; 
+            border-radius: var(--radius-md) !important;
+            padding: 1.4rem !important; 
+            box-shadow: var(--shadow-card) !important;
+            position: relative;
+        }
+
+        .screening-card:hover {
+            border-color: #CBD5E1 !important;
+            box-shadow: var(--shadow-hover) !important;
+        }
+
+        .screening-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid var(--wilson-border);
+            padding-bottom: 0.75rem;
+        }
+
+        .candidate-title-block {
+            flex: 1;
+        }
+
+        .screening-name {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--wilson-black);
+            line-height: 1.15;
+            letter-spacing: -0.3px;
+        }
+
+        .screening-company {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--wilson-text-muted);
+            margin-top: 2px;
+        }
+
+        .score-pill {
+            background: #F0FDF4;
+            color: #15803D;
+            border: 1px solid #BBF7D0;
+            font-size: 0.85rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: var(--radius-pill);
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+        }
+
+        .meta-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.85rem;
+        }
+
+        .meta-tag {
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: var(--radius-pill);
+            background: var(--wilson-surface-subtle);
+            border: 1px solid var(--wilson-border);
+            color: #475569;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .meta-tag-salary {
+            background: #ECFDF5;
+            color: #047857;
+            border-color: #A7F3D0;
+            font-weight: 700;
+        }
+
+        .summary-body {
+            font-size: 0.86rem;
+            line-height: 1.5;
+            color: #334155;
+            padding-top: 0.5rem;
+        }
+
+        .summary-section { 
+            margin-bottom: 0.75rem; 
+        }
+
+        .summary-subhead { 
+            font-family: var(--font-heading); 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.6px;
+            color: var(--wilson-black); 
+            background: #F1F5F9;
+            padding: 2px 8px;
+            border-radius: var(--radius-xs);
+            display: inline-block; 
+            font-weight: 700; 
+            margin-bottom: 0.35rem;
+            margin-top: 0.5rem;
+        }
+
+        .roi-warning { 
+            background-color: #FFFBEB; 
+            border-left: 4px solid #F59E0B; 
+            padding: 0.75rem 1rem; 
+            margin-top: 1rem; 
+            font-size: 0.82rem; 
+            color: #92400E; 
+            border-radius: 0 var(--radius-xs) var(--radius-xs) 0; 
+            line-height: 1.4;
+        }
+
+        .roi-warning strong {
+            color: #78350F;
+        }
 
         /* --- INTEL DASHBOARD STYLES --- */
-        .intel-tab-wrapper { font-family: var(--font-intel); }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-        .card { background: var(--card-bg); border: none; border-radius: 4px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .card-header { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
-        .card-header h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin: 0; font-family: var(--font-heading); text-transform: uppercase; }
-        .kpi-card { grid-column: span 3; display: flex; flex-direction: column; justify-content: center; }
-        .kpi-value { font-size: 2.5rem; font-weight: 700; color: var(--brand-teal); line-height: 1.2; }
-        .kpi-label { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
-        .chart-card-large { grid-column: span 8; }
-        .chart-card-small { grid-column: span 4; }
+        .intel-tab-wrapper { font-family: var(--font-body); }
         
-        .vp-header-box { background: var(--brand-dark); color: white; padding: 2rem; border-radius: 4px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .vp-header-text h2 { font-family: var(--font-heading); text-transform: uppercase; font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: normal; }
-        .vp-header-text p { color: #94A3B8; max-width: 600px; margin: 0; font-family: var(--font-intel); }
-        
-        .comp-card { background: white; border-left: 4px solid var(--brand-teal); padding: 1.5rem; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 1rem; border-top: none; border-right: none; border-bottom: none; }
-        .comp-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; font-family: var(--font-heading); text-transform: uppercase; }
-        .comp-company { color: var(--brand-teal); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
-        .comp-details { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
-        .comp-salary { font-size: 1.25rem; font-weight: 700; color: var(--success); }
-        
-        .live-btn { display: inline-block; background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 2px; font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-decoration: none; transition: background 0.2s; }
-        .live-btn:hover { background: #E2E8F0; }
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(12, 1fr); 
+            gap: 1.25rem; 
+            margin-bottom: 1.75rem; 
+        }
 
-        .filters-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .intel-filter-group { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
-        .intel-filter-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-        .intel-filter-group select { padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 2px; font-family: var(--font-intel); }
-        
-        .table-card { grid-column: span 12; }
-        table.dataTable { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
-        table.dataTable thead th { background: #F1F5F9; border-bottom: 1px solid var(--border-color); padding: 1rem; text-align: left; font-weight: 600; color: var(--text-main); font-family: var(--font-heading); text-transform: uppercase; }
-        table.dataTable tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); }
-        
-        .intel-badge { padding: 4px 8px; border-radius: 2px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
-        .badge-vp { background: var(--brand-yellow); color: var(--brand-dark); }
-        .badge-dir { background: var(--off-white); color: var(--brand-dark); }
-        .badge-mgr { background: var(--off-white); color: var(--brand-dark); }
-        .badge-ic { background: var(--off-white); color: var(--brand-dark); }
+        .card { 
+            background: var(--wilson-surface); 
+            border: 1px solid var(--wilson-border); 
+            border-radius: var(--radius-md); 
+            padding: 1.5rem; 
+            box-shadow: var(--shadow-card); 
+        }
 
-        /* Qualitative Styles Restored */
-        .qualitative-insights { margin-bottom: 2rem; background: var(--white); border: none; border-radius: 4px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .qualitative-insights h3 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid var(--brand-dark); padding-bottom: 0.5rem; }
-        .signal-list { list-style: none; margin-bottom: 2rem; font-family: var(--font-intel); font-size: 0.95rem; }
-        .signal-list li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
-        .signal-list li::before { content: "►"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.8rem; }
+        .card-header { 
+            margin-bottom: 1.1rem; 
+            padding-bottom: 0.6rem; 
+            border-bottom: 1px solid var(--wilson-border); 
+        }
+
+        .card-header h3 { 
+            font-size: 1rem; 
+            font-weight: 700; 
+            color: var(--wilson-black); 
+            margin: 0; 
+            font-family: var(--font-heading); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+
+        .kpi-card { 
+            grid-column: span 3; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            background: #FFFFFF;
+            border-top: 4px solid var(--wilson-teal);
+        }
+
+        .kpi-value { 
+            font-family: var(--font-heading);
+            font-size: 2.35rem; 
+            font-weight: 800; 
+            color: var(--wilson-black); 
+            line-height: 1.1; 
+            letter-spacing: -1px;
+            margin-bottom: 0.2rem;
+        }
+
+        .kpi-label { 
+            font-size: 0.75rem; 
+            color: var(--wilson-text-muted); 
+            text-transform: uppercase; 
+            font-weight: 700; 
+            letter-spacing: 0.6px; 
+        }
+
+        .chart-card-large { grid-column: span 12; }
         
-        .battle-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 1rem; }
-        .battle-card { background: var(--off-white); border: none; padding: 1.5rem; border-radius: 4px; }
-        .battle-card h4 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 1rem; color: var(--brand-dark); border-bottom: 3px solid var(--brand-teal); display: inline-block; padding-bottom: 0.25rem; }
-        .battle-card p { font-family: var(--font-intel); font-size: 0.95rem; margin-bottom: 0.5rem; }
-        .battle-card .talk-track { background: var(--brand-yellow); border: none; padding: 1.25rem; margin-top: 1rem; font-style: italic; font-size: 0.95rem; font-family: var(--font-body); }
+        .vp-header-box { 
+            background: var(--wilson-black); 
+            color: white; 
+            padding: 2rem 2.25rem; 
+            border-radius: var(--radius-md); 
+            margin-bottom: 1.5rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: var(--shadow-card);
+        }
+
+        .vp-header-text h2 { 
+            font-family: var(--font-heading); 
+            font-size: 1.65rem; 
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.4rem; 
+        }
+
+        .vp-header-text p { 
+            color: #94A3B8; 
+            max-width: 650px; 
+            margin: 0; 
+            font-size: 0.9rem;
+        }
         
-        .exec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 1rem; }
-        .exec-card { background: var(--off-white); border: none; padding: 1.5rem; border-radius: 4px; }
-        .exec-card h4 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 0.75rem; text-transform: uppercase; color: var(--brand-dark); }
+        .comp-card { 
+            background: white; 
+            border: 1px solid var(--wilson-border);
+            border-left: 4px solid var(--wilson-teal); 
+            padding: 1.25rem 1.5rem; 
+            border-radius: var(--radius-sm); 
+            box-shadow: var(--shadow-sm); 
+            margin-bottom: 0.85rem; 
+            transition: transform 0.2s;
+        }
+
+        .comp-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-card);
+        }
+
+        .comp-title { 
+            font-weight: 700; 
+            font-size: 1.05rem; 
+            margin-bottom: 0.2rem; 
+            font-family: var(--font-heading); 
+            color: var(--wilson-black);
+        }
+
+        .comp-company { 
+            color: var(--wilson-teal-dark); 
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            margin-bottom: 0.6rem; 
+        }
+
+        .comp-details { 
+            display: flex; 
+            gap: 1.25rem; 
+            font-size: 0.82rem; 
+            color: var(--wilson-text-muted); 
+            margin-bottom: 0.85rem; 
+        }
+
+        .comp-salary { 
+            font-family: var(--font-heading);
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            color: #047857; 
+        }
+        
+        .live-btn { 
+            display: inline-flex; 
+            align-items: center;
+            background: var(--wilson-surface-subtle); 
+            border: 1px solid var(--wilson-border); 
+            padding: 0.4rem 0.85rem; 
+            border-radius: var(--radius-pill); 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: var(--wilson-text-main); 
+            text-decoration: none; 
+            transition: all 0.2s; 
+        }
+
+        .live-btn:hover { 
+            background: var(--wilson-black); 
+            color: #FFFFFF;
+            border-color: var(--wilson-black);
+        }
+
+        .filters-area { 
+            display: flex; 
+            flex-wrap: wrap;
+            gap: 1rem; 
+            margin-bottom: 1.5rem; 
+            background: white; 
+            padding: 1rem 1.25rem; 
+            border-radius: var(--radius-md); 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-sm); 
+        }
+
+        .intel-filter-group { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.35rem; 
+            flex: 1; 
+            min-width: 180px;
+        }
+
+        .intel-filter-group label { 
+            font-size: 0.72rem; 
+            font-weight: 700; 
+            color: var(--wilson-text-muted); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px;
+        }
+
+        .intel-filter-group select { 
+            padding: 0.6rem 0.9rem; 
+            border: 1px solid var(--wilson-border); 
+            border-radius: var(--radius-pill); 
+            font-family: var(--font-body); 
+            font-size: 0.85rem;
+            background: var(--wilson-surface-subtle);
+            outline: none;
+        }
+        
+        .table-card { grid-column: span 12; overflow-x: auto; }
+        
+        table.dataTable { 
+            border-collapse: collapse; 
+            width: 100%; 
+            font-size: 0.88rem; 
+        }
+
+        table.dataTable thead th { 
+            background: #F8FAFC; 
+            border-bottom: 2px solid var(--wilson-border); 
+            padding: 0.9rem 1rem; 
+            text-align: left; 
+            font-weight: 700; 
+            color: #475569; 
+            font-family: var(--font-heading); 
+            text-transform: uppercase; 
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        table.dataTable tbody td { 
+            padding: 0.85rem 1rem; 
+            border-bottom: 1px solid var(--wilson-border); 
+        }
+
+        table.dataTable tbody tr:hover {
+            background-color: #F8FAF9;
+        }
+        
+        .intel-badge { 
+            padding: 3px 8px; 
+            border-radius: var(--radius-pill); 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 0.4px;
+        }
+
+        /* Qualitative Insights */
+        .qualitative-insights { 
+            margin-bottom: 2rem; 
+            background: var(--wilson-surface); 
+            border: 1px solid var(--wilson-border); 
+            border-radius: var(--radius-md); 
+            padding: 2rem; 
+            box-shadow: var(--shadow-card); 
+        }
+
+        .qualitative-insights h3 { 
+            font-family: var(--font-heading); 
+            font-size: 1.15rem;
+            font-weight: 800;
+            text-transform: uppercase; 
+            letter-spacing: 0.4px;
+            margin-bottom: 1.25rem; 
+            border-bottom: 2px solid var(--wilson-black); 
+            padding-bottom: 0.5rem; 
+        }
+
+        .signal-list { 
+            list-style: none; 
+            margin-bottom: 2rem; 
+            font-size: 0.92rem; 
+            color: #334155;
+        }
+
+        .signal-list li { 
+            margin-bottom: 0.85rem; 
+            padding-left: 1.5rem; 
+            position: relative; 
+            line-height: 1.5;
+        }
+
+        .signal-list li::before { 
+            content: "→"; 
+            position: absolute; 
+            left: 0; 
+            color: var(--wilson-teal-dark); 
+            font-weight: 800;
+            font-size: 1rem; 
+            top: -1px;
+        }
+        
+        .battle-cards-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 1.25rem; 
+            margin-bottom: 1rem; 
+        }
+
+        .battle-card { 
+            background: var(--wilson-surface-subtle); 
+            border: 1px solid var(--wilson-border); 
+            padding: 1.5rem; 
+            border-radius: var(--radius-sm); 
+        }
+
+        .battle-card h4 { 
+            font-family: var(--font-heading); 
+            font-size: 1rem;
+            font-weight: 800;
+            text-transform: uppercase; 
+            letter-spacing: 0.4px;
+            margin-bottom: 0.85rem; 
+            color: var(--wilson-black); 
+            border-bottom: 3px solid var(--wilson-teal); 
+            display: inline-block; 
+            padding-bottom: 0.2rem; 
+        }
+
+        .battle-card p { 
+            font-size: 0.88rem; 
+            margin-bottom: 0.5rem; 
+            color: #475569;
+        }
+
+        .battle-card .talk-track { 
+            background: var(--wilson-yellow); 
+            border-left: 3px solid #D97706; 
+            padding: 1rem 1.25rem; 
+            margin-top: 1rem; 
+            font-style: italic; 
+            font-size: 0.88rem; 
+            color: #78350F;
+            border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
+            line-height: 1.45;
+        }
 
         /* Region Toggle */
-        .region-toggle-container { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; background: var(--white); padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .region-btn { padding: 0.6rem 1.5rem; background: var(--off-white); border: 1px solid var(--border-color); border-radius: 2px; font-family: var(--font-intel); font-weight: 600; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-        .region-btn:hover { background: #E2E8F0; }
-        .region-btn.active { background: var(--brand-teal); color: white; border-color: var(--brand-teal); }
+        .region-toggle-container { 
+            display: flex; 
+            justify-content: center; 
+            gap: 0.5rem; 
+            margin-bottom: 2rem; 
+            background: var(--wilson-surface); 
+            padding: 0.6rem 1rem; 
+            border-radius: var(--radius-pill); 
+            border: 1px solid var(--wilson-border); 
+            box-shadow: var(--shadow-sm); 
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-        /* Screening Summaries Styles */
-        .screening-column { min-width: 380px !important; max-width: 380px !important; }
-        .screening-card { background-color: var(--off-white) !important; border: 3px solid var(--brand-yellow) !important; padding: 1.5rem !important; }
-        .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
-        .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
-        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 2px; }
+        .region-btn { 
+            padding: 0.5rem 1.35rem; 
+            background: transparent; 
+            border: none; 
+            border-radius: var(--radius-pill); 
+            font-family: var(--font-body); 
+            font-weight: 600; 
+            font-size: 0.85rem; 
+            color: var(--wilson-text-muted); 
+            cursor: pointer; 
+            transition: all 0.2s; 
+        }
+
+        .region-btn:hover { 
+            color: var(--wilson-black); 
+            background: #E2E8F0; 
+        }
+
+        .region-btn.active { 
+            background: var(--wilson-black); 
+            color: #FFFFFF; 
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(22, 23, 15, 0.65); 
+            backdrop-filter: blur(4px);
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            z-index: 2000; 
+            padding: 1.5rem; 
+        }
+
+        .modal-overlay.active { 
+            display: flex; 
+            animation: fadeIn 0.2s ease; 
+        }
+
+        .modal-card { 
+            background: var(--wilson-surface); 
+            border: 1px solid var(--wilson-border); 
+            max-width: 650px; 
+            width: 100%; 
+            max-height: 88vh; 
+            overflow-y: auto; 
+            padding: 2.25rem; 
+            position: relative; 
+            border-radius: var(--radius-lg); 
+            box-shadow: var(--shadow-modal); 
+        }
+
+        .modal-close { 
+            position: absolute; 
+            top: 1.25rem; 
+            right: 1.25rem; 
+            background: var(--wilson-surface-subtle); 
+            color: var(--wilson-black); 
+            border: 1px solid var(--wilson-border); 
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            font-family: var(--font-heading); 
+            font-weight: 700;
+            font-size: 0.9rem; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover { 
+            background: var(--wilson-black); 
+            color: #FFFFFF; 
+        }
+
+        .modal-section { 
+            margin-top: 1.25rem; 
+            padding-top: 1.25rem; 
+            border-top: 1px solid var(--wilson-border); 
+        }
+
+        .modal-section h4 { 
+            font-family: var(--font-heading); 
+            font-weight: 700;
+            text-transform: uppercase; 
+            margin-bottom: 0.6rem; 
+            font-size: 0.85rem; 
+            letter-spacing: 0.4px;
+            color: var(--wilson-black);
+        }
+
+        @media (max-width: 900px) {
+            .header-container { flex-direction: column; align-items: flex-start; }
+            nav { width: 100%; overflow-x: auto; justify-content: flex-start; }
+            .kpi-card { grid-column: span 6; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="header-container">
-            <div class="brand-logo">
-                <h1>wilson</h1>
-                <span>A fresh take on talent</span>
-            </div>
+            <a href="#" class="brand-logo-wrap">
+                <img src="https://www.wilsonhr.com/hubfs/Wilson_logo_RGB_icon_color.png" alt="Wilson" class="brand-logo-icon">
+                <div class="brand-logo">
+                    <h1>wilson<span class="brand-dot"></span></h1>
+                    <span>Integrated Talent Solutions • Americas Executive Search</span>
+                </div>
+            </a>
             <nav>
-                <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">VP Delivery Pipeline</button>
-                <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">Screening Summaries</button>
-                <button class="nav-btn" onclick="switchTab('general-intel', this)">Macro Market Intel</button>
-                <button class="nav-btn" onclick="switchTab('vp-intel', this)">VP Delivery Focus</button>
-                <button class="nav-btn" onclick="switchTab('raw-data', this)">Live Database</button>
+                <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">
+                    <span class="nav-indicator"></span>VP Delivery Pipeline
+                </button>
+                <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">
+                    <span class="nav-indicator"></span>Screening Summaries
+                </button>
+                <button class="nav-btn" onclick="switchTab('general-intel', this)">
+                    <span class="nav-indicator"></span>Macro Market Intel
+                </button>
+                <button class="nav-btn" onclick="switchTab('vp-intel', this)">
+                    <span class="nav-indicator"></span>VP Delivery Focus
+                </button>
+                <button class="nav-btn" onclick="switchTab('raw-data', this)">
+                    <span class="nav-indicator"></span>Live Database
+                </button>
             </nav>
         </div>
     </header>
@@ -269,43 +1164,48 @@
         <div id="pipeline-tab" class="tab-content active">
             <div class="mandate-card">
                 <div class="mandate-header" onclick="toggleMandate()">
-                    <h2>Search Mandate Summary (VP Delivery - Americas)</h2>
+                    <div class="mandate-header-title-wrap">
+                        <span class="mandate-pill">Active Search</span>
+                        <h2>VP Delivery (Americas) — Mandate Calibration Overview</h2>
+                    </div>
                     <span class="mandate-toggle" id="mandate-toggle-text">Expand Overview ▼</span>
                 </div>
                 <div class="mandate-body" id="mandate-body">
-                    <p style="font-weight: 500; margin-bottom: 1rem;">
+                    <p style="font-weight: 500; font-size: 0.95rem; margin-bottom: 1rem; color: #1E293B;">
                         <strong>Primary Mandate:</strong> Architect, scale, and lead WilsonHCG’s nearshore and offshore delivery infrastructure across the Americas.
                     </p>
                     <div class="mandate-grid">
                         <div class="mandate-section">
-                            <h3>Core Priorities</h3>
+                            <h3>🎯 Core Priorities</h3>
                             <ul>
-                                <li>Scale nearshore shared services (Mexico, Argentina).</li>
-                                <li>Stabilize mid-market & "tail business" accounts.</li>
+                                <li>Scale nearshore shared services hubs (Mexico, Argentina).</li>
+                                <li>Stabilize mid-market & "tail business" enterprise accounts.</li>
                                 <li>Modernize delivery workflows and AI sourcing models.</li>
                             </ul>
                         </div>
                         <div class="mandate-section">
-                            <h3>Target Archetypes</h3>
+                            <h3>👥 Target Archetypes</h3>
                             <ul>
-                                <li><strong>LATAM Commercial Leaders:</strong> $110k–$120k USD Base.</li>
-                                <li><strong>US Tech / Implementation:</strong> ~$200k USD.</li>
+                                <li><strong>LATAM Commercial Leaders:</strong> $110k–$135k USD Base.</li>
+                                <li><strong>US Tech / Implementation VPs:</strong> ~$200k–$240k USD.</li>
                                 <li><strong>Strategic TA Pivots:</strong> Fresh perspectives on tech.</li>
                             </ul>
                         </div>
                         <div class="mandate-section">
-                            <h3>Cultural Filters</h3>
+                            <h3>⚙️ Cultural Filters</h3>
                             <ul>
-                                <li><strong>"Anti-Randstad":</strong> Agile, builder-minded, non-corporate.</li>
-                                <li><strong>Target Verticals:</strong> Engineering, Pharma, Skilled Mfg.</li>
+                                <li><strong>"Anti-Randstad":</strong> Agile, builder-minded, non-bureaucratic.</li>
+                                <li><strong>Target Verticals:</strong> Tech, Pharma, Skilled Manufacturing.</li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <div class="controls-panel">
                 <div class="search-box">
-                    <input type="text" id="search-input" placeholder="Search candidate, company, or notes..." oninput="filterCandidates()">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="search-input" placeholder="Search candidate, current company, or keywords..." oninput="filterCandidates()">
                 </div>
                 <div class="filter-group">
                     <select id="profile-filter" class="filter-select" onchange="filterCandidates()">
@@ -317,18 +1217,20 @@
                     </select>
                 </div>
             </div>
-            <div id="loading-state" style="font-family: var(--font-heading); padding: 2rem; text-align: center;">Loading live pipeline...</div>
+            
+            <div id="loading-state" style="font-family: var(--font-heading); font-weight: 600; padding: 3rem; text-align: center; color: var(--wilson-text-muted);">
+                Connecting to Live Google Sheets Pipeline...
+            </div>
             <div class="kanban-board" id="kanban-board"></div>
         </div>
 
-        <!-- TAB 1.5: STACK RANK -->
+        <!-- TAB 1.5: STACK RANK / SCREENING SUMMARIES -->
         <div id="stack-rank-tab" class="tab-content">
             <div class="kanban-board" id="stack-rank-board"></div>
         </div>
 
-        <!-- TAB 2: MACRO MARKET INTEL (REDESIGNED) -->
+        <!-- TAB 2: MACRO MARKET INTEL -->
         <div id="general-intel" class="tab-content intel-tab-wrapper">
-            
             <!-- Dynamic Region Toggle -->
             <div class="region-toggle-container">
                 <button class="region-btn active" onclick="setRegion('Global', this)">🌍 Global View</button>
@@ -356,7 +1258,7 @@
                 </div>
             </div>
 
-            <!-- Restored Qualitative Insights -->
+            <!-- Qualitative Insights -->
             <div class="qualitative-insights">
                 <h3>Strategic Signals & Competitor Org Structures</h3>
                 <ul class="signal-list">
@@ -372,13 +1274,13 @@
                         <h4>Cielo Target</h4>
                         <p><strong>Target:</strong> Regional Directors (LATAM).</p>
                         <p><strong>Vulnerability:</strong> Moving heavily into massive tech integrations, pulling leaders away from pure operational scale and P&L control.</p>
-                        <div class="talk-track">"WilsonHCG offers an agile environment where you own the P&L without the red tape of software integration rollouts."</div>
+                        <div class="talk-track">"Wilson offers an agile environment where you own the P&L without the red tape of massive software integration rollouts."</div>
                     </div>
                     <div class="battle-card">
                         <h4>Pontoon Target</h4>
                         <p><strong>Target:</strong> VPs of Workforce Solutions (US/Global).</p>
                         <p><strong>Vulnerability:</strong> The suffocating bureaucracy of the Adecco Group ecosystem.</p>
-                        <div class="talk-track">"Pontoon's scale comes with a rigid matrix. WilsonHCG offers an 'Anti-Randstad' builder culture."</div>
+                        <div class="talk-track">"Pontoon's scale comes with a rigid matrix. Wilson offers a true 'Anti-Randstad' builder culture."</div>
                     </div>
                     <div class="battle-card">
                         <h4>Hudson Target</h4>
@@ -391,13 +1293,13 @@
 
             <!-- Dynamic Charts -->
             <div class="dashboard-grid">
-                <div class="card chart-card-large" style="grid-column: span 12;">
-                    <div class="card-header"><h3>Active Requisitions</h3></div>
+                <div class="card chart-card-large">
+                    <div class="card-header"><h3>Active Requisitions by Competitor</h3></div>
                     <canvas id="companyVolumeChart"></canvas>
                 </div>
 
-                <div class="card chart-card-large" style="grid-column: span 12;">
-                    <div class="card-header"><h3>Compensation Spread (Verified USD)</h3></div>
+                <div class="card chart-card-large">
+                    <div class="card-header"><h3>Compensation Spread (Verified USD Base)</h3></div>
                     <canvas id="compSpreadChart"></canvas>
                 </div>
             </div>
@@ -407,19 +1309,19 @@
         <div id="vp-intel" class="tab-content intel-tab-wrapper">
             <div class="vp-header-box">
                 <div class="vp-header-text">
-                    <h2>VP of Delivery & Shared Services</h2>
+                    <h2>VP of Delivery & Shared Services Benchmark</h2>
                     <p>Live, verified requisitions for executive delivery, client services, and RPO leadership extracted directly from competitor ATS platforms.</p>
                 </div>
                 <div style="text-align: right;">
-                    <div style="font-size: 0.85rem; color: #94A3B8; text-transform: uppercase; font-weight: 600;">Wilson Benchmark (US)</div>
-                    <div style="font-size: 1.5rem; font-weight: 700; color: white;">$185k - $240k</div>
+                    <div style="font-size: 0.78rem; color: #94A3B8; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px;">Wilson Benchmark (US)</div>
+                    <div style="font-size: 1.6rem; font-weight: 800; color: #FFFFFF; font-family: var(--font-heading);">$185k – $240k USD</div>
                 </div>
             </div>
 
             <div class="dashboard-grid">
                 <div class="card" style="grid-column: span 12;">
-                    <div class="card-header"><h3>Live Verified Requisitions</h3></div>
-                    <div id="vp-roles-container" style="max-height: 500px; overflow-y: auto; padding-right: 10px;">
+                    <div class="card-header"><h3>Live Verified Market Postings</h3></div>
+                    <div id="vp-roles-container" style="max-height: 550px; overflow-y: auto; padding-right: 8px;">
                         <!-- Generated via JS -->
                     </div>
                 </div>
@@ -476,17 +1378,17 @@
     <!-- Modal Popup for Kanban -->
     <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
         <div class="modal-card">
-            <button class="modal-close" onclick="closeModalDirect()">X</button>
+            <button class="modal-close" onclick="closeModalDirect()">✕</button>
             <span class="badge" id="modal-badge">Profile</span>
-            <h2 class="candidate-name" id="modal-name">Name</h2>
-            <div class="candidate-meta" id="modal-meta">Title • Company • Location</div>
+            <h2 class="candidate-name" id="modal-name" style="font-size: 1.45rem; margin-top: 4px;">Name</h2>
+            <div class="candidate-meta" id="modal-meta" style="font-size: 0.9rem; margin-bottom: 1.25rem;">Title • Company • Location</div>
             <div class="modal-section">
-                <h4>The Good (Initial JD Alignment)</h4>
-                <p id="modal-good">-</p>
+                <h4>🎯 The Good (Initial JD Alignment)</h4>
+                <p id="modal-good" style="font-size: 0.92rem; color: #334155; line-height: 1.5;">-</p>
             </div>
             <div class="modal-section">
-                <h4>Trade-Offs & Potential Risks</h4>
-                <p id="modal-tradeoff">-</p>
+                <h4>⚠️ Trade-Offs & Potential Risks</h4>
+                <p id="modal-tradeoff" style="font-size: 0.92rem; color: #334155; line-height: 1.5;">-</p>
             </div>
         </div>
     </div>
@@ -546,11 +1448,10 @@
         ];
 
         let intelDataTable;
-        let currentRegion = 'Global'; // Master toggle state
-        let charts = {}; // Store chart instances
+        let currentRegion = 'Global';
+        let charts = {};
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Init Kanban
             if (GOOGLE_SHEET_CSV_URL.startsWith('http')) {
                 Papa.parse(GOOGLE_SHEET_CSV_URL, {
                     download: true, header: true, skipEmptyLines: true,
@@ -581,12 +1482,12 @@
                         }
                         renderKanban();
                         renderStackRank();
-                        document.getElementById('loading-state').style.display = 'none';
+                        const loadEl = document.getElementById('loading-state');
+                        if (loadEl) loadEl.style.display = 'none';
                     }
                 });
             }
 
-            // Init Intel Dashboard
             updateDashboardView();
             populateFilters();
             populateTable();
@@ -596,26 +1497,31 @@
         // --- UI LOGIC ---
         function renderKanban(dataToRender = candidateData) {
             const board = document.getElementById('kanban-board');
+            if (!board) return;
             board.innerHTML = '';
             stages.forEach(stage => {
                 const stageCards = dataToRender.filter(c => c.Status === stage);
                 let colHTML = `
                     <div class="kanban-column">
                         <div class="kanban-header">
-                            ${stage} <span class="kanban-count">${stageCards.length}</span>
+                            <span>${stage}</span> <span class="kanban-count">${stageCards.length}</span>
                         </div>
                 `;
-                stageCards.forEach((c, idx) => {
-                    const badgeClass = c.BackgroundProfile.includes('LATAM') ? 'badge-vp' : 'badge-mgr';
+                stageCards.forEach((c) => {
+                    const badgeClass = c.BackgroundProfile.includes('LATAM') ? 'badge-vp' : (c.BackgroundProfile.includes('US') ? 'badge-dir' : 'badge-mgr');
                     colHTML += `
                         <div class="candidate-card">
-                            <span class="badge ${badgeClass}">${c.BackgroundProfile}</span>
+                            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                                <span class="badge ${badgeClass}">${c.BackgroundProfile || 'Profile'}</span>
+                            </div>
                             <div class="candidate-name">${c.Candidate}</div>
-                            <div class="candidate-meta">${c.CurrentCompany} • ${c.Location}</div>
-                            ${c.Verticals ? `<div class="candidate-meta" style="margin-top:-5px; font-weight:600; color:#555;">🏢 ${c.Verticals}</div>` : ''}
+                            <div class="candidate-meta">
+                                <strong>${c.CurrentCompany}</strong> • 📍 ${c.Location}
+                            </div>
+                            ${c.Verticals ? `<div class="candidate-meta" style="color:#475569; font-weight:600; margin-top:-2px;">🏢 ${c.Verticals}</div>` : ''}
                             <div class="card-preview">${c.TheGood}</div>
                             <div class="card-actions">
-                                <button class="btn-action btn-view" onclick="openModal(${candidateData.indexOf(c)})">Notes</button>
+                                <button class="btn-action btn-view" onclick="openModal(${candidateData.indexOf(c)})">View Notes</button>
                                 <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')">LinkedIn</button>
                             </div>
                         </div>
@@ -642,13 +1548,13 @@
                 let colHTML = `
                     <div class="kanban-column screening-column">
                         <div class="kanban-header">
-                            ${bucket} <span class="kanban-count">${bucketCards.length}</span>
+                            <span>${bucket}</span> <span class="kanban-count">${bucketCards.length}</span>
                         </div>
                 `;
                 bucketCards.forEach((c) => {
                     let summaryHTML = c.ExecSummary || "";
                     let salaryDisplay = (c.Salary || "").replace(/\$/g, '');
-                    summaryHTML = summaryHTML.replace(/\$/g, 'USD '); // Prevent KaTeX issues
+                    summaryHTML = summaryHTML.replace(/\$/g, 'USD ');
                     
                     let roiText = "";
                     let roiMatch = summaryHTML.match(/(⚠️?\s*\*?ROI WARNING:[^\.]*\.)\s*/i);
@@ -657,34 +1563,45 @@
                         summaryHTML = summaryHTML.replace(roiMatch[0], "");
                     }
 
-                    // Format Subheads (Bulletproof against copy-paste artifacts)
+                    // Format Subheads
                     summaryHTML = summaryHTML.replace(/Overview:/gi, '<span class="summary-subhead">Overview</span><br>');
                     summaryHTML = summaryHTML.replace(/Strengths:/gi, '</div><div class="summary-section"><span class="summary-subhead">Strengths</span><br>');
-                    summaryHTML = summaryHTML.replace(/Trade-offs:/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-offs</span><br>');
+                    summaryHTML = summaryHTML.replace(/Trade-offs:/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-Offs</span><br>');
                     summaryHTML = summaryHTML.replace(/Cultural Fit:/gi, '</div><div class="summary-section"><span class="summary-subhead">Cultural Fit</span><br>');
+                    summaryHTML = summaryHTML.replace(/Mandate Match:/gi, '</div><div class="summary-section"><span class="summary-subhead">🎯 Mandate Match</span><br>');
+                    summaryHTML = summaryHTML.replace(/Additional:/gi, '</div><div class="summary-section"><span class="summary-subhead">🌐 Additional</span><br>');
                     
-                    // Wrap the first overview part
                     summaryHTML = '<div class="summary-section">' + summaryHTML + '</div>';
 
-                    // Add ROI warning at the end
                     if (roiText) {
                         summaryHTML += `<div class="roi-warning">⚠️ <strong>${roiText.replace('⚠️', '').trim()}</strong></div>`;
                     }
 
+                    const scoreVal = c.CalibratedScore ? `${c.CalibratedScore} / 10` : '';
+
                     colHTML += `
-                        <div class="candidate-card screening-card" style="padding-bottom:1rem; cursor:default;">
-                            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
-                                <div class="candidate-name" style="margin:0; font-size:1.15rem; line-height:1.2; background: var(--brand-yellow); display: inline-block; padding: 0.15rem 0.4rem; border-radius: 2px;">${c.Candidate}</div>
+                        <div class="candidate-card screening-card">
+                            <div class="screening-header">
+                                <div class="candidate-title-block">
+                                    <div class="screening-name">${c.Candidate}</div>
+                                    <div class="screening-company">${c.CurrentCompany}</div>
+                                </div>
+                                ${scoreVal ? `<div class="score-pill">⭐ ${scoreVal}</div>` : ''}
                             </div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem;"><strong>${c.CurrentCompany}</strong></div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">📍 ${c.SpecificLocation || c.Location}</div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">💰 ${salaryDisplay}</div>
-                            ${c.Verticals ? `<div class="candidate-meta" style="margin-bottom:12px; font-size:0.85rem; color:#555; font-weight:600;">🏢 ${c.Verticals}</div>` : ''}
-                            <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #c9b165; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
+                            
+                            <div class="meta-pill-row">
+                                <span class="meta-tag">📍 ${c.SpecificLocation || c.Location}</span>
+                                ${salaryDisplay ? `<span class="meta-tag meta-tag-salary">💰 ${salaryDisplay}</span>` : ''}
+                            </div>
+                            
+                            ${c.Verticals ? `<div class="meta-tag" style="margin-bottom:0.75rem; width:100%; border-radius:var(--radius-xs); background:#FAF5FF; color:#6B21A8; border-color:#E9D5FF; font-weight:600;">🏢 ${c.Verticals}</div>` : ''}
+                            
+                            <div class="summary-body">
                                 ${summaryHTML}
                             </div>
-                            <div class="card-actions" style="margin-top:15px;">
-                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')" style="width:100%; padding:0.5rem; justify-content:center; border: 1px solid var(--brand-teal); background-color: white; color: var(--brand-teal);">LinkedIn Profile</button>
+                            
+                            <div class="card-actions" style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--wilson-border);">
+                                <button class="btn-action btn-linkedin" onclick="forceOpenLink('${c.LinkedIn}')" style="width:100%;">LinkedIn Profile ↗</button>
                             </div>
                         </div>
                     `;
@@ -697,15 +1614,22 @@
         function openModal(index) {
             const c = candidateData[index];
             document.getElementById('modal-name').innerText = c.Candidate;
-            document.getElementById('modal-badge').innerText = c.BackgroundProfile;
+            document.getElementById('modal-badge').innerText = c.BackgroundProfile || 'Profile';
             document.getElementById('modal-badge').className = 'badge ' + (c.BackgroundProfile.includes('LATAM') ? 'badge-vp' : 'badge-mgr');
-            document.getElementById('modal-meta').innerText = `${c.CurrentCompany} • ${c.Location}`;
+            document.getElementById('modal-meta').innerText = `${c.CurrentCompany} • 📍 ${c.Location}`;
             document.getElementById('modal-good').innerText = c.TheGood;
             document.getElementById('modal-tradeoff').innerText = c.TheTradeOff;
             document.getElementById('modal-overlay').classList.add('active');
         }
-        function closeModal(e) { if(e.target.id === 'modal-overlay') { document.getElementById('modal-overlay').classList.remove('active'); } }
-        function closeModalDirect() { document.getElementById('modal-overlay').classList.remove('active'); }
+        
+        function closeModal(e) { 
+            if(e.target.id === 'modal-overlay') { 
+                document.getElementById('modal-overlay').classList.remove('active'); 
+            } 
+        }
+        function closeModalDirect() { 
+            document.getElementById('modal-overlay').classList.remove('active'); 
+        }
 
         function filterCandidates() {
             const query = document.getElementById('search-input').value.toLowerCase();
@@ -719,8 +1643,11 @@
                 );
                 let matchesProfile = true;
                 if (profileFilter !== 'ALL') {
-                    if (profileFilter === 'STRATEGIC') { matchesProfile = item.BackgroundProfile.toUpperCase().includes('PIVOT') || item.BackgroundProfile.toUpperCase().includes('STRATEGIC'); } 
-                    else { matchesProfile = (item.BackgroundProfile.toLowerCase() === profileFilter.toLowerCase()); }
+                    if (profileFilter === 'STRATEGIC') { 
+                        matchesProfile = item.BackgroundProfile.toUpperCase().includes('PIVOT') || item.BackgroundProfile.toUpperCase().includes('STRATEGIC'); 
+                    } else { 
+                        matchesProfile = (item.BackgroundProfile.toLowerCase() === profileFilter.toLowerCase()); 
+                    }
                 }
                 return matchesSearch && matchesProfile;
             });
@@ -757,7 +1684,6 @@
         function updateDashboardView() {
             const data = getFilteredData();
             
-            // Update KPIs
             document.getElementById('kpi-total-roles').innerText = data.length;
             
             const remoteRoles = data.filter(d => d.location.includes('Remote') || d.location.includes('Hybrid')).length;
@@ -778,10 +1704,9 @@
         }
 
         function renderCharts(data) {
-            // Destroy existing charts
             Object.values(charts).forEach(c => c.destroy());
 
-            // 1. Volume by Company
+            // Volume by Company
             const compCounts = {};
             data.forEach(d => { compCounts[d.company] = (compCounts[d.company] || 0) + 1; });
             const sortedComps = Object.entries(compCounts).sort((a,b) => b[1]-a[1]);
@@ -790,26 +1715,43 @@
                 type: 'bar',
                 data: {
                     labels: sortedComps.map(i => i[0]),
-                    datasets: [{ label: 'Active Reqs', data: sortedComps.map(i => i[1]), backgroundColor: '#0284C7', borderRadius: 4 }]
+                    datasets: [{ 
+                        label: 'Active Requisitions', 
+                        data: sortedComps.map(i => i[1]), 
+                        backgroundColor: '#16170F', 
+                        borderRadius: 6,
+                        hoverBackgroundColor: '#00BA88'
+                    }]
                 },
-                options: { responsive: true, plugins: { legend: { display: false } } }
+                options: { 
+                    responsive: true, 
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { grid: { color: '#EDF2F4' }, ticks: { font: { family: 'Inter' } } },
+                        x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                    }
+                }
             });
 
-            // 3. Comp Spread
+            // Comp Spread
             const execData = data.filter(d => d.minComp).sort((a,b) => b.maxComp - a.maxComp);
             charts.spread = new Chart(document.getElementById('compSpreadChart'), {
                 type: 'bar',
                 data: {
                     labels: execData.map(d => d.company + " (" + d.level + ")"),
                     datasets: [
-                        { label: 'Min Salary', data: execData.map(d => d.minComp), backgroundColor: '#94A3B8' },
-                        { label: 'Max Salary', data: execData.map(d => d.maxComp), backgroundColor: '#0284C7' }
+                        { label: 'Min Salary', data: execData.map(d => d.minComp), backgroundColor: '#94A3B8', borderRadius: 4 },
+                        { label: 'Max Salary', data: execData.map(d => d.maxComp), backgroundColor: '#00BA88', borderRadius: 4 }
                     ]
                 },
-                options: { responsive: true, scales: { y: { beginAtZero: true } } }
+                options: { 
+                    responsive: true, 
+                    scales: { 
+                        y: { beginAtZero: true, grid: { color: '#EDF2F4' }, ticks: { font: { family: 'Inter' } } },
+                        x: { grid: { display: false }, ticks: { font: { family: 'Inter' } } }
+                    } 
+                }
             });
-
-
         }
 
         function getLevelBadge(level) {
@@ -831,14 +1773,14 @@
                 const compStr = role.minComp ? `$${Math.round(role.minComp/1000)}k - $${Math.round(role.maxComp/1000)}k` : 'Not Disclosed';
                 tbody.innerHTML += `
                     <tr>
-                        <td style="font-weight:600;">${role.company}</td>
+                        <td style="font-weight:700; color: var(--wilson-black);">${role.company}</td>
                         <td>${role.title}</td>
                         <td>${getLevelBadge(role.level)}</td>
                         <td>${role.function}</td>
                         <td>${role.location}</td>
                         <td>${role.region}</td>
-                        <td style="font-weight:600; color: #10B981;">${compStr}</td>
-                        <td><a href="${role.url}" target="_blank" class="live-btn">View ATS</a></td>
+                        <td style="font-weight:700; color: #047857;">${compStr}</td>
+                        <td><a href="${role.url}" target="_blank" class="live-btn">View ATS ↗</a></td>
                     </tr>
                 `;
             });
@@ -849,24 +1791,22 @@
             const company = $('#filter-company').val();
             const func = $('#filter-function').val();
             const region = $('#filter-region').val();
-            const level = $('#filter-level').val();
             intelDataTable.column(0).search(company).draw();
             intelDataTable.column(3).search(func).draw();
             intelDataTable.column(5).search(region).draw();
-            intelDataTable.column(2).search(level).draw();
         }
 
         function populateVPSection() {
             const container = document.getElementById('vp-roles-container');
             const vpRoles = liveData.filter(d => (d.level === 'VP' || d.level === 'Director' || d.level === 'Manager') && d.region === 'LATAM').sort((a,b) => b.maxComp - a.maxComp);
             
-            container.innerHTML = `<p style="font-size:0.85rem; color:#64748B; margin-bottom: 1rem;">*Showing LATAM Proxy roles for strategic comparison.</p>`;
+            container.innerHTML = `<p style="font-size:0.82rem; color:#64748B; margin-bottom: 1rem;">*Showing LATAM Proxy roles for strategic comparison.</p>`;
             
             vpRoles.forEach(role => {
-                const compStr = role.minComp ? `$${(role.minComp).toLocaleString()} - $${(role.maxComp).toLocaleString()}` : 'Confidential / Unlisted';
+                const compStr = role.minComp ? `$${(role.minComp).toLocaleString()} - $${(role.maxComp).toLocaleString()} USD` : 'Confidential / Unlisted';
                 container.innerHTML += `
                     <div class="comp-card">
-                        <div style="display:flex; justify-content: space-between;">
+                        <div style="display:flex; justify-content: space-between; align-items:flex-start; margin-bottom: 0.4rem;">
                             <div>
                                 <div class="comp-title">${role.title}</div>
                                 <div class="comp-company">${role.company}</div>
@@ -877,7 +1817,7 @@
                             <span>📍 ${role.location}</span>
                             <span>🎯 ${role.function}</span>
                         </div>
-                        <a href="${role.url}" target="_blank" class="live-btn">Verify ATS Posting</a>
+                        <a href="${role.url}" target="_blank" class="live-btn">Verify ATS Posting ↗</a>
                     </div>
                 `;
             });

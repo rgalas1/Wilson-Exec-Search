@@ -132,17 +132,17 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- PIPELINE KANBAN STYLES --- */
-        .mandate-card { margin-bottom: 2rem; background: transparent; }
-        .mandate-header { display: flex; justify-content: flex-start; align-items: center; gap: 1.5rem; cursor: pointer; user-select: none; margin-bottom: 1.5rem; }
-        .mandate-header h2 { font-family: var(--font-heading); font-weight: 800; font-size: 1.15rem; background: var(--brand-dark); color: var(--white); padding: 0.7rem 1.5rem; letter-spacing: -0.2px; transition: background 0.2s; } .mandate-header:hover h2 { background: #000; }
-        .mandate-toggle { font-family: var(--font-intel); font-weight: 400; font-size: 1.1rem; color: var(--brand-dark); border-bottom: 1px solid var(--brand-dark); padding-bottom: 2px; text-transform: none; transition: opacity 0.2s; } .mandate-header:hover .mandate-toggle { opacity: 0.7; }
-        .mandate-body { background: var(--brand-yellow); padding: 2.5rem 3rem; display: none; border-top: 1px solid rgba(22,23,15,0.1); border-bottom: 1px solid rgba(22,23,15,0.1); margin-left: -2rem; margin-right: -2rem; }
+        .mandate-card { background: var(--brand-yellow); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
+        .mandate-header { padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--brand-dark); color: var(--white); user-select: none; }
+        .mandate-header h2 { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: -0.2px; }
+        .mandate-toggle { font-family: var(--font-intel); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
+        .mandate-body { padding: 1.75rem; display: none; }
         .mandate-body.open { display: block; }
         .mandate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .mandate-section h3 { font-family: var(--font-heading); font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; border-bottom: 1px solid var(--brand-dark); padding-bottom: 0.5rem; color: var(--brand-dark); }
+        .mandate-section h3 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 0.6rem; text-transform: uppercase; border-bottom: 2px solid var(--brand-dark); padding-bottom: 0.25rem; }
         .mandate-section ul { list-style: none; font-size: 0.95rem; font-family: var(--font-intel); }
         .mandate-section li { margin-bottom: 0.5rem; padding-left: 14px; position: relative; }
-        .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.5rem; top: 6px; }
+        .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.7rem; top: 4px; }
         
         .controls-panel { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--white); padding: 1rem 1.25rem; border-radius: 4px; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .search-box { flex: 1; min-width: 280px; }
@@ -271,8 +271,8 @@
         <div id="pipeline-tab" class="tab-content active">
             <div class="mandate-card">
                 <div class="mandate-header" onclick="toggleMandate()">
-                    <h2>Search mandate summary (VP Delivery - Americas)</h2>
-                    <span class="mandate-toggle" id="mandate-toggle-text">Expand overview ▼</span>
+                    <h2>Search Mandate Summary (VP Delivery - Americas)</h2>
+                    <span class="mandate-toggle" id="mandate-toggle-text">Expand Overview ▼</span>
                 </div>
                 <div class="mandate-body" id="mandate-body">
                     <p style="font-weight: 500; margin-bottom: 1rem;">
@@ -740,7 +740,7 @@
             const body = document.getElementById('mandate-body');
             const toggleText = document.getElementById('mandate-toggle-text');
             body.classList.toggle('open');
-            toggleText.innerText = body.classList.contains('open') ? 'Collapse overview ▲' : 'Expand overview ▼';
+            toggleText.innerText = body.classList.contains('open') ? 'Collapse Overview ▲' : 'Expand Overview ▼';
         }
 
         // --- DASHBOARD FILTERING LOGIC ---

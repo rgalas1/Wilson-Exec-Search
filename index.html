@@ -19,14 +19,14 @@
     <style>
 
         :root {
-            --brand-mint: #94E3C9;
-            --brand-yellow: #FEF4D5;
-            --brand-dark: #1A1A1A;
-            --brand-teal: #00BA88;
+            --brand-mint: #91EBC9;
+            --brand-yellow: #FCF5E3;
+            --brand-dark: #16170F;
+            --brand-teal: #00AE8A;
             --white: #FFFFFF;
             --off-white: #F9FAFB;
-            --font-heading: 'Archivo Black', 'Inter', sans-serif;
-            --font-body: 'Merriweather', serif;
+            --font-heading: 'Inter', sans-serif;
+            --font-body: 'Inter', sans-serif;
             
             /* Intel Dashboard Colors */
             --bg-color: #F8FAFC;
@@ -130,9 +130,9 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* --- PIPELINE KANBAN STYLES --- */
-        .mandate-card { background: var(--brand-yellow); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .mandate-card { background: var(--brand-yellow); border-radius: 4px; margin-bottom: 1.5rem; overflow: hidden; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .mandate-header { padding: 1.25rem 1.75rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; background: var(--brand-dark); color: var(--white); user-select: none; }
-        .mandate-header h2 { font-family: var(--font-heading); font-size: 1.1rem; text-transform: uppercase; }
+        .mandate-header h2 { font-family: var(--font-heading); font-weight: 700; font-size: 1.1rem; text-transform: uppercase; letter-spacing: -0.2px; }
         .mandate-toggle { font-family: var(--font-intel); font-weight: 600; font-size: 0.85rem; text-transform: uppercase; }
         .mandate-body { padding: 1.75rem; display: none; }
         .mandate-body.open { display: block; }
@@ -142,7 +142,7 @@
         .mandate-section li { margin-bottom: 0.5rem; padding-left: 14px; position: relative; }
         .mandate-section li::before { content: "■"; position: absolute; left: 0; color: var(--brand-teal); font-size: 0.7rem; top: 4px; }
         
-        .controls-panel { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--white); padding: 1rem 1.25rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .controls-panel { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--white); padding: 1rem 1.25rem; border-radius: 4px; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .search-box { flex: 1; min-width: 280px; }
         .search-box input { width: 100%; padding: 0.7rem 1rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-intel); font-size: 0.9rem; outline: none; background: var(--off-white); }
         .filter-group { display: flex; gap: 0.75rem; }
@@ -153,14 +153,14 @@
         .kanban-header { font-family: var(--font-heading); font-size: 1rem; text-transform: uppercase; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--brand-dark); display: flex; justify-content: space-between; align-items: center; }
         .kanban-count { background: var(--brand-dark); color: var(--white); padding: 2px 10px; border-radius: 20px; font-size: 0.85rem; font-family: var(--font-intel); font-weight: bold; }
         
-        .candidate-card { background: var(--white); border-radius: 4px; padding: 1.25rem; margin-bottom: 1rem; border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .candidate-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
-        .candidate-name { font-family: var(--font-heading); text-transform: uppercase; font-size: 1.25rem; margin-bottom: 0.25rem; color: var(--brand-dark); }
+        .candidate-card { background: var(--white); border-radius: 4px; padding: 1.25rem; margin-bottom: 1rem; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .candidate-card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(22,23,15,0.08), 0 4px 8px rgba(22,23,15,0.04); }
+        .candidate-name { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; font-size: 1.15rem; letter-spacing: -0.3px; margin-bottom: 0.25rem; color: var(--brand-dark); }
         .candidate-meta { font-size: 0.85rem; color: #666; margin-bottom: 0.75rem; font-family: var(--font-intel); }
-        .badge { display: inline-block; padding: 4px 8px; background: var(--brand-yellow); border: none; font-family: var(--font-intel); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; border-radius: 2px; }
+        .badge { display: inline-block; padding: 4px 10px; background: var(--brand-yellow); border: none; font-family: var(--font-intel); font-size: 0.7rem; font-weight: 600; text-transform: uppercase; margin-bottom: 0.75rem; border-radius: 4px; letter-spacing: 0.3px; color: var(--brand-dark); }
         .card-preview { font-size: 0.95rem; margin-bottom: 1.25rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; color: #333; }
         .card-actions { display: flex; gap: 0.75rem; }
-        .btn-action { flex: 1; padding: 0.7rem; border: none; font-family: var(--font-heading); font-size: 0.75rem; cursor: pointer; border-radius: 2px; text-align: center; text-decoration: none; text-transform: uppercase; transition: background 0.2s; }
+        .btn-action { flex: 1; padding: 0.7rem; border: none; font-family: var(--font-heading); font-size: 0.75rem; font-weight: 600; cursor: pointer; border-radius: 4px; letter-spacing: 0.3px; text-align: center; text-decoration: none; text-transform: uppercase; transition: background 0.2s; }
         .btn-view { background: var(--brand-dark); color: var(--white); }
         .btn-view:hover { background: #333; }
         .btn-linkedin { background: var(--brand-teal); color: var(--white); }
@@ -177,7 +177,7 @@
         /* --- INTEL DASHBOARD STYLES --- */
         .intel-tab-wrapper { font-family: var(--font-intel); }
         .dashboard-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-        .card { background: var(--card-bg); border: none; border-radius: 4px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .card { background: var(--card-bg); border: none; border-radius: 4px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .card-header { margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); }
         .card-header h3 { font-size: 1.1rem; font-weight: 600; color: var(--text-main); margin: 0; font-family: var(--font-heading); text-transform: uppercase; }
         .kpi-card { grid-column: span 3; display: flex; flex-direction: column; justify-content: center; }
@@ -187,36 +187,36 @@
         .chart-card-small { grid-column: span 4; }
         
         .vp-header-box { background: var(--brand-dark); color: white; padding: 2rem; border-radius: 4px; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; }
-        .vp-header-text h2 { font-family: var(--font-heading); text-transform: uppercase; font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: normal; }
+        .vp-header-text h2 { font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; font-size: 2rem; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
         .vp-header-text p { color: #94A3B8; max-width: 600px; margin: 0; font-family: var(--font-intel); }
         
-        .comp-card { background: white; border-left: 4px solid var(--brand-teal); padding: 1.5rem; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); margin-bottom: 1rem; border-top: none; border-right: none; border-bottom: none; }
+        .comp-card { background: white; border-left: 4px solid var(--brand-teal); padding: 1.5rem; border-radius: 4px; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); margin-bottom: 1rem; border-top: none; border-right: none; border-bottom: none; }
         .comp-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.25rem; font-family: var(--font-heading); text-transform: uppercase; }
         .comp-company { color: var(--brand-teal); font-weight: 600; font-size: 0.9rem; margin-bottom: 0.5rem; }
         .comp-details { display: flex; gap: 1.5rem; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem; }
         .comp-salary { font-size: 1.25rem; font-weight: 700; color: var(--success); }
         
-        .live-btn { display: inline-block; background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 2px; font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-decoration: none; transition: background 0.2s; }
+        .live-btn { display: inline-block; background: var(--bg-color); border: 1px solid var(--border-color); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; color: var(--text-main); text-decoration: none; transition: background 0.2s; }
         .live-btn:hover { background: #E2E8F0; }
 
-        .filters-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .filters-area { display: flex; gap: 1rem; margin-bottom: 1.5rem; background: white; padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .intel-filter-group { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
         .intel-filter-group label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-        .intel-filter-group select { padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 2px; font-family: var(--font-intel); }
+        .intel-filter-group select { padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-intel); }
         
         .table-card { grid-column: span 12; }
         table.dataTable { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
         table.dataTable thead th { background: #F1F5F9; border-bottom: 1px solid var(--border-color); padding: 1rem; text-align: left; font-weight: 600; color: var(--text-main); font-family: var(--font-heading); text-transform: uppercase; }
         table.dataTable tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border-color); }
         
-        .intel-badge { padding: 4px 8px; border-radius: 2px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+        .intel-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
         .badge-vp { background: var(--brand-yellow); color: var(--brand-dark); }
         .badge-dir { background: var(--off-white); color: var(--brand-dark); }
         .badge-mgr { background: var(--off-white); color: var(--brand-dark); }
         .badge-ic { background: var(--off-white); color: var(--brand-dark); }
 
         /* Qualitative Styles Restored */
-        .qualitative-insights { margin-bottom: 2rem; background: var(--white); border: none; border-radius: 4px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .qualitative-insights { margin-bottom: 2rem; background: var(--white); border: none; border-radius: 4px; padding: 2rem; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
         .qualitative-insights h3 { font-family: var(--font-heading); text-transform: uppercase; margin-bottom: 1rem; border-bottom: 2px solid var(--brand-dark); padding-bottom: 0.5rem; }
         .signal-list { list-style: none; margin-bottom: 2rem; font-family: var(--font-intel); font-size: 0.95rem; }
         .signal-list li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
@@ -233,8 +233,8 @@
         .exec-card h4 { font-family: var(--font-heading); font-size: 1rem; margin-bottom: 0.75rem; text-transform: uppercase; color: var(--brand-dark); }
 
         /* Region Toggle */
-        .region-toggle-container { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; background: var(--white); padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .region-btn { padding: 0.6rem 1.5rem; background: var(--off-white); border: 1px solid var(--border-color); border-radius: 2px; font-family: var(--font-intel); font-weight: 600; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+        .region-toggle-container { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; background: var(--white); padding: 1rem; border-radius: 4px; border: none; box-shadow: 0 4px 12px rgba(22,23,15,0.05), 0 1px 3px rgba(22,23,15,0.03); }
+        .region-btn { padding: 0.6rem 1.5rem; background: var(--off-white); border: 1px solid var(--border-color); border-radius: 4px; font-family: var(--font-intel); font-weight: 600; font-size: 0.9rem; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
         .region-btn:hover { background: #E2E8F0; }
         .region-btn.active { background: var(--brand-teal); color: white; border-color: var(--brand-teal); }
 
@@ -243,7 +243,7 @@
         .screening-card { background-color: var(--off-white) !important; border: 3px solid var(--brand-yellow) !important; padding: 1.5rem !important; }
         .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
         .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
-        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 2px; }
+        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -331,9 +331,9 @@
             
             <!-- Dynamic Region Toggle -->
             <div class="region-toggle-container">
-                <button class="region-btn active" onclick="setRegion('Global', this)">🌍 Global View</button>
-                <button class="region-btn" onclick="setRegion('US', this)">🇺🇸 US Only</button>
-                <button class="region-btn" onclick="setRegion('LATAM', this)">🌎 LATAM Only</button>
+                <button class="region-btn active" onclick="setRegion('Global', this)">Global View</button>
+                <button class="region-btn" onclick="setRegion('US', this)">US Only</button>
+                <button class="region-btn" onclick="setRegion('LATAM', this)">LATAM Only</button>
             </div>
 
             <!-- Dynamic KPIs -->
@@ -612,7 +612,7 @@
                             <span class="badge ${badgeClass}">${c.BackgroundProfile}</span>
                             <div class="candidate-name">${c.Candidate}</div>
                             <div class="candidate-meta">${c.CurrentCompany} • ${c.Location}</div>
-                            ${c.Verticals ? `<div class="candidate-meta" style="margin-top:-5px; font-weight:600; color:#555;">🏢 ${c.Verticals}</div>` : ''}
+                            ${c.Verticals ? `<div class="candidate-meta" style="margin-top:-5px; font-weight:600; color:#555;">Verticals: ${c.Verticals}</div>` : ''}
                             <div class="card-preview">${c.TheGood}</div>
                             <div class="card-actions">
                                 <button class="btn-action btn-view" onclick="openModal(${candidateData.indexOf(c)})">Notes</button>
@@ -651,7 +651,7 @@
                     summaryHTML = summaryHTML.replace(/\$/g, 'USD '); // Prevent KaTeX issues
                     
                     let roiText = "";
-                    let roiMatch = summaryHTML.match(/(⚠️?\s*\*?ROI WARNING:[^\.]*\.)\s*/i);
+                    let roiMatch = summaryHTML.match(/(ROI WARNING:[^\.]*\.)\s*/i);
                     if (roiMatch) {
                         roiText = roiMatch[1].replace(/\*?\*?ROI WARNING:\*?\*?/i, 'ROI WARNING:');
                         summaryHTML = summaryHTML.replace(roiMatch[0], "");
@@ -668,18 +668,18 @@
 
                     // Add ROI warning at the end
                     if (roiText) {
-                        summaryHTML += `<div class="roi-warning">⚠️ <strong>${roiText.replace('⚠️', '').trim()}</strong></div>`;
+                        summaryHTML += `<div class="roi-warning"><strong>${roiText.replace('', '').trim()}</strong></div>`;
                     }
 
                     colHTML += `
                         <div class="candidate-card screening-card" style="padding-bottom:1rem; cursor:default;">
                             <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
-                                <div class="candidate-name" style="margin:0; font-size:1.15rem; line-height:1.2; background: var(--brand-yellow); display: inline-block; padding: 0.15rem 0.4rem; border-radius: 2px;">${c.Candidate}</div>
+                                <div class="candidate-name" style="margin:0; font-size:1.15rem; line-height:1.2; background: var(--brand-yellow); display: inline-block; padding: 0.15rem 0.4rem; border-radius: 4px;">${c.Candidate}</div>
                             </div>
                             <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem;"><strong>${c.CurrentCompany}</strong></div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">📍 ${c.SpecificLocation || c.Location}</div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">💰 ${salaryDisplay}</div>
-                            ${c.Verticals ? `<div class="candidate-meta" style="margin-bottom:12px; font-size:0.85rem; color:#555; font-weight:600;">🏢 ${c.Verticals}</div>` : ''}
+                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">Location: ${c.SpecificLocation || c.Location}</div>
+                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">${salaryDisplay}</div>
+                            ${c.Verticals ? `<div class="candidate-meta" style="margin-bottom:12px; font-size:0.85rem; color:#555; font-weight:600;">Verticals: ${c.Verticals}</div>` : ''}
                             <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #c9b165; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
                                 ${summaryHTML}
                             </div>
@@ -874,8 +874,8 @@
                             <div class="comp-salary">${compStr}</div>
                         </div>
                         <div class="comp-details">
-                            <span>📍 ${role.location}</span>
-                            <span>🎯 ${role.function}</span>
+                            <span>Location: ${role.location}</span>
+                            <span>Function: ${role.function}</span>
                         </div>
                         <a href="${role.url}" target="_blank" class="live-btn">Verify ATS Posting</a>
                     </div>

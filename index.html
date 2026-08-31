@@ -261,7 +261,8 @@
                 <button class="nav-btn active" onclick="switchTab('pipeline-tab', this)">VP Delivery Pipeline</button>
                 <button class="nav-btn" onclick="switchTab('stack-rank-tab', this)">Screening Summaries</button>
                 <button class="nav-btn" onclick="switchTab('general-intel', this)">Macro Market Intel</button>
-                <button class="nav-btn" onclick="switchTab('vp-intel', this)">VP Delivery Focus</button>
+                                <button class="nav-btn" onclick="switchTab('vp-intel', this)">VP Delivery Focus</button>
+                <button class="nav-btn" onclick="switchTab('interview-plan-tab', this)">Assessment Architecture</button>
                 <button class="nav-btn" onclick="switchTab('raw-data', this)">Live Database</button>
             </nav>
         </div>
@@ -735,6 +736,14 @@
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+        }
+
+        function toggleBusinessCase() {
+            const body = document.getElementById('bc-body');
+            const toggleText = document.getElementById('bc-toggle-text');
+            body.classList.toggle('open');
+            const isClosed = !body.classList.contains('open');
+            toggleText.innerHTML = isClosed ? 'View options <span style="font-size:0.75rem; border:1px solid rgba(22,23,15,0.3); border-radius:50%; padding:2px 5px;">+</span>' : 'Hide options <span style="font-size:0.75rem; border:1px solid rgba(22,23,15,0.3); border-radius:50%; padding:2px 6px;">-</span>';
         }
 
         function toggleMandate() {

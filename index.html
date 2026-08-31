@@ -133,6 +133,16 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 
+
+        /* --- Mandate Grid --- */
+        .profile-section { background: var(--brand-yellow); padding: 4rem; border-radius: 4px; margin-top: 5rem; border: 1px solid rgba(22,23,15,0.05); margin-bottom: 2rem; }
+        .profile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .pillar-card { background: var(--white); padding: 2.5rem 2rem; border-radius: 4px; position: relative; overflow: hidden; box-shadow: 0 4px 12px rgba(22,23,15,0.03); border: 1px solid rgba(22,23,15,0.05); transition: transform 0.2s; }
+        .pillar-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(22,23,15,0.06); }
+        .pillar-watermark { position: absolute; top: -1.5rem; right: -1rem; font-family: var(--font-heading); font-size: 8rem; font-weight: 700; color: rgba(22,23,15,0.04); line-height: 1; pointer-events: none; letter-spacing: -5px; }
+        .pillar-title { font-family: var(--font-heading); font-weight: 700; font-size: 1.15rem; color: var(--brand-dark); margin-bottom: 1rem; position: relative; z-index: 1; line-height: 1.3; }
+        .pillar-desc { font-family: var(--font-serif); font-weight: 300; font-size: 1.05rem; line-height: 1.6; color: #444; position: relative; z-index: 1; }
+
         /* --- Assessment Timeline --- */
         .timeline-container { position: relative; margin-top: 3rem; padding-left: 2rem; }
         .timeline-container::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--brand-dark); opacity: 0.15; }
@@ -524,144 +534,176 @@
 
 
         <!-- TAB 5: ASSESSMENT ARCHITECTURE -->
-        <div id="interview-plan-tab" class="tab-content">
-            <div style="max-width: 900px; margin: 0 auto; background: var(--white); padding: 4rem; border-radius: 4px; box-shadow: 0 4px 12px rgba(22,23,15,0.05);">
+                <div id="interview-plan-tab" class="tab-content">
+            <div style="max-width: 1000px; margin: 0 auto; padding: 2rem 0;">
                 
-                <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.25rem; margin-bottom: 1.5rem; color: var(--brand-dark); letter-spacing: -0.5px;">Performance Profile</h2>
-                <p style="font-family: var(--font-serif); font-weight: 300; font-size: 1.15rem; line-height: 1.8; color: #333; margin-bottom: 2.5rem;">
-                    The evaluation framework is strictly anchored to the core mandate. The successful VP Delivery must achieve the following Year 1 outcomes:
-                </p>
-                <ul style="list-style: none; padding-left: 2.5rem; font-family: var(--font-serif); font-weight: 300; font-size: 1.1rem; line-height: 1.7; color: #444; margin-bottom: 4rem;">
-                    <li style="margin-bottom: 1.25rem; position: relative;"><span style="position: absolute; left: -2rem; color: var(--brand-teal); font-family: var(--font-heading); font-weight: 600;">01</span><strong>Global Shared Services Scale:</strong> Build and scale the LATAM nearshore footprint (ideally anchored in Mexico) while managing offshore teams (South Africa, Philippines).</li>
-                    <li style="margin-bottom: 1.25rem; position: relative;"><span style="position: absolute; left: -2rem; color: var(--brand-teal); font-family: var(--font-heading); font-weight: 600;">02</span><strong>Commercial Solutioning & P&L:</strong> Completely own account profitability, pricing, and contract negotiations without relying on a dedicated "solutions team".</li>
-                    <li style="margin-bottom: 1.25rem; position: relative;"><span style="position: absolute; left: -2rem; color: var(--brand-teal); font-family: var(--font-heading); font-weight: 600;">03</span><strong>Tail Business Stabilization:</strong> Take over and stabilize mid-market/lower-risk accounts to immediately relieve the current Senior Leadership Team (SLT).</li>
-                    <li style="margin-bottom: 1.25rem; position: relative;"><span style="position: absolute; left: -2rem; color: var(--brand-teal); font-family: var(--font-heading); font-weight: 600;">04</span><strong>Sourcing Model Ownership:</strong> Successfully transition ownership of the shared services sourcing model away from the VP of Tech/Product.</li>
-                    <li style="margin-bottom: 1.25rem; position: relative;"><span style="position: absolute; left: -2rem; color: var(--brand-teal); font-family: var(--font-heading); font-weight: 600;">05</span><strong>The "Anti-Randstad" Agility:</strong> Demonstrate the ability to flex across multiple complex client verticals (Engineering, Life Sciences, Skilled Mfg) rather than sitting on a single legacy account.</li>
-                </ul>
-
-                <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.25rem; margin-bottom: 2rem; color: var(--brand-dark); letter-spacing: -0.5px;">Assessment Timeline</h2>
-                
-                <div class="timeline-container">
+                <!-- TIMELINE SECTION (NOW FIRST) -->
+                <div style="background: var(--white); padding: 4rem; border-radius: 4px; box-shadow: 0 4px 12px rgba(22,23,15,0.05);">
+                    <div style="margin-bottom: 3rem;">
+                        <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.5rem; color: var(--brand-dark); letter-spacing: -0.5px; margin-bottom: 1rem;">Assessment Timeline</h2>
+                        <p style="font-family: var(--font-serif); font-weight: 300; font-size: 1.15rem; color: #555;">The 6-stage triangulated Topgrading framework.</p>
+                    </div>
                     
-                    <!-- Stage 1 -->
-                    <div class="timeline-card">
-                        <div class="timeline-left">
-                            <div class="timeline-stage">Stage 01 • 45 Min</div>
-                            <div class="timeline-interviewer">Rob Galas</div>
-                            <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Executive Talent Partner</div>
-                        </div>
-                        <div class="timeline-right">
-                            <div class="timeline-focus-title">Executive Screening & Alignment</div>
-                            <ul class="timeline-focus-list">
-                                <li><strong>Motivation & Alignment:</strong> Genuine interest in building/scaling vs. maintaining.</li>
-                                <li><strong>Compensation & Logistics:</strong> Alignment on the $110k–$120k LATAM band vs US transformation band.</li>
-                                <li><strong>Industry Viability:</strong> Initial screen for "Anti-Randstad" agility and exposure to priority verticals.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Stage 2 -->
-                    <div class="timeline-card">
-                        <div class="timeline-left">
-                            <div class="timeline-stage">Stage 02 • 60 Min</div>
-                            <div class="timeline-interviewer">Charles</div>
-                            <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Chief Delivery Officer</div>
-                        </div>
-                        <div class="timeline-right">
-                            <div class="timeline-focus-title">Topgrading & Core Mandate Review</div>
-                            <ul class="timeline-focus-list">
-                                <li><strong>Chronological Deep Dive:</strong> Trajectory of increasing scale and extreme ownership.</li>
-                                <li><strong>Commercial Solutioning:</strong> Ability to independently design pricing models and negotiate enterprise contracts (P&L ownership).</li>
-                                <li><strong>Sourcing Strategy:</strong> High-level vision for taking over and modernizing the sourcing model from the Tech/Product team.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Stage 3 -->
-                    <div class="timeline-card">
-                        <div class="timeline-left">
-                            <div class="timeline-stage">Stage 03 • 45 Min</div>
-                            <div class="timeline-interviewer">SVP Delivery</div>
-                            <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Peer Triangulation I</div>
-                        </div>
-                        <div class="timeline-right">
-                            <div class="timeline-focus-title">Global Operations & Scaling</div>
-                            <ul class="timeline-focus-list">
-                                <li><strong>Nearshore/Offshore Execution:</strong> Tactical experience scaling distributed teams (Mexico, SA, Philippines).</li>
-                                <li><strong>Operational Rigor:</strong> Managing productivity, capacity, SLAs/KPIs, quality, and cost across borders.</li>
-                                <li><strong>Cross-Functional Collaboration:</strong> Ability to partner with broader Wilson teams effectively.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Stage 4 -->
-                    <div class="timeline-card">
-                        <div class="timeline-left">
-                            <div class="timeline-stage">Stage 04 • 45 Min</div>
-                            <div class="timeline-interviewer">SVP Delivery</div>
-                            <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Peer Triangulation II</div>
-                        </div>
-                        <div class="timeline-right">
-                            <div class="timeline-focus-title">Client Stabilization & Agility</div>
-                            <ul class="timeline-focus-list">
-                                <li><strong>Tail Business Management:</strong> Strategies for stabilizing and managing mid-market or lower-risk accounts.</li>
-                                <li><strong>Client Vertical Agility:</strong> Navigating multiple complex clients simultaneously without a dedicated solutions overlay.</li>
-                                <li><strong>Stakeholder Management:</strong> Exceptional C-Suite networking and escalation resolution.</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Stage 5 (Collapsible) -->
-                    <div class="timeline-card collapsible-card">
-                        <div class="collapsible-header" onclick="toggleBusinessCase()">
-                            <div class="timeline-left" style="border: none;">
-                                <div class="timeline-stage" style="color: #888;">Stage 05 • Optional</div>
-                                <div class="timeline-interviewer">Panel</div>
-                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Charles & SVPs</div>
+                    <div class="timeline-container">
+                        
+                        <!-- Stage 1 -->
+                        <div class="timeline-card">
+                            <div class="timeline-left">
+                                <div class="timeline-stage">Stage 01 • 45 Min</div>
+                                <div class="timeline-interviewer">Rob Galas</div>
+                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Executive Talent Partner</div>
                             </div>
                             <div class="timeline-right">
-                                <div class="timeline-focus-title">Business Case Presentation</div>
-                                <div style="font-family: var(--font-intel); font-weight: 300; font-size: 1.05rem; color: #555; line-height: 1.5;">Strategic Planning, Commercial Solutioning, & Executive Communication.</div>
-                            </div>
-                            <div class="collapsible-toggle" id="bc-toggle-text">
-                                View options <span style="font-size:0.75rem; border:1px solid rgba(22,23,15,0.3); border-radius:50%; padding:2px 5px;">+</span>
-                            </div>
-                        </div>
-                        <div class="collapsible-body" id="bc-body">
-                            <div style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #333; line-height: 1.6;">Select one of the following formats to pressure-test the candidate's commercial acumen and agility:</div>
-                            <div class="options-grid">
-                                <div class="option-box">
-                                    <div class="option-title">Option A: The Take-Home Deck</div>
-                                    <div class="option-desc">Give the candidate a prompt 72 hours in advance (e.g., "Outline a 12-month roadmap to scale a new nearshore hub in Mexico while taking over 5 mid-market accounts"). They present a 5-slide deck, followed by Q&A.<br><br><em>Best for testing polished executive communication and deep strategic thought.</em></div>
-                                </div>
-                                <div class="option-box">
-                                    <div class="option-title">Option B: The Live Working Session</div>
-                                    <div class="option-desc">Provide a raw data set or a real-world scenario during the interview (e.g., "Here is the P&L and SLA data for a failing 'tail' account. Walk us through how you diagnose the issue and the commercial model you propose to fix it").<br><br><em>Best for testing agility, commercial math, and "thinking on their feet" without relying on a solutions team.</em></div>
-                                </div>
+                                <div class="timeline-focus-title">Executive Screening & Alignment</div>
+                                <ul class="timeline-focus-list">
+                                    <li><strong>Motivation & Alignment:</strong> Genuine interest in building/scaling vs. maintaining.</li>
+                                    <li><strong>Compensation & Logistics:</strong> Alignment on the $110k–$120k LATAM band vs US transformation band.</li>
+                                    <li><strong>Industry Viability:</strong> Initial screen for "Anti-Randstad" agility and exposure to priority verticals.</li>
+                                </ul>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Stage 6 -->
-                    <div class="timeline-card">
-                        <div class="timeline-left">
-                            <div class="timeline-stage">Stage 06 • 30-45 Min</div>
-                            <div class="timeline-interviewer">JF</div>
-                            <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Chief Executive Officer</div>
+                        <!-- Stage 2 -->
+                        <div class="timeline-card">
+                            <div class="timeline-left">
+                                <div class="timeline-stage">Stage 02 • 60 Min</div>
+                                <div class="timeline-interviewer">Charles</div>
+                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Chief Delivery Officer</div>
+                            </div>
+                            <div class="timeline-right">
+                                <div class="timeline-focus-title">Topgrading & Core Mandate Review</div>
+                                <ul class="timeline-focus-list">
+                                    <li><strong>Chronological Deep Dive:</strong> Trajectory of increasing scale and extreme ownership.</li>
+                                    <li><strong>Commercial Solutioning:</strong> Ability to independently design pricing models and negotiate enterprise contracts (P&L ownership).</li>
+                                    <li><strong>Sourcing Strategy:</strong> High-level vision for taking over and modernizing the sourcing model from the Tech/Product team.</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="timeline-right">
-                            <div class="timeline-focus-title">Final Executive Alignment</div>
-                            <ul class="timeline-focus-list">
-                                <li><strong>Culture Add:</strong> Alignment with WilsonHCG's highly tenured, humanized, yet fast-paced environment.</li>
-                                <li><strong>Long-term Vision:</strong> Innovative thinking regarding the future of TA, RPO, and global talent ecosystems.</li>
-                            </ul>
+
+                        <!-- Stage 3 -->
+                        <div class="timeline-card">
+                            <div class="timeline-left">
+                                <div class="timeline-stage">Stage 03 • 45 Min</div>
+                                <div class="timeline-interviewer">SVP Delivery</div>
+                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Peer Triangulation I</div>
+                            </div>
+                            <div class="timeline-right">
+                                <div class="timeline-focus-title">Global Operations & Scaling</div>
+                                <ul class="timeline-focus-list">
+                                    <li><strong>Nearshore/Offshore Execution:</strong> Tactical experience scaling distributed teams (Mexico, SA, Philippines).</li>
+                                    <li><strong>Operational Rigor:</strong> Managing productivity, capacity, SLAs/KPIs, quality, and cost across borders.</li>
+                                    <li><strong>Cross-Functional Collaboration:</strong> Ability to partner with broader Wilson teams effectively.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Stage 4 -->
+                        <div class="timeline-card">
+                            <div class="timeline-left">
+                                <div class="timeline-stage">Stage 04 • 45 Min</div>
+                                <div class="timeline-interviewer">SVP Delivery</div>
+                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Peer Triangulation II</div>
+                            </div>
+                            <div class="timeline-right">
+                                <div class="timeline-focus-title">Client Stabilization & Agility</div>
+                                <ul class="timeline-focus-list">
+                                    <li><strong>Tail Business Management:</strong> Strategies for stabilizing and managing mid-market or lower-risk accounts.</li>
+                                    <li><strong>Client Vertical Agility:</strong> Navigating multiple complex clients simultaneously without a dedicated solutions overlay.</li>
+                                    <li><strong>Stakeholder Management:</strong> Exceptional C-Suite networking and escalation resolution.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Stage 5 (Collapsible) -->
+                        <div class="timeline-card collapsible-card">
+                            <div class="collapsible-header" onclick="toggleBusinessCase()">
+                                <div class="timeline-left" style="border: none;">
+                                    <div class="timeline-stage" style="color: #888;">Stage 05 • Optional</div>
+                                    <div class="timeline-interviewer">Panel</div>
+                                    <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Charles & SVPs</div>
+                                </div>
+                                <div class="timeline-right">
+                                    <div class="timeline-focus-title">Business Case Presentation</div>
+                                    <div style="font-family: var(--font-intel); font-weight: 300; font-size: 1.05rem; color: #555; line-height: 1.5;">Strategic Planning, Commercial Solutioning, & Executive Communication.</div>
+                                </div>
+                                <div class="collapsible-toggle" id="bc-toggle-text">
+                                    View options <span style="font-size:0.75rem; border:1px solid rgba(22,23,15,0.3); border-radius:50%; padding:2px 5px;">+</span>
+                                </div>
+                            </div>
+                            <div class="collapsible-body" id="bc-body">
+                                <div style="font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: #333; line-height: 1.6;">Select one of the following formats to pressure-test the candidate's commercial acumen and agility:</div>
+                                <div class="options-grid">
+                                    <div class="option-box">
+                                        <div class="option-title">Option A: The Take-Home Deck</div>
+                                        <div class="option-desc">Give the candidate a prompt 72 hours in advance (e.g., "Outline a 12-month roadmap to scale a new nearshore hub in Mexico while taking over 5 mid-market accounts"). They present a 5-slide deck, followed by Q&A.<br><br><em>Best for testing polished executive communication and deep strategic thought.</em></div>
+                                    </div>
+                                    <div class="option-box">
+                                        <div class="option-title">Option B: The Live Working Session</div>
+                                        <div class="option-desc">Provide a raw data set or a real-world scenario during the interview (e.g., "Here is the P&L and SLA data for a failing 'tail' account. Walk us through how you diagnose the issue and the commercial model you propose to fix it").<br><br><em>Best for testing agility, commercial math, and "thinking on their feet" without relying on a solutions team.</em></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Stage 6 -->
+                        <div class="timeline-card">
+                            <div class="timeline-left">
+                                <div class="timeline-stage">Stage 06 • 30-45 Min</div>
+                                <div class="timeline-interviewer">JF</div>
+                                <div style="font-family: var(--font-intel); font-size: 0.9rem; color: #666; font-weight: 300;">Chief Executive Officer</div>
+                            </div>
+                            <div class="timeline-right">
+                                <div class="timeline-focus-title">Final Executive Alignment</div>
+                                <ul class="timeline-focus-list">
+                                    <li><strong>Culture Add:</strong> Alignment with WilsonHCG's highly tenured, humanized, yet fast-paced environment.</li>
+                                    <li><strong>Long-term Vision:</strong> Innovative thinking regarding the future of TA, RPO, and global talent ecosystems.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- PROFILE SECTION (NOW SECOND, AS A GRID) -->
+                <div class="profile-section">
+                    <div style="max-width: 800px;">
+                        <h2 style="font-family: var(--font-heading); font-weight: 300; font-size: 2.5rem; color: var(--brand-dark); letter-spacing: -0.5px; margin-bottom: 1rem;">Performance Profile</h2>
+                        <p style="font-family: var(--font-serif); font-weight: 300; font-size: 1.15rem; line-height: 1.8; color: #333;">
+                            The evaluation framework is strictly anchored to the core mandate. The successful VP Delivery must achieve the following Year 1 outcomes:
+                        </p>
+                    </div>
+
+                    <div class="profile-grid">
+                        <div class="pillar-card">
+                            <div class="pillar-watermark">01</div>
+                            <div class="pillar-title">Global Shared Services Scale</div>
+                            <div class="pillar-desc">Build and scale the LATAM nearshore footprint (ideally anchored in Mexico) while managing offshore teams (South Africa, Philippines).</div>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-watermark">02</div>
+                            <div class="pillar-title">Commercial Solutioning & P&L</div>
+                            <div class="pillar-desc">Completely own account profitability, pricing, and contract negotiations without relying on a dedicated "solutions team".</div>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-watermark">03</div>
+                            <div class="pillar-title">Tail Business Stabilization</div>
+                            <div class="pillar-desc">Take over and stabilize mid-market/lower-risk accounts to immediately relieve the current Senior Leadership Team (SLT).</div>
+                        </div>
+                        <div class="pillar-card">
+                            <div class="pillar-watermark">04</div>
+                            <div class="pillar-title">Sourcing Model Ownership</div>
+                            <div class="pillar-desc">Successfully transition ownership of the shared services sourcing model away from the VP of Tech/Product.</div>
+                        </div>
+                        <div class="pillar-card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto; text-align: center;">
+                            <div class="pillar-watermark" style="left: 50%; right: auto; transform: translateX(-50%); top: 10%;">05</div>
+                            <div class="pillar-title">The "Anti-Randstad" Agility</div>
+                            <div class="pillar-desc">Demonstrate the ability to flex across multiple complex client verticals (Engineering, Life Sciences, Skilled Mfg) rather than sitting on a single legacy account.</div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-    <script>
+<script>
         // --- KANBAN LOGIC ---
         const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT7SGehun-xXnLILN48Yhxsh9Oar9jrpiZDyBuwCpmepsYIKE_kZOB3MPdbrohvfCjMYXbZpUZg0qJu/pub?gid=974184280&single=true&output=csv'; 
         const stages = ["Mapped (Pre-Outreach)", "Outreach Active", "Screening (Rob)", "Charles Review", "Keep Warm / Bench", "Archived"];

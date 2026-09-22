@@ -279,7 +279,7 @@
         .region-btn.active { background: var(--brand-teal); color: white; border-color: var(--brand-teal); }
 
         /* Screening Summaries Styles */
-        .screening-column { min-width: 380px !important; max-width: 380px !important; }
+        .screening-column { min-width: 460px !important; max-width: 540px !important; flex: 1; }
         .screening-card { background-color: var(--off-white) !important; border: 3px solid var(--brand-yellow) !important; padding: 1.5rem !important; }
         .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
         .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
@@ -844,19 +844,37 @@
             const board = document.getElementById('stack-rank-board');
             if (!board) return;
             board.innerHTML = '';
-            const stackBuckets = ["Bucket 1: US VP", "Bucket 2: LATAM Director", "Bucket 3: Strategic Pivot"];
+            const tracks = [
+                {
+                    title: "Track 1: LATAM",
+                    matches: (bStr) => {
+                        let b = (bStr || '').toUpperCase();
+                        return b.includes('LATAM') || b.includes('BUCKET 2') || b.includes('TRACK 1');
+                    }
+                },
+                {
+                    title: "Track 2: US",
+                    matches: (bStr) => {
+                        let b = (bStr || '').toUpperCase();
+                        return (b.includes('US') && !b.includes('LATAM')) || b.includes('BUCKET 1') || b.includes('TRACK 2');
+                    }
+                }
+            ];
             
             let rankedData = candidateData.filter(c => c.StackRankBucket && c.StackRankBucket.trim() !== '');
             
-            stackBuckets.forEach(bucket => {
-                let bucketPrefix = bucket.split(':')[0];
-                let bucketCards = rankedData.filter(c => c.StackRankBucket.includes(bucketPrefix));
-                bucketCards.sort((a, b) => parseFloat(b.CalibratedScore) - parseFloat(a.CalibratedScore));
+            tracks.forEach(track => {
+                let bucketCards = rankedData.filter(c => track.matches(c.StackRankBucket));
+                bucketCards.sort((a, b) => {
+                    let scoreA = parseFloat(a.CalibratedScore) || 0;
+                    let scoreB = parseFloat(b.CalibratedScore) || 0;
+                    return scoreB - scoreA;
+                });
                 
                 let colHTML = `
                     <div class="kanban-column screening-column">
                         <div class="kanban-header">
-                            ${bucket} <span class="kanban-count">${bucketCards.length}</span>
+                            ${track.title} <span class="kanban-count">${bucketCards.length}</span>
                         </div>
                 `;
                 bucketCards.forEach((c) => {

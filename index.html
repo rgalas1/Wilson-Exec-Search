@@ -281,9 +281,15 @@
         /* Screening Summaries Styles */
         .screening-column { min-width: 460px !important; max-width: 540px !important; flex: 1; }
         .screening-card { background-color: var(--off-white) !important; border: 3px solid var(--brand-yellow) !important; padding: 1.5rem !important; }
-        .summary-section { margin-bottom: 0.5rem; font-family: var(--font-intel); font-size: 0.95rem; line-height: 1.5; color: #222; }
-        .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 1rem; margin-bottom: 0.25rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; }
-        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.5rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 4px; }
+        .summary-section { margin-bottom: 0.6rem; font-family: var(--font-intel); font-size: 0.9rem; line-height: 1.5; color: #222; }
+        .summary-subhead { font-family: var(--font-heading); font-size: 0.85rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 0.85rem; margin-bottom: 0.35rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 700; letter-spacing: 0.5px; }
+        .summary-section:first-child .summary-subhead { margin-top: 0.15rem; }
+        .summary-paragraph { margin: 0.25rem 0 0.5rem 0; line-height: 1.55; color: #333; }
+        .summary-paragraph:last-child { margin-bottom: 0.25rem; }
+        .summary-list { margin: 0.25rem 0 0.5rem 1.25rem; padding: 0; list-style-type: disc; color: #333; }
+        .summary-list li { margin-bottom: 0.35rem; line-height: 1.5; }
+        .summary-list li:last-child { margin-bottom: 0.15rem; }
+        .roi-warning { background-color: #fff3cd; border-left: 4px solid #ffc107; padding: 0.75rem; margin-top: 1.25rem; font-size: 0.9rem; color: #856404; font-family: var(--font-intel); border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -840,6 +846,135 @@
             });
         }
 
+        function formatScreeningSummary(rawSummary, candidateName = '') {
+            if (!rawSummary || typeof rawSummary !== 'string') return '<div class="summary-section"><p class="summary-paragraph">No summary available.</p></div>';
+            
+            let text = rawSummary.trim();
+            if (!text) return '<div class="summary-section"><p class="summary-paragraph">No summary available.</p></div>';
+
+            // Clean leading candidate name if duplicated on the first line
+            if (candidateName) {
+                let firstLineMatch = text.match(/^([^\r\n]+)[\r\n]*/);
+                if (firstLineMatch && firstLineMatch[1].trim().toLowerCase() === candidateName.trim().toLowerCase()) {
+                    text = text.substring(firstLineMatch[0].length).trim();
+                }
+            }
+
+            // Extract ROI Warning if present
+            let roiText = '';
+            let roiMatch = text.match(/(?:\*\*)?(ROI WARNING:[^\.\n]*\.?)(?:\*\*)?\s*/i);
+            if (roiMatch) {
+                roiText = roiMatch[1].replace(/\*?\*?ROI WARNING:\*?\*?/i, 'ROI WARNING:').trim();
+                text = text.replace(roiMatch[0], '').trim();
+            }
+
+            // Helper to render block content (paragraphs, line breaks, bullet lists)
+            function renderBlock(blockText) {
+                if (!blockText) return '';
+                let b = blockText.trim();
+                b = b.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+                let lines = b.split('\n');
+                let res = '';
+                let inList = false;
+                let currentP = [];
+
+                function flushP() {
+                    if (currentP.length > 0) {
+                        let p = currentP.join('<br>');
+                        p = p.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        res += `<p class="summary-paragraph">${p}</p>`;
+                        currentP = [];
+                    }
+                }
+                function flushL() {
+                    if (inList) {
+                        res += '</ul>';
+                        inList = false;
+                    }
+                }
+
+                for (let i = 0; i < lines.length; i++) {
+                    let line = lines[i].trim();
+                    if (!line) {
+                        flushP();
+                        flushL();
+                        continue;
+                    }
+                    let bulletMatch = line.match(/^(?:(?:\*(?!\*))|\-|•)\s*(.*)/);
+                    if (bulletMatch) {
+                        flushP();
+                        if (!inList) {
+                            res += '<ul class="summary-list">';
+                            inList = true;
+                        }
+                        let item = bulletMatch[1].replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                        res += `<li>${item}</li>`;
+                    } else {
+                        flushL();
+                        currentP.push(line);
+                    }
+                }
+                flushP();
+                flushL();
+                return res;
+            }
+
+            // Regex for recognized subheadings (case-insensitive, optional bolding, optional trailing colon)
+            const headingRegex = /(?:^|[\r\n]+)\s*(?:\*\*)?(OVERVIEW|STRENGTHS|TRADE-OFFS|TRADEOFFS|TRADE OFFS|TRADE-OFF|CULTURAL FIT|CULTURE FIT|CONCERNS|KEY CONSIDERATIONS|CONSIDERATIONS|LOGISTICS & COMPENSATION|LOGISTICS AND COMPENSATION|COMPENSATION & LOGISTICS)(?:\*\*)?(?:(?::\s*)|(?:\s*(?=[\r\n]|$)))/gi;
+
+            let match;
+            let sections = [];
+            let lastIndex = 0;
+            let prevHeading = null;
+
+            while ((match = headingRegex.exec(text)) !== null) {
+                let matchStart = match.index;
+                let matchEnd = headingRegex.lastIndex;
+                let headingRaw = match[1].toUpperCase();
+
+                let standardizedTitle = headingRaw;
+                if (standardizedTitle === 'TRADEOFFS' || standardizedTitle === 'TRADE OFFS' || standardizedTitle === 'TRADE-OFF') standardizedTitle = 'TRADE-OFFS';
+                if (standardizedTitle === 'CULTURE FIT') standardizedTitle = 'CULTURAL FIT';
+                if (standardizedTitle === 'LOGISTICS AND COMPENSATION' || standardizedTitle === 'COMPENSATION & LOGISTICS') standardizedTitle = 'LOGISTICS & COMPENSATION';
+
+                if (matchStart > lastIndex) {
+                    let chunk = text.substring(lastIndex, matchStart);
+                    if (chunk.trim()) {
+                        sections.push({ heading: prevHeading, content: chunk });
+                    }
+                }
+                prevHeading = standardizedTitle;
+                lastIndex = matchEnd;
+            }
+
+            if (lastIndex < text.length) {
+                let chunk = text.substring(lastIndex);
+                if (chunk.trim()) {
+                    sections.push({ heading: prevHeading, content: chunk });
+                }
+            }
+
+            if (sections.length === 0) {
+                sections.push({ heading: null, content: text });
+            }
+
+            let outputHTML = '';
+            sections.forEach((sec) => {
+                outputHTML += '<div class="summary-section">';
+                if (sec.heading) {
+                    outputHTML += `<span class="summary-subhead">${sec.heading}</span>`;
+                }
+                outputHTML += renderBlock(sec.content);
+                outputHTML += '</div>';
+            });
+
+            if (roiText) {
+                outputHTML += `<div class="roi-warning"><strong>${roiText}</strong></div>`;
+            }
+
+            return outputHTML;
+        }
+
         function renderStackRank() {
             const board = document.getElementById('stack-rank-board');
             if (!board) return;
@@ -878,30 +1013,8 @@
                         </div>
                 `;
                 bucketCards.forEach((c) => {
-                    let summaryHTML = c.ExecSummary || "";
-                    let salaryDisplay = (c.Salary || "").replace(/\$/g, '');
-                    summaryHTML = summaryHTML.replace(/\$/g, 'USD '); // Prevent KaTeX issues
-                    
-                    let roiText = "";
-                    let roiMatch = summaryHTML.match(/(ROI WARNING:[^\.]*\.)\s*/i);
-                    if (roiMatch) {
-                        roiText = roiMatch[1].replace(/\*?\*?ROI WARNING:\*?\*?/i, 'ROI WARNING:');
-                        summaryHTML = summaryHTML.replace(roiMatch[0], "");
-                    }
-
-                    // Format Subheads (Bulletproof against copy-paste artifacts)
-                    summaryHTML = summaryHTML.replace(/Overview:/gi, '<span class="summary-subhead">Overview</span><br>');
-                    summaryHTML = summaryHTML.replace(/Strengths:/gi, '</div><div class="summary-section"><span class="summary-subhead">Strengths</span><br>');
-                    summaryHTML = summaryHTML.replace(/Trade-offs:/gi, '</div><div class="summary-section"><span class="summary-subhead">Trade-offs</span><br>');
-                    summaryHTML = summaryHTML.replace(/Cultural Fit:/gi, '</div><div class="summary-section"><span class="summary-subhead">Cultural Fit</span><br>');
-                    
-                    // Wrap the first overview part
-                    summaryHTML = '<div class="summary-section">' + summaryHTML + '</div>';
-
-                    // Add ROI warning at the end
-                    if (roiText) {
-                        summaryHTML += `<div class="roi-warning"><strong>${roiText.replace('', '').trim()}</strong></div>`;
-                    }
+                    let summaryHTML = formatScreeningSummary(c.ExecSummary || "", c.Candidate || "");
+                    let salaryDisplay = c.Salary ? c.Salary.trim() : '';
 
                     colHTML += `
                         <div class="candidate-card screening-card" style="padding-bottom:1rem; cursor:default;">
@@ -910,7 +1023,7 @@
                             </div>
                             <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem;"><strong>${c.CurrentCompany}</strong></div>
                             <div class="candidate-meta" style="margin-bottom:5px; font-size:0.85rem;">Location: ${c.SpecificLocation || c.Location}</div>
-                            <div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">${salaryDisplay}</div>
+                            ${salaryDisplay ? `<div class="candidate-meta" style="margin-bottom:5px; font-size:0.9rem; color:var(--brand-teal); font-weight:700;">${salaryDisplay}</div>` : ''}
                             ${c.Verticals ? `<div class="candidate-meta" style="margin-bottom:12px; font-size:0.85rem; color:#555; font-weight:600;">Verticals: ${c.Verticals}</div>` : ''}
                             <div class="card-preview" style="font-size:0.85rem; line-height:1.45; padding-top:12px; border-top:1px solid #c9b165; margin-top:5px; -webkit-line-clamp: unset; color:#333;">
                                 ${summaryHTML}

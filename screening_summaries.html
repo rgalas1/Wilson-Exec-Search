@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WilsonHCG | Candidate Screening Summaries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-mint: #91EBC9;
+            --brand-yellow: #FCF5E3;
+            --brand-dark: #16170F;
+            --brand-teal: #00AE8A;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --border-color: #E5E7EB;
+            --text-main: #1A1A1A;
+            --text-muted: #64748B;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-main); background-color: var(--off-white); color: var(--text-main); line-height: 1.5; padding-bottom: 3rem; }
+
+        header { background: var(--brand-dark); color: white; padding: 1.5rem 2rem; border-bottom: 3px solid var(--brand-teal); }
+        .header-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .brand-logo h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; color: var(--white); text-transform: lowercase; }
+        .brand-logo span { font-size: 0.8rem; color: var(--brand-mint); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
+        .header-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 4px; font-size: 0.8rem; color: var(--brand-yellow); }
+
+        .container { max-width: 1300px; margin: 2rem auto; padding: 0 1.5rem; }
+        .intro-box { background: var(--white); border-left: 4px solid var(--brand-teal); padding: 1.25rem 1.5rem; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.04); margin-bottom: 2rem; }
+        .intro-box h2 { font-size: 1.2rem; font-weight: 700; color: var(--brand-dark); margin-bottom: 0.35rem; }
+        .intro-box p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+        .board-grid { display: flex; gap: 1.75rem; align-items: flex-start; }
+        .track-column { flex: 1; min-width: 380px; background: #EEF2F6; border-radius: 6px; padding: 1.25rem; border: 1px solid var(--border-color); }
+        .track-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--brand-dark); }
+        .track-title { font-size: 1.05rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; color: var(--brand-dark); }
+        .track-count { background: var(--brand-dark); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 12px; }
+
+        .candidate-card { background: var(--white); border: 1px solid var(--border-color); border-radius: 6px; padding: 1.4rem; margin-bottom: 1.25rem; box-shadow: 0 2px 6px rgba(0,0,0,0.03); transition: transform 0.15s, box-shadow 0.15s; }
+        .candidate-card:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,0.06); }
+        .candidate-card:last-child { margin-bottom: 0; }
+
+        .card-header-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+        .candidate-name { font-size: 1.15rem; font-weight: 800; color: var(--brand-dark); background: var(--brand-yellow); padding: 0.15rem 0.5rem; border-radius: 4px; display: inline-block; }
+        .candidate-title { font-size: 0.9rem; font-weight: 700; color: #2D3748; margin-top: 0.35rem; }
+        .candidate-meta { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.2rem; }
+        .candidate-verticals { font-size: 0.82rem; color: #4A5568; font-weight: 600; margin-top: 0.3rem; margin-bottom: 0.75rem; }
+
+        .summary-body { border-top: 1px solid #E2E8F0; padding-top: 0.85rem; font-size: 0.88rem; line-height: 1.55; color: #2D3748; }
+        .summary-subhead { font-size: 0.78rem; text-transform: uppercase; color: var(--brand-dark); margin-top: 0.9rem; margin-bottom: 0.35rem; border-bottom: 2px solid var(--brand-teal); display: inline-block; padding-bottom: 2px; font-weight: 800; letter-spacing: 0.5px; }
+        .candidate-card .summary-subhead:first-child { margin-top: 0; }
+        .summary-paragraph { margin: 0.25rem 0 0.55rem 0; }
+        .summary-paragraph:last-child { margin-bottom: 0.25rem; }
+        .summary-list { margin: 0.25rem 0 0.6rem 1.25rem; padding: 0; list-style-type: disc; }
+        .summary-list li { margin-bottom: 0.4rem; }
+        .summary-list li:last-child { margin-bottom: 0.15rem; }
+
+        .card-footer { margin-top: 1.1rem; padding-top: 0.75rem; border-top: 1px solid #EDF2F7; display: flex; justify-content: space-between; align-items: center; }
+        .btn-linkedin { display: inline-block; text-decoration: none; font-size: 0.78rem; font-weight: 700; color: var(--brand-teal); border: 1px solid var(--brand-teal); padding: 0.35rem 0.8rem; border-radius: 4px; transition: all 0.2s; background: white; }
+        .btn-linkedin:hover { background: var(--brand-teal); color: white; }
+        .contact-info { font-size: 0.78rem; color: var(--text-muted); font-family: monospace; }
+
+        @media (max-width: 900px) {
+            .board-grid { flex-direction: column; }
+            .track-column { width: 100%; min-width: unset; }
+        }
+
+        @media print {
+            header, .intro-box, .btn-linkedin { display: none !important; }
+            body { background: white; color: black; }
+            .board-grid { display: block; }
+            .track-column { background: none; border: none; padding: 0; margin-bottom: 2rem; }
+            .candidate-card { border: 1px solid #ccc; box-shadow: none; page-break-inside: avoid; margin-bottom: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="brand-logo">
+                <h1>wilson</h1>
+                <span>A fresh take on talent</span>
+            </div>
+            <div class="header-badge">Executive Search • Screening Summaries</div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro-box">
+            <h2>Candidate Screening Summaries & Calibration</h2>
+            <p>Prepared for internal review and interview preparation. All candidate summaries have been standardized and scrubbed of compensation data.</p>
+        </div>
+
+        <div class="board-grid">
+            
+            <!-- TRACK 1: LATAM -->
+            <div class="track-column">
+                <div class="track-header">
+                    <span class="track-title">Track 1: LATAM (Active Finalists)</span>
+                    <span class="track-count">2 Candidates</span>
+                </div>
+
+                <!-- VALERIA STUPENENGO -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Valeria Stupenengo</div>
+                            <div class="candidate-title">Executive Director, LATAM Delivery @ Cielo</div>
+                            <div class="candidate-meta">Location: Buenos Aires, Argentina</div>
+                            <div class="candidate-verticals">Verticals: Technology, Financial Services, Consumer, Life Sciences</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>15+ years in enterprise RPO. Began her career spending 7 consecutive years delivering exclusively for US and Canadian corporate accounts before expanding regionally across Latin America.</li>
+                            <li>At Cielo, she greenfield-built their entire LATAM delivery footprint from scratch, founding the Buenos Aires Center of Excellence, then scaling Cielo Mexico from 0 to 30 FTEs in 6 months and nearly 100 FTEs by Year 1, before adding entities in Brazil and Colombia.</li>
+                            <li>Managed a regional delivery P&L of $3M across multiple countries, progressing from hands-on recruiter up to leading Account Directors at VP level.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>True Greenfield Scrappiness:</strong> Unlike corporate leaders dependent on enterprise overlay teams, Valeria built Cielo’s hubs without existing local HR or payroll infrastructure. She understands the mechanics of contractor models, EOR setups, and cross-border labor compliance, making her an immediate plug-and-play builder.</li>
+                            <li><strong>Native North American Client Acumen:</strong> Because her foundational training was 100% US/Canada-facing, her communication style, executive presence, and client management match US corporate expectations. She bridges North American enterprise governance with LATAM ground delivery.</li>
+                            <li><strong>Pragmatic Tech Implementation:</strong> Highly practical regarding automation. She has already implemented voice screening bots for high-volume knockout stages, automated scheduling, LLM-generated booleans for sourcing, and streamlined recruiter intake workflows to eliminate administrative drag.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>Regional P&L Scope:</strong> Her highest regional P&L to date sits around $3M. While this matches Wilson’s immediate Americas delivery scale, she will be stepping up into a wider enterprise mandate across North America as Wilson continues to expand.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/valeria-stupenengo/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">Email: [On File]</span>
+                    </div>
+                </div>
+
+                <!-- RICARDO RIBAS -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Ricardo Ribas</div>
+                            <div class="candidate-title">Senior Vice President, Enterprise Solutions @ Hays (ex-PageGroup)</div>
+                            <div class="candidate-meta">Location: São Paulo, Brazil</div>
+                            <div class="candidate-verticals">Verticals: Multi-Sector (Manufacturing, Tech, Financial Services, Life Sciences)</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>20+ years of high-altitude workforce solutions leadership across Latin America; currently leading Hays Enterprise Solutions (RPO, MSP, Staff Augmentation) across the region.</li>
+                            <li>Prior to Hays, spent 14 years at PageGroup, where he greenfield-launched and led Page Outsourcing across LATAM from Mexico City—building the commercial strategy, pricing models, BI/AI reporting infrastructure, and operational delivery from scratch.</li>
+                            <li>Native regional fluency: spent 7 years living in Mexico, 3 years in Colombia, and 10+ years in Brazil. Trilingual (English, Portuguese, Spanish). Previously received an offer from Charles and Wilson 4–5 years ago.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>Proven Enterprise P&L & Commercial Hunting:</strong> Unlike purely delivery-focused LATAM directors, Ricardo brings proven enterprise P&L ownership and hunting capability. He has prospected, negotiated, and closed multi-country enterprise RPO deals across manufacturing, tech, and financial services.</li>
+                            <li><strong>Pan-Regional Delivery Mastery:</strong> Deep, localized understanding of labor markets, compliance, and nearshore hub mechanics across Mexico, Colombia, and Brazil. He has built and scaled teams from the ground up rather than just overseeing established shared services.</li>
+                            <li><strong>Strong Commitment to Wilson:</strong> While Hays is winding down Brazil operations within 60 days and he holds other active offers, Wilson is his explicit first choice due to leadership alignment and the 3i PE growth horizon.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>Location & Travel Cadence:</strong> Based in São Paulo, Brazil, where his family is rooted. He has lived in Mexico City and Colombia and is fully accustomed to extensive regional travel, but will not permanently relocate to Mexico (due to son's healthcare needs).</li>
+                            <li><strong>Navigating Lean Support:</strong> In his last two mandates at Hays and PageGroup, he operated as a regional SVP/Managing Director with standing corporate infrastructure. Seems energized to roll his sleeves up, but will need to test this hands-on execution cadence through the process.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/ricardo-ribas-00a01417/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">ricardo.ribas@hays.com.br</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TRACK 2: US -->
+            <div class="track-column">
+                <div class="track-header">
+                    <span class="track-title">Track 2: US (Leadership Bench)</span>
+                    <span class="track-count">4 Candidates</span>
+                </div>
+
+                <!-- DANIELA CONSOLARO -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Daniela Consolaro</div>
+                            <div class="candidate-title">Vice President, Client Delivery & Global Solutions @ AgileOne (ex-Adecco)</div>
+                            <div class="candidate-meta">Location: New York, NY</div>
+                            <div class="candidate-verticals">Verticals: Technology, Financial Services, Life Sciences, Retail</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>25+ years of enterprise workforce solutions leadership, deep C-suite client presence, and native trilingual fluency (Italian, Spanish, English).</li>
+                            <li>Seeking a new challenge after 11 years at AgileOne due to corporate bureaucracy; energized by Wilson’s PE-backed growth roadmap and high-touch culture.</li>
+                            <li>Deep Latin American operating history, having lived 2 years in Buenos Aires and traveled extensively across Argentina, Chile, Brazil, and Uruguay managing regional client engagements.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>Executive Presence & Client Partnership:</strong> High-energy, consultative operator with extensive boardroom presence across Fortune 500 accounts. Exceptional track record in client relationship retention, governance, and expansion.</li>
+                            <li><strong>LATAM Regional Fluency:</strong> Natively bilingual in Spanish with deep on-the-ground operational context across South America. Will remain based in New York with complete willingness for frequent travel to Mexico and nearshore hubs.</li>
+                            <li><strong>Execution Drive:</strong> Highly determined, results-oriented leader with a strong track record of driving operational discipline and accountability across large, distributed delivery teams.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>MSP vs. RPO Core DNA:</strong> Career across AgileOne and Adecco has centered primarily on global MSP, contingent workforce solutions, and enterprise client relations rather than building pure-play direct-hire RPO delivery machinery from scratch.</li>
+                            <li><strong>Peer Dynamics & Operating Style:</strong> Very direct, determined 'get shit done' approach; team should assess how her strong personality meshes with Wilson's collaborative, relationship-first leadership dynamic.</li>
+                            <li><strong>Notice Period:</strong> 1 month.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/danielaconsolaro/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">Daconsolaro@gmail.com</span>
+                    </div>
+                </div>
+
+                <!-- BETSY JOYCE-KOCH -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Betsy Joyce-Koch</div>
+                            <div class="candidate-title">Global Vice President, Enterprise Delivery @ Randstad Enterprise</div>
+                            <div class="candidate-meta">Location: Philadelphia, PA (US Remote)</div>
+                            <div class="candidate-verticals">Verticals: Technology, Telecom, Life Sciences, Professional Services</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>Global VP at Randstad Enterprise managing Americas delivery for Google. Handles an enterprise portfolio with a team of 134 recruiters, 10 managers, and 4 directors.</li>
+                            <li>Operates at a high strategic level, co-creating financial and AI roadmaps with Google, while maintaining an explicit preference for hands-on, builder environments.</li>
+                            <li>5+ years of experience managing nearshore delivery hubs, primarily utilizing delivery teams in Brazil.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>Strategic Scale & Operational Rigor:</strong> Broad cross-sector track record prior to Google: successfully launched end-to-end programs and P&Ls for DirecTV, Boston Consulting Group (BCG), and Bristol Myers Squibb in 2020.</li>
+                            <li><strong>Enterprise Troubleshooter:</strong> Designated turnaround leader within Randstad; deployed to salvage the Bosch account mid-contract, securing a two-year extension before moving to stabilize the Google relationship.</li>
+                            <li><strong>Consultative & Scrappy Demeanor:</strong> Direct, transparent, and consultative. A former front-row rugby player who describes scrappiness as part of her DNA, balancing enterprise portfolio management with a roll-up-your-sleeves execution style.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>Legacy RPO Adjustment:</strong> Her background is heavily anchored in legacy corporate RPO infrastructure, which may require an intentional transition to Wilson’s leaner, faster-moving environment.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/betsy-joyce-koch-8167885/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">Email: [On File]</span>
+                    </div>
+                </div>
+
+                <!-- BRYAN KRASTINS -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Bryan Krastins</div>
+                            <div class="candidate-title">Senior Director of Talent Acquisition @ JLL (ex-VP Global Operations, Cielo)</div>
+                            <div class="candidate-meta">Location: Dallas, TX</div>
+                            <div class="candidate-verticals">Verticals: Healthcare, Consumer/Retail, Financial Services, Tech</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>15+ years in talent solutions; former VP Global Operations at Cielo before taking a Senior Director role at JLL.</li>
+                            <li>Managed an $18M–$20M enterprise delivery P&L at peak across major commercial and high-volume accounts (Disney, Walgreens, Asurion, Campbell's, Willis Towers Watson) with 100+ delivery FTEs.</li>
+                            <li>Rare US VP with substantive nearshore execution: led Cielo’s internal Americas TA (managing recruiters in Mexico and BA directly), supervised delivery teams in Argentina, and launched nearshore hubs in Bogota and Manila. Speaks conversational Spanish.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>The "Bridge" Profile:</strong> Bridges US commercial sales and nearshore execution. Bryan has spent extensive time on the ground in Buenos Aires, Bogota, and Managua training teams on American hiring nuances. He understands how to pitch nearshore delivery credibly to skeptical US enterprise buyers.</li>
+                            <li><strong>Demonstrated Account Expansion:</strong> Consulted Asurion on their global delivery roadmap, led their geographic expansions into Bogota and the Philippines, and turned a volatile domestic account into $2.5M–$3M in net-new annual RPO revenue.</li>
+                            <li><strong>High-Trust Change Leadership:</strong> Stepped into Buenos Aires during Cielo’s post-COVID restructuring to steady the team, calm attrition fears, and align delivery with global strategy.</li>
+                            <li><strong>Pragmatic Technology Mindset:</strong> Close advisory relationship with Paradox leadership (ex-Cielo CTO). Focuses on eliminating operational friction through practical workflow automation.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>Player-Coach vs. Corporate Overseer:</strong> At peak Cielo, Bryan had director layers beneath him. He took a title haircut to Senior Director at JLL and is hungry to return to a VP remit; team should test his readiness to roll his sleeves up in an agile build.</li>
+                            <li><strong>Technical Sourcing Depth:</strong> Strong operational and commercial leader rather than an AI technologist. Relies on sourcers for specialized technical boolean searches rather than hands-on pipeline building.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/bryankrastins/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">Email: [On File]</span>
+                    </div>
+                </div>
+
+                <!-- CHRISTINE KANE -->
+                <div class="candidate-card">
+                    <div class="card-header-row">
+                        <div>
+                            <div class="candidate-name">Christine Kane</div>
+                            <div class="candidate-title">Global Vice President, RPO Operations & Client Success @ Hudson (ex-Pontoon)</div>
+                            <div class="candidate-meta">Location: Tampa, FL</div>
+                            <div class="candidate-verticals">Verticals: Technology, Financial Services, Telecommunications</div>
+                        </div>
+                    </div>
+                    <div class="summary-body">
+                        <span class="summary-subhead">Overview</span>
+                        <ul class="summary-list">
+                            <li>20+ years leading enterprise solution design, global RPO delivery operations, and client success for Tier-1 multinational clients (e.g., Google, Bank of America, Cisco Systems).</li>
+                            <li>Currently Global Vice President, RPO Operations & Client Success at Hudson Talent Solutions (12+ years at Hudson; prior 7 years at Pontoon/Adecco).</li>
+                            <li>Leads operational delivery, implementation, and HR tech innovation teams globally, driving standardized operating models, compliance, and client retention.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Strengths</span>
+                        <ul class="summary-list">
+                            <li><strong>Elite Global Delivery & Solution Design:</strong> Proven track record architecting complex global RPO delivery models with strong operational parallels to Wilson’s multi-region footprint.</li>
+                            <li><strong>Tech Innovation & Implementation:</strong> Former VP & Head of Implementation and Tech Innovation at Hudson; deep expertise embedding HR tech, automation, and analytics directly into delivery workflows.</li>
+                            <li><strong>Client Success & Executive Credibility:</strong> Exceptional C-suite presence and enterprise relationship management, having managed and expanded flagship global accounts across tech and finance.</li>
+                        </ul>
+
+                        <span class="summary-subhead">Key Considerations</span>
+                        <ul class="summary-list">
+                            <li><strong>Tenured Corporate Background:</strong> 12+ years at Hudson and 7 years at Pontoon. Needs vetting on agility and scrappiness in Wilson's leaner, high-growth environment compared to mature corporate infrastructure.</li>
+                            <li><strong>Notice Period:</strong> Estimated 6-month notice period at Hudson; will require clear exploration around transition timeline and flexibility.</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://www.linkedin.com/in/cristinekane/" target="_blank" class="btn-linkedin">LinkedIn Profile</a>
+                        <span class="contact-info">christine.kane@icloud.com</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
